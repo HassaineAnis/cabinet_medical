@@ -1,0 +1,12 @@
+.pagination {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+  height: 2.5rem;
+  padding-right: 1rem;
+  align-items: center;
+  gap: 10px;
+}
+.pagination svg {
+  cursor: pointer;
+}/*# sourceMappingURL=pagination.css.map */

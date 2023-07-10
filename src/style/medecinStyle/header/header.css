@@ -1,0 +1,58 @@
+.header_medecin {
+  grid-column: 1/7;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: rgba(1, 66, 1, 0.589);
+  color: #FFF;
+  padding: 0.5rem 1rem;
+}
+.header_medecin .lien {
+  text-decoration: none;
+  color: #FFF;
+}
+.header_medecin .header_medecin_logo img {
+  width: 5rem;
+  height: 5rem;
+}
+.header_medecin .header_medecin_menu .header_medecin_menu_liste {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  list-style: none;
+  gap: 2rem;
+}
+.header_medecin .header_medecin_menu .header_medecin_menu_liste li {
+  height: 3rem;
+  width: 10rem;
+  border-radius: 4px;
+}
+.header_medecin .header_medecin_menu .header_medecin_menu_liste li .lien {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.header_medecin .header_medecin_menu .header_medecin_menu_liste li:hover {
+  background-color: darkgreen;
+}
+.header_medecin .header_medecin_profil {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+}
+.header_medecin .header_medecin_profil .header_medecin_profil_info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.header_medecin .header_medecin_profil img {
+  outline-offset: 1px;
+  outline: 2px solid black;
+  width: 5rem;
+  height: 5rem;
+  border-radius: 50%;
+  background-color: #979797;
+}/*# sourceMappingURL=header.css.map */

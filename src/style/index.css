@@ -1,0 +1,11 @@
+body {
+  margin: 0%;
+  padding: 0;
+  box-sizing: border-box;
+  height: -moz-max-content;
+  height: max-content;
+}
+body #root {
+  height: 100%;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}/*# sourceMappingURL=index.css.map */

@@ -1,0 +1,136 @@
+.ajouterConsult {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%;
+}
+.ajouterConsult .ajouterConsult_entete {
+  text-align: center;
+}
+.ajouterConsult .ajouterConsult_entete h2 {
+  font-size: 2rem;
+  font-weight: 500;
+  letter-spacing: 0.0125em;
+  margin-bottom: 0;
+}
+.ajouterConsult .ajouterConsult_entete span {
+  font-size: 0.9rem;
+  font-weight: lighter;
+  letter-spacing: 0.0125em;
+  color: rgba(58, 53, 65, 0.87);
+}
+.ajouterConsult form {
+  animation: table 300ms ease;
+  box-shadow: 0px 2px 10px 0px rgba(58, 53, 65, 0.1);
+  padding: 1rem;
+  border-radius: 5px;
+  margin-bottom: 1rem;
+  width: 80%;
+  align-self: center;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  background-color: white;
+}
+.ajouterConsult form .input_container_radio {
+  display: flex;
+  align-items: center;
+  font-family: sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #2e2e2e;
+  letter-spacing: 0.0125em;
+}
+.ajouterConsult form .input_container_radio label {
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #2e2e2e;
+}
+.ajouterConsult form .input_container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.ajouterConsult form .input_container input, .ajouterConsult form .input_container select {
+  font-family: inter, sans-serif;
+  padding-left: 0.5rem;
+  height: 2.5rem;
+  outline: none;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #333;
+  border-radius: 5px;
+  border: 1px solid #aaa;
+  background-color: #fff;
+}
+.ajouterConsult form .input_container input:hover, .ajouterConsult form .input_container select:hover {
+  border: 1px solid #8d8d8d;
+}
+.ajouterConsult form .input_container input:focus, .ajouterConsult form .input_container select:focus {
+  outline: 2px solid darkgreen;
+}
+.ajouterConsult form .input_container label {
+  font-family: inter, sans-serif;
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: #2e2e2e;
+}
+.ajouterConsult form .input_container .dates {
+  width: 100%;
+  position: relative;
+}
+.ajouterConsult form .input_container .dates input[type=date] {
+  width: 1.4rem;
+  border: 0;
+  background-color: transparent;
+  right: 0.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 0;
+  position: absolute;
+  outline: 0;
+}
+.ajouterConsult form .input_container .dates input[type=text] {
+  width: 100%;
+  box-sizing: border-box;
+}
+.ajouterConsult form .formulaire_nom {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+  -moz-column-gap: 1rem;
+       column-gap: 1rem;
+  row-gap: 1rem;
+}
+.ajouterConsult form .btn {
+  display: flex;
+  gap: 1rem;
+}
+.ajouterConsult form .btn button, .ajouterConsult form .btn span {
+  font-family: inherit;
+  font-weight: 500;
+  font-size: 1rem;
+  padding: 0.3rem 0.4rem;
+  width: 8rem;
+  height: 2rem;
+  cursor: pointer;
+  border: 0;
+  color: #fff;
+  border-radius: 4px;
+  letter-spacing: 0.8px;
+}
+.ajouterConsult form .btn button:nth-child(1), .ajouterConsult form .btn span:nth-child(1) {
+  background-color: darkgreen;
+}
+.ajouterConsult form .btn button:nth-child(1):hover, .ajouterConsult form .btn span:nth-child(1):hover {
+  background-color: green;
+}
+.ajouterConsult form .btn button:nth-child(2), .ajouterConsult form .btn span:nth-child(2) {
+  background-color: darkred;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.ajouterConsult form .btn button:nth-child(2):hover, .ajouterConsult form .btn span:nth-child(2):hover {
+  background-color: red;
+}/*# sourceMappingURL=ajoutconsult.css.map */

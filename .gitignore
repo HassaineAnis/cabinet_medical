@@ -2,6 +2,7 @@
 
 # dependencies
 /node_modules
+/back-end/node_modules
 /.pnp
 .pnp.js
 
@@ -21,3 +22,17 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+/src/App.css
+/src/App.js
+/src/App.test.js
+/src/index.css
+/src/index.js
+/src/reportWebVitals.js
+/src/setupTests.js
+
+#scss
+**/*.scss
+**/*.css.map
+
+#fontawesome
+/public/fontawesome/**

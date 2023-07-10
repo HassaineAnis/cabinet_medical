@@ -1,0 +1,6 @@
+.medecinApp {
+  height: 100%;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-template-rows: repeat(6, 16.6666666667vh);
+}/*# sourceMappingURL=app.css.map */

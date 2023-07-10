@@ -1,0 +1,189 @@
+* {
+  box-sizing: border-box;
+}
+
+.container_form {
+  animation: table 200ms ease;
+  width: 95%;
+  margin: 1rem 0;
+  border-radius: 5px;
+  box-shadow: 0px 2px 10px 0px rgba(58, 53, 65, 0.1);
+  background-color: #fff;
+  padding: 1rem;
+  box-sizing: border-box;
+}
+.container_form h2 {
+  margin: 0;
+  font-size: 1.4rem;
+  color: #5e5d5d;
+}
+.container_form form {
+  display: flex;
+  gap: 2rem;
+  width: 100%;
+  flex-direction: column;
+}
+.container_form form .image_upload {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.container_form form .image_upload picture {
+  border-radius: 4px;
+  height: 6.5rem;
+  width: 6.5rem;
+  border: 2px solid darkgreen;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1px;
+}
+.container_form form .image_upload picture img {
+  width: 100%;
+  height: 100%;
+}
+.container_form form .image_upload .btn_photo label {
+  cursor: pointer;
+  background-color: darkgreen;
+  padding: 0.5rem 0.8rem;
+  border-radius: 5px;
+  color: #fff;
+}
+.container_form form .image_upload .btn_photo label:hover {
+  background-color: green;
+}
+.container_form form .image_upload .btn_photo input {
+  display: none;
+}
+.container_form form .image_upload button {
+  font-size: 1rem;
+  width: 5rem;
+  padding: 0.4rem 0.5rem;
+  background-color: darkred;
+  border: 0;
+  color: #fff;
+  font-family: inherit;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.container_form form .image_upload button:hover {
+  background-color: red;
+}
+.container_form form .input_section {
+  -moz-column-gap: 1rem;
+       column-gap: 1rem;
+  row-gap: 2rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
+}
+.container_form form .input_section .input_conteneur {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+.container_form form .input_section .input_conteneur label {
+  font-family: inter, sans-serif;
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: #2e2e2e;
+}
+.container_form form .input_section .input_conteneur input, .container_form form .input_section .input_conteneur select {
+  font-family: inter, sans-serif;
+  padding-left: 0.5rem;
+  height: 2.5rem;
+  outline: none;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #333;
+  border-radius: 5px;
+  border: 1px solid #aaa;
+  background-color: #fff;
+}
+.container_form form .input_section .input_conteneur input:hover, .container_form form .input_section .input_conteneur select:hover {
+  border: 1px solid #8d8d8d;
+}
+.container_form form .input_section .input_conteneur input:focus, .container_form form .input_section .input_conteneur select:focus {
+  outline: 2px solid darkgreen;
+}
+.container_form form .input_section .input_conteneur .dates {
+  width: 100%;
+  position: relative;
+}
+.container_form form .input_section .input_conteneur .dates input[type=date] {
+  width: 1.4rem;
+  border: 0;
+  background-color: transparent;
+  right: 0.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 0;
+  position: absolute;
+  outline: 0;
+}
+.container_form form .input_section .input_conteneur .dates input[type=text] {
+  width: 100%;
+  box-sizing: border-box;
+}
+.container_form form .input_conteneur {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+.container_form form .input_conteneur label {
+  font-family: inter, sans-serif;
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: #2e2e2e;
+}
+.container_form form .input_conteneur textarea {
+  font-family: inter, sans-serif;
+  padding-left: 0.5rem;
+  height: 2.5rem;
+  outline: none;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #333;
+  border-radius: 5px;
+  border: 1px solid #aaa;
+  background-color: #fff;
+  height: 4rem;
+  padding-top: 0.5rem;
+}
+.container_form form .input_conteneur textarea:hover {
+  border: 1px solid #8d8d8d;
+}
+.container_form form .input_conteneur textarea:focus {
+  outline: 2px solid darkgreen;
+}
+.container_form form .btn {
+  display: flex;
+  gap: 1rem;
+}
+.container_form form .btn button, .container_form form .btn span {
+  font-family: inherit;
+  font-weight: 500;
+  font-size: 1rem;
+  padding: 0.3rem 0.4rem;
+  width: 8rem;
+  height: 2rem;
+  cursor: pointer;
+  border: 0;
+  color: #fff;
+  border-radius: 4px;
+  letter-spacing: 0.8px;
+}
+.container_form form .btn button:nth-child(1), .container_form form .btn span:nth-child(1) {
+  background-color: darkgreen;
+}
+.container_form form .btn button:nth-child(1):hover, .container_form form .btn span:nth-child(1):hover {
+  background-color: green;
+}
+.container_form form .btn button:nth-child(2), .container_form form .btn span:nth-child(2) {
+  background-color: darkred;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.container_form form .btn button:nth-child(2):hover, .container_form form .btn span:nth-child(2):hover {
+  background-color: red;
+}/*# sourceMappingURL=ajoutUser.css.map */

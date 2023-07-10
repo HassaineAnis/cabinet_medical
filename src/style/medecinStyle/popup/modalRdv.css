@@ -1,0 +1,99 @@
+.rdv {
+  animation: fade-in 0.3s ease-in-out;
+  transform-origin: 50% 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  min-width: -moz-max-content;
+  min-width: max-content;
+  width: 50%;
+  min-height: -moz-max-content;
+  min-height: max-content;
+  padding: 1rem;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgb(204, 204, 204);
+  background-color: rgb(255, 255, 255);
+  outline: none;
+  border-radius: 4px;
+  font-family: Inter, sans-serif;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  opacity: 1;
+  transition: opacity 3000ms ease;
+}
+.rdv .modal_btn {
+  display: flex;
+  flex-direction: row-reverse;
+  width: 100%;
+  gap: 1rem;
+  justify-content: space-between;
+}
+.rdv .modal_btn button {
+  color: #ffffff;
+  font-weight: 500;
+  font-size: large;
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  height: -moz-fit-content;
+  height: fit-content;
+  padding: 5px 15px;
+  border-radius: 4px;
+  background-color: darkgreen;
+}
+.rdv .modal_btn button:hover {
+  filter: brightness(80%);
+}
+.rdv .modal_btn button:nth-child(1) {
+  background-color: darkred;
+}
+.rdv .modal_btn button:nth-child(1):hover {
+  filter: brightness(80%);
+}
+.rdv .modal_btn .confirme {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: center;
+  gap: 0.2rem;
+  align-items: center;
+}
+.rdv .modal_btn .confirme svg {
+  fill: darkgreen;
+}
+.rdv .modal_btn .confirme span {
+  font-weight: 500;
+  color: darkgreen;
+  align-self: center;
+}
+.rdv .modal_profil {
+  width: 95%;
+}
+.rdv .modal_profil h2 {
+  text-align: center;
+}
+.rdv .modal_profil hr {
+  width: 100%;
+}
+.rdv .modal_profil .modal_profil_info {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.rdv .modal_profil .modal_profil_info .ligne {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.rdv .modal_profil .modal_profil_info .ligne p {
+  margin: 0;
+  display: inline-block;
+  width: 15rem;
+}
+.rdv .modal_profil .modal_profil_info .ligne span {
+  font-weight: 600;
+  width: 10rem;
+}/*# sourceMappingURL=modalRdv.css.map */

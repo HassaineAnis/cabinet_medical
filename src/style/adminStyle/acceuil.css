@@ -1,0 +1,15 @@
+.acceuil {
+  background-color: #F9F9F9;
+  grid-row: 2/6;
+  grid-column: 2/6;
+  padding: 10px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  justify-items: center;
+  gap: 20px;
+}
+.acceuil .box {
+  width: 100%;
+  background-color: rgb(255, 255, 255);
+}/*# sourceMappingURL=acceuil.css.map */
