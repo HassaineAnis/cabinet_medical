@@ -1,35 +1,28 @@
 import React, { useState,useEffect } from 'react';
-import SearchBar from '../serchBar/SearchBar';
+ 
 import Pagination from '../../../admin/components/pagination/Pagination';
 import "../../../style/medecinStyle/consultation.css"
-import { Link, useNavigate, useParams } from 'react-router-dom';
- 
- 
+import { Link } from 'react-router-dom';
+import { ToastContainer  } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import Modal from "react-modal";
 import useModal from "../../../util/hooks/UseModal";
- 
- 
+import Notification from "../../../util/Notifiation"; 
+//import socket from '../../../socket/Socket';
 import "../../../style/medecinStyle/popup/modalRdv.css"
 
-const nombreElementPage = 8;
-const TableRdvArchive = () => {
-  const {id} =useParams()
-  
+const nombreElementPage = 6;
+
+const TableConsultation = ({id}) =>{
     const jetonString = sessionStorage.getItem("user");
     const jeton = JSON.parse(jetonString); 
-    const url = id? `http://localhost:3000/api/rendez-vous/patient/${id}`:`http://localhost:3000/api/rendez-vous/${jeton.id}`
-
-    const {modalIsOpen1 , openModal1, closeModal1 } = useModal();
+  
+    const { modalIsOpen, openModal, closeModal , modalIsOpen1 , openModal1, closeModal1 } = useModal();
     const [currentObjet,setObjet]=useState({})
     
     const [data, setData] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
-
-    const navigate = useNavigate();
-    const navigation =()=>{
-      navigate(-1)
-    }
    
   
    
@@ -37,36 +30,23 @@ const TableRdvArchive = () => {
     const [rendeVous, setRendeVous] = useState([]);
     const [erreur, setErreur] = useState(false);
   
-    const [searchTerm, setSearchTerm] = useState("");
-    const [recherche ,setRecherche] = useState(false)
-  
-    const handleSearchChange = (event) => {
-      if(event.target.value !==""){
-      setSearchTerm(event.target.value);
-      setRecherche(true)
-      }else{
-        setRecherche(false)
-      }
-    };
+    
     
     
    
-     const  filteredRdv = rendeVous.filter((rdv) => {
-        const fullName = `${rdv.nom} ${rdv.prenom}`.toLowerCase();
-        return fullName.includes(searchTerm.toLowerCase());
-      });
+     
   
       useEffect(() => {
-       
+        
       const fetchRdv = async () => {
         setLoading(true);
         try {
-          const response = await fetch(url);
+          const response = await fetch(`http://localhost:3000/api/rendez-vous/${jeton.id}`);
     
           const rendeVous = await response.json();
           rendeVous.sort((a, b) => new Date(a.date) - new Date(b.date));
-          setTotalPages(!recherche ? Math.ceil(rendeVous.length / nombreElementPage):Math.ceil(filteredRdv.length /nombreElementPage));
-          setData(!recherche ? rendeVous:filteredRdv );
+          setTotalPages( Math.ceil(rendeVous.length / nombreElementPage) );
+          setData(  rendeVous  );
     
           setRendeVous(rendeVous);
         } catch (e) {
@@ -81,11 +61,12 @@ const TableRdvArchive = () => {
         
         }
       };
-     
+      
+         
     
       fetchRdv();
-    
-    }, [recherche]);
+     
+    }, []);
      const indiceDepart = (currentPage - 1) * nombreElementPage;
       const currentData =  data.slice(
         indiceDepart,
@@ -102,66 +83,77 @@ const TableRdvArchive = () => {
         console.log(data)
         
       }
-
+  
+      const confimeRemove = (data)=>{
+     
+        setObjet(data)
+         
+        openModal();
+      }
+      const RemoveData = async ()=>{
+        // console.log(currentObjet.user._id)
+           
+         try {
+           const reponse = await fetch(
+           `http://localhost:3000/api/rendez-vous/${currentObjet._id}`,
+             {
+               method: "DELETE",
+             }
+           );
+     
+           if (reponse.ok) {
+              closeModal()
+              Notification.reussite(`Rendez-vous supprimer avec succés.`)
+              
+           }
+         } catch (error) {
+           Notification.echec("Erreur de suppression.");
+           console.log(error);
+         }
+      
+       }
+  
+  
+   
+  
+       
+     
       if(erreur){
         return(
-            <div className="consultation_table">erreur de chargement</div>
+          <div>Erreur de chargement</div>
         )
       }
-    return (
-        <div className="consultation_table">
-         
-        <h2>Rendez-vous archivé</h2>
-      <div className="consultation_table_btn" > 
-       <Link style={{textDecoration:'none'}}  onClick={navigation} className='btn_archive'> 
-       
-        Retour
-       </Link>
 
-     <SearchBar  onSearchChange={handleSearchChange} /> 
-     </div> 
-     {isLoading? (<div style={{alignSelf:"center"}} className="spinner"></div>):
-     
-     
-    ( 
-      <>
       
-
-   <div className="consultation_table__content">
-    
+    return (
+        <div className='table_rdv_patient'>
+            
+             <div className="consultation_table__content">
+      
       <table className="table">
       <thead>
         <tr className="table_entete">
-          <td>Nom</td>
-          <td>Prénom</td>
-          <td>Age</td>
-          <td>date</td>
-          <td>Motif</td>
-          <td>Status</td>
-          <td>Details</td>
+             <td>Date</td>
+              <td>Diagnostic</td>
+             <td>Actions</td>
           
         </tr>
       </thead>
       <tbody>
      
            
-           {
-            currentData.filter(element =>  element.status ).map((element)=>(
+          
+           { currentData.map((element)=>(
 
 
      
            
               <tr key={element._id} >
-              <td>{element.nom}</td>
-              <td>{element.prenom} </td>
-              <td>{element.age}</td>
-              <td> {new Date(element.date).toLocaleDateString() }  </td>
-              <td>{element.motif} </td>
-              <td style={{color:"green"}}> Passé</td>
-               
+           
                
               
-              
+              <td> {new Date(element.date).toLocaleDateString()}  </td>
+              <td>Alergie</td>
                
               <td>
                 <div className="action"> 
@@ -179,17 +171,34 @@ const TableRdvArchive = () => {
                     >
                       <path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM216 336h24V272H216c-13.3 0-24-10.7-24-24s10.7-24 24-24h48c13.3 0 24 10.7 24 24v88h8c13.3 0 24 10.7 24 24s-10.7 24-24 24H216c-13.3 0-24-10.7-24-24s10.7-24 24-24zm40-208a32 32 0 1 1 0 64 32 32 0 1 1 0-64z" />
                     </svg>
-                  
+                    
                
-                 
+                   
                
                 </div>
               </td>
-            </tr> ))}
+            </tr> )) }
+
+            
+
+            
       
         
       </tbody>
-    
+      <Modal
+          isOpen={modalIsOpen}
+          onRequestClose={closeModal}
+          className="custom_modal"
+           
+           style={{ overlay: { backgroundColor: "rgba(0, 0, 0, 0.6)" ,zIndex:"99" } 
+           }}
+        >
+          <p> Etes vous sur des vouloir supprimer ce rendez-vous?</p>
+          <div className="repense">
+            <button onClick={RemoveData}>OUI</button>
+            <button onClick={closeModal}>NON</button>
+          </div>
+        </Modal>
 
         <Modal
           isOpen={modalIsOpen1}
@@ -221,18 +230,7 @@ const TableRdvArchive = () => {
           
           <div className="modal_btn">
             <button onClick={closeModal1}>Fermer</button>
-          
-             <div className='confirme'> 
-              <span> Rendez-vous passé</span>
-              <svg xmlns="http://www.w3.org/2000/svg" fill="#637381" height={30} width={30} viewBox="0 0 448 512">
-              <path d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"/>
-              </svg>
-              </div>
-             
-               
-             
             
-          
            
             
           </div>
@@ -244,10 +242,35 @@ const TableRdvArchive = () => {
     cliqueAvancer={pageSuivante}
       
     />
-    </div> </>)}
+    </div>  
+    <div className="table_btn">
 
-    </div>
+<Link to={`/medecin/patient/dossier/consultation/ajouter/${id}`}  className='btn_ajout' style={{textDecoration:"none",color:"#fff",display:"flex",justifyContent:"center",alignItems:"center"}}> 
+<svg
+width={25}
+height={25}
+fill="none"
+stroke="#FFFF"
+strokeLinecap="round"
+strokeLinejoin="round"
+strokeWidth={2}
+viewBox="0 0 24 24"
+xmlns="http://www.w3.org/2000/svg"
+>
+<path d="M12 5v14" />
+<path d="M5 12h14" />
+</svg>
+Ajouter  
+</Link>
+
+        
+
+</div>
+
+
+            
+        </div>
     );
 }
 
-export default TableRdvArchive;
+export default TableConsultation;

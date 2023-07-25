@@ -3,9 +3,10 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: rgba(1, 66, 1, 0.589);
+  background-color: green;
   color: #FFF;
   padding: 0.5rem 1rem;
+  border-bottom: 2px solid darkgreen;
 }
 .header_medecin .lien {
   text-decoration: none;
@@ -50,7 +51,7 @@
 }
 .header_medecin .header_medecin_profil img {
   outline-offset: 1px;
-  outline: 2px solid black;
+  outline: 2px solid darkgreen;
   width: 5rem;
   height: 5rem;
   border-radius: 50%;

@@ -2,13 +2,24 @@ const mongoose = require("mongoose");
 
 const consultationShema =mongoose.Schema({
  
-nom : {type:String,required:true},
-prenom : {type:String,required:true},
-age : {type:Number,required:true },
-diagnostic :{type:String,required:true},
+    medecin: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
+        required: true,
+      },
+      patient:{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Patient",
+        required: true,
+    
+      },
+//diagnostic :{type:String,required:false,default:""},
+symptome:{type:[String],required:false,default:[]},
 date : {type:Date,required:true},
-montant : {type:Number,required:true},
-sexe : {type:String, required:true},
+montant : {type:String,required:true},
+informationsMedical:{type:Object,required:false,default:{}},
+fichierExterne:{type:[Object],required:false,default:[]}
+ 
 
 })
 

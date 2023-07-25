@@ -36,7 +36,16 @@ exports.afficherRendezVousMedecin = (req,res,next)=>{
     .then(rdv=>res.status(200).json(rdv))
     .catch(error=>res.status(400).json({error}))
 }
+//afficher les rdv d'un patient specifique
+exports.afficherRendezVousPatient=  (req,res,next)=> {
+ console.log("afficher rendez-vous d'un patient", req.params.id)
+    RendezVous.find({patient:req.params.id})
+    .then(rdv=>res.status(200).json(rdv))
+    .catch(error=>res.status(400).json({error}))
 
+
+
+}
 //supprimer rdv
 exports.supprimerRendezVous = (req,res,next) =>{
     const {id}=req.params;

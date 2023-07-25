@@ -6,6 +6,12 @@ const rendezVousShema = mongoose.Schema({
     ref: "User",
     required: true,
   },
+  patient:{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Patient",
+    required: true,
+
+  },
   nom: { type: String, required: true },
   prenom: { type: String, required: true },
   age: { type: Number, required: true },

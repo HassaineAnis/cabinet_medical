@@ -1,22 +1,24 @@
-import React, { useRef, useState, useContext } from "react";
+import React, { useRef, useState,useEffect } from "react";
 import "../../../style/medecinStyle/ajout/ajoutconsult.css";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { ToastContainer  } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Modal from "react-modal";
 import useModal from "../../../util/hooks/UseModal";
 import Notification from "../../../util/Notifiation";
-import { RechargeContext } from "../../../util/context/Context";
+import "../../../style/loader/loader.css"
+ 
+ 
 
 Modal.setAppElement("#root");
 
 const AjouterRDV = (props) => {
   const jetonString = sessionStorage.getItem("user");
   const jeton = JSON.parse(jetonString);
+  const {id} = useParams()
 
   const {openModal,closeModal,modalIsOpen} = useModal()
-
-  const { setRecharge } = useContext(RechargeContext);
+ 
    
   const [motif, setMotif] = useState("");
   const formRef = useRef(null);
@@ -29,12 +31,45 @@ const AjouterRDV = (props) => {
   const ageRef = useRef(null);
   const typeAccouchementRef  = useRef(null)
   const typeCherurgieRef =useRef(null)
+
+  const [isLoading, setLoading] = useState(false);
+  const [patient, setPatient] = useState([]);
+  const [erreur, setErreur] = useState(false);
+
+  useEffect(() => {
+    
+    const fetchPatient = async () => {
+      setLoading(true);
+      try {
+        const response = await fetch(
+          `http://localhost:3000/api/Patient/details/${id}`
+        );
+
+        const patients = await response.json();
+        //rendeVous.sort((a, b) => new Date(a.date) - new Date(b.date));
+        
+    
+        setPatient(patients);
+      } catch (e) {
+        console.log("erreur!!!", e);
+        setErreur(true);
+      } finally {
+        setLoading(false);
+
+       
+      }
+    };
+    
+   fetchPatient()
+    
+  }, [id]);
   
 
   const navigate = useNavigate();
   const navigation = () => {
-    navigate("/medecin/rendez-vous");
+    navigate(-1);
   };
+
 
   
 
@@ -50,6 +85,7 @@ const AjouterRDV = (props) => {
  closeModal()
     const data = {
       medecin: jeton.id,
+      patient:id,
       nom: nomRef.current.value,
       prenom: prenomRef.current.value,
       age: ageRef.current.value,
@@ -78,7 +114,7 @@ const AjouterRDV = (props) => {
       });
 
       if (response.ok) {
-        setRecharge(true);
+       
         Notification.reussite("Rendez- vous ajouter avec succés.")
         formRef.current.reset();
       } else {
@@ -102,8 +138,11 @@ const AjouterRDV = (props) => {
           <h2>Ajouter un nouveau rendez-vous</h2>
           <span>Veuillez remplire les champs</span>
         </div>
-
-        <form
+          {isLoading? <div className="spinner"></div>
+          
+        :
+        (
+          <form
           onSubmit={(e) => {
             verificationData(e);
           }}
@@ -118,8 +157,11 @@ const AjouterRDV = (props) => {
                  placeholder="Exemple : Dupont"
                  ref={nomRef}
                  pattern="[A-Za-z,-_\s]{3,}"
+
                  title="Le nom doit contenir au moins 3 caractères alphabétiques."
                  required
+                 defaultValue={patient.nom}
+                 readOnly={true}
               />
             </div>
 
@@ -133,6 +175,8 @@ const AjouterRDV = (props) => {
                   pattern="[A-Za-z,-_\s]{3,}"
                   title="Le prenom doit contenir au moins 3 caractères alphabétiques."
                   required
+                  defaultValue={patient.prenom}
+                  readOnly={true}
               />
             </div>
 
@@ -145,6 +189,8 @@ const AjouterRDV = (props) => {
                 placeholder="Exemple : 23"
                 required
                 ref={ageRef}
+                defaultValue={patient.age}
+                readOnly={true}
               />
             </div>
             <div className="input_container">
@@ -157,6 +203,8 @@ const AjouterRDV = (props) => {
              title="L'adresse doit contenir au moins 4 caractères alphabétiques."
              placeholder="Ex : Abarane, Tirmitine, Tizi-Ouzou"
              required
+             defaultValue={patient.adresse}
+             readOnly={true}
               />
             </div>
             <div className="input_container">
@@ -169,9 +217,30 @@ const AjouterRDV = (props) => {
                title="Le numéro de téléphone doit être au format algérien."
                required
                placeholder="Ex: 05 XX XX XX XX"
+               defaultValue={patient.numeroTel}
+               readOnly={true}
               />
             </div>
+
             <div className="input_container">
+              <label htmlFor="sexe">Sexe</label>
+             
+              <input
+               type="text"
+               name="sexe"
+                id="sexe"
+                required
+                 ref={sexeRef}
+                  defaultValue={patient.sexe}
+                  readOnly={true}
+              />
+            </div>
+ 
+            
+          </div>
+          
+          <div style={{display:"flex",justifyContent:"center",gap:"1rem"}}>
+            <div className="input_container" style={{width:"50%"}}>
               <label htmlFor="date">Date du rendez-vous</label>
               <input
                 type="date"
@@ -179,19 +248,13 @@ const AjouterRDV = (props) => {
                 id="date"
                 required 
                 ref={dateRef}
+                
               />
             </div>
 
-            <div className="input_container">
-              <label htmlFor="sexe">Sexe</label>
-              <select name="sexe" id="sexe" required ref={sexeRef}>
-                <option value=""></option>
-                <option value="HOMME">Homme</option>
-                <option value="FEMME">Femme</option>
-              </select>
-            </div>
+            
 
-            <div className="input_container">
+            <div className="input_container" style={{width:"50%"}}>
               <label htmlFor="motif">Motif du rendez-vous</label>
               <select
                 name="motif"
@@ -205,7 +268,7 @@ const AjouterRDV = (props) => {
                 <option value="Accouchement">Accouchement</option>
               </select>
             </div>
-          </div>
+            </div>
 
           {motif === "Accouchement" && (
             <div className="input_container">
@@ -243,6 +306,11 @@ const AjouterRDV = (props) => {
             </div>
           </Modal>
         </form>
+
+        )
+        
+        }
+        
       </div>
     </>
   );

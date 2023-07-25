@@ -1,0 +1,204 @@
+.dossier {
+  padding: 0.2rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  height: 100%;
+  box-sizing: border-box;
+}
+.dossier h2 {
+  margin-top: 0.4rem;
+  margin: 0;
+}
+.dossier .dossier_container {
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  grid-template-rows: repeat(10, 1fr);
+  height: 100%;
+  -moz-column-gap: 1rem;
+       column-gap: 1rem;
+  row-gap: 1rem;
+}
+.dossier .information_personnel {
+  grid-area: 1/1/11/4;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.dossier .information_personnel h3 {
+  text-align: center;
+}
+.dossier .information_personnel .container {
+  animation: table 300ms ease-in-out;
+  box-shadow: 0px 0px 19px 1px rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  background-color: #FFF;
+  padding: 1rem 0;
+  height: -moz-max-content;
+  height: max-content;
+}
+.dossier .information_personnel .container .info {
+  display: flex;
+  justify-content: center;
+}
+.dossier .information_personnel .container .info span:nth-child(1) {
+  font-weight: 600;
+  width: 10rem;
+}
+.dossier .information_personnel .container .info span:nth-child(2) {
+  width: 10rem;
+  font-weight: 500;
+}
+.dossier .table_rdv {
+  grid-area: 1/4/6/11;
+}
+.dossier .table_rdv .table_rdv_patient {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.dossier .table_rdv .table_rdv_patient .table_btn {
+  display: flex;
+  justify-content: space-evenly;
+}
+.dossier .table_rdv .table_rdv_patient .table_btn .btn_archive {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  width: 10rem;
+  color: #fff;
+  background-color: darkgreen;
+  border-radius: 4px;
+  padding: 5px 15px;
+}
+.dossier .table_rdv .table_rdv_patient .table_btn .btn_archive svg {
+  fill: #FFF;
+}
+.dossier .table_rdv .table_rdv_patient .table_btn .btn_archive:hover {
+  filter: brightness(80%);
+}
+.dossier .table_rdv .table_rdv_patient .table_btn .btn_ajout {
+  display: flex;
+  align-items: center;
+  width: 10rem;
+  font: inherit;
+  cursor: pointer;
+  background-color: darkgreen;
+  color: #FFF;
+  border-radius: 5px;
+  border: 0;
+  padding: 0.4rem;
+  font-weight: 500;
+}
+.dossier .table_rdv .table_rdv_patient .table_btn .btn_ajout:hover {
+  filter: brightness(80%);
+}
+.dossier .table_rdv .table_rdv_patient .consultation_table__content {
+  box-shadow: 0px 2px 10px 0px rgba(58, 53, 65, 0.1);
+  background-color: #FFF;
+  animation: table 300ms ease-in-out;
+}
+.dossier .table_rdv .table_rdv_patient .consultation_table__content .table {
+  font-family: Inter, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+.dossier .table_rdv .table_rdv_patient .consultation_table__content .table thead tr {
+  height: 2.5rem;
+  border-bottom: 1px solid rgba(58, 53, 65, 0.12);
+}
+.dossier .table_rdv .table_rdv_patient .consultation_table__content .table thead tr td {
+  padding: 0 1rem;
+  font-weight: 600;
+  background-color: rgba(0, 128, 0, 0.301);
+  color: rgba(58, 53, 65, 0.87);
+}
+.dossier .table_rdv .table_rdv_patient .consultation_table__content .table tbody tr {
+  height: 2.5rem;
+  background-color: rgb(255, 255, 255);
+  border-bottom: 1px solid rgba(58, 53, 65, 0.12);
+}
+.dossier .table_rdv .table_rdv_patient .consultation_table__content .table tbody tr td {
+  color: rgba(58, 53, 65, 0.68);
+  padding: 0 1rem;
+  height: 100%;
+  font-weight: 500;
+}
+.dossier .table_rdv .table_rdv_patient .consultation_table__content .table tbody tr td .action {
+  width: 100%;
+  display: flex;
+  gap: 1rem;
+}
+.dossier .table_rdv .table_rdv_patient .consultation_table__content .table tbody tr td .action svg {
+  cursor: pointer;
+}
+.dossier .table_consult {
+  grid-area: 6/4/11/11;
+}
+.dossier .table_consult .table_rdv_patient {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.dossier .table_consult .table_rdv_patient .table_btn {
+  display: flex;
+  justify-content: space-evenly;
+}
+.dossier .table_consult .table_rdv_patient .table_btn .btn_ajout {
+  display: flex;
+  align-items: center;
+  width: 10rem;
+  font: inherit;
+  cursor: pointer;
+  background-color: darkgreen;
+  color: #FFF;
+  border-radius: 5px;
+  border: 0;
+  padding: 0.4rem;
+  font-weight: 500;
+}
+.dossier .table_consult .table_rdv_patient .table_btn .btn_ajout:hover {
+  filter: brightness(80%);
+}
+.dossier .table_consult .table_rdv_patient .consultation_table__content {
+  box-shadow: 0px 2px 10px 0px rgba(58, 53, 65, 0.1);
+  background-color: #FFF;
+  animation: table 300ms ease-in-out;
+}
+.dossier .table_consult .table_rdv_patient .consultation_table__content .table {
+  font-family: Inter, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+.dossier .table_consult .table_rdv_patient .consultation_table__content .table thead tr {
+  height: 2.5rem;
+  border-bottom: 1px solid rgba(58, 53, 65, 0.12);
+}
+.dossier .table_consult .table_rdv_patient .consultation_table__content .table thead tr td {
+  padding: 0 1rem;
+  font-weight: 600;
+  background-color: rgba(0, 128, 0, 0.301);
+  color: rgba(58, 53, 65, 0.87);
+}
+.dossier .table_consult .table_rdv_patient .consultation_table__content .table tbody tr {
+  height: 2.5rem;
+  background-color: rgb(255, 255, 255);
+  border-bottom: 1px solid rgba(58, 53, 65, 0.12);
+}
+.dossier .table_consult .table_rdv_patient .consultation_table__content .table tbody tr td {
+  color: rgba(58, 53, 65, 0.68);
+  padding: 0 1rem;
+  height: 100%;
+  font-weight: 500;
+}
+.dossier .table_consult .table_rdv_patient .consultation_table__content .table tbody tr td .action {
+  width: 100%;
+  display: flex;
+  gap: 1rem;
+}
+.dossier .table_consult .table_rdv_patient .consultation_table__content .table tbody tr td .action svg {
+  cursor: pointer;
+}/*# sourceMappingURL=dossierMedical.css.map */

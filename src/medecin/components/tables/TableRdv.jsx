@@ -178,23 +178,7 @@ const TableRdv = ( ) => {
           <ToastContainer/>
         <div className="consultation_table_btn" > 
         
-          <Link to="/medecin/rendez-vous/ajouter" className='btn_ajout' style={{textDecoration:"none",color:"#fff",display:"flex",justifyContent:"center",alignItems:"center"}}> 
-          <svg
-            width={25}
-            height={25}
-            fill="none"
-            stroke="#FFFF"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            viewBox="0 0 24 24"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path d="M12 5v14" />
-            <path d="M5 12h14" />
-          </svg>
-          Ajouter une nouveau rendez-vous
-          </Link>
+          
         
         <select name="motif" id="motif"   onChange={(e)=>setMotif(e.target.value)}>
           <option value="">filtré</option>

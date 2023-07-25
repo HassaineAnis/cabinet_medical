@@ -12,5 +12,6 @@ router.get('/:id', RdvControl.afficherRendezVousMedecin);
 router.delete('/:id',RdvControl.supprimerRendezVous );
 router.put('/:id',RdvControl.modifierRendezVous);
 router.put('/confirmer/:id',RdvControl.confirmeRendezVous)
+router.get('/patient/:id',RdvControl.afficherRendezVousPatient);
 
  module.exports = router;

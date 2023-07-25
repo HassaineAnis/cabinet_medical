@@ -8,6 +8,8 @@ const userRoutes = require('./routes/user');
 const consultRoutes = require('./routes/consultation')
 const personnelRoutes = require("./routes/personnel")
 const rendezVousRoutes = require("./routes/rendezVous")
+const patientRoutes = require("./routes/patient")
+
 const app =express();
 const server = http.createServer(app);
 const io = new Server(server,{
@@ -49,11 +51,13 @@ app.use((req, res, next) => {
   
  app.use('/api/medecin',medecinRoutes);
  app.use('/photo',express.static(path.join(__dirname,'photo')));
+ app.use('/document',express.static(path.join(__dirname,'document')));
 
  app.use('/api/users',userRoutes);
  app.use('/api/consultation',consultRoutes)
  app.use("/api/personnel",personnelRoutes)
  app.use("/api/rendez-vous",rendezVousRoutes)
+ app.use("/api/patient",patientRoutes)
  
 
 
@@ -67,6 +71,10 @@ app.use((req, res, next) => {
   socket.on("supprimerData",(data)=>{
     console.log(data)
     io.emit("afterDeleteData",data)
+  })
+  socket.on("supprimerRdvPatient",(data)=>{
+    console.log(data)
+    io.emit("afterDeleteRdvPatient",data)
   })
 
   socket.on("confirmerdv",(data)=>{

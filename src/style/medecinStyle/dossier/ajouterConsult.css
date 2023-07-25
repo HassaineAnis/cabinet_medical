@@ -1,0 +1,300 @@
+.Ajouter_consult {
+  margin-bottom: 1rem;
+}
+.Ajouter_consult h2 {
+  text-align: center;
+}
+.Ajouter_consult form {
+  display: flex;
+  gap: 2rem;
+}
+.Ajouter_consult form .ajouter_symptome {
+  background-color: #fff;
+  padding: 1rem;
+  width: 20rem;
+  box-shadow: 0px 0px 19px 1px rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-direction: column;
+}
+.Ajouter_consult form .ajouter_symptome input {
+  font-family: inter, sans-serif;
+  padding-left: 0.5rem;
+  height: 2.5rem;
+  outline: none;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #333;
+  border-radius: 5px;
+  border: 1px solid #aaa;
+  background-color: #fff;
+  width: 100%;
+  justify-self: end;
+}
+.Ajouter_consult form .ajouter_symptome input:hover {
+  border: 1px solid #8d8d8d;
+}
+.Ajouter_consult form .ajouter_symptome input:focus {
+  outline: 2px solid darkgreen;
+}
+.Ajouter_consult form .ajouter_symptome h3 {
+  color: darkgreen;
+  text-align: center;
+}
+.Ajouter_consult form .ajouter_symptome .Ajouter_symptome_input {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.Ajouter_consult form .ajouter_symptome .Ajouter_symptome_input input {
+  font-family: inter, sans-serif;
+  padding-left: 0.5rem;
+  height: 2.5rem;
+  outline: none;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #333;
+  border-radius: 5px;
+  border: 1px solid #aaa;
+  background-color: #fff;
+  flex-grow: 2;
+}
+.Ajouter_consult form .ajouter_symptome .Ajouter_symptome_input input:hover {
+  border: 1px solid #8d8d8d;
+}
+.Ajouter_consult form .ajouter_symptome .Ajouter_symptome_input input:focus {
+  outline: 2px solid darkgreen;
+}
+.Ajouter_consult form .ajouter_symptome .Ajouter_symptome_input svg {
+  fill: darkgreen;
+}
+.Ajouter_consult form .ajouter_symptome .Ajouter_symptome_input svg:hover {
+  cursor: pointer;
+}
+.Ajouter_consult form .ajouter_symptome .liste_symptome {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.Ajouter_consult form .ajouter_symptome .liste_symptome li {
+  animation: table 300ms ease-in;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.Ajouter_consult form .ajouter_symptome .liste_symptome li svg {
+  fill: darkred;
+  cursor: pointer;
+}
+.Ajouter_consult form .ajouter_information {
+  background-color: #fff;
+  padding: 1rem;
+  width: 20rem;
+  box-shadow: 0px 0px 19px 1px rgba(0, 0, 0, 0.3);
+}
+.Ajouter_consult form .ajouter_information h3 {
+  color: darkgreen;
+  text-align: center;
+}
+.Ajouter_consult form .ajouter_information .input_info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.Ajouter_consult form .ajouter_information .input_info .input_container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+.Ajouter_consult form .ajouter_information .input_info .input_container label {
+  font-family: inter, sans-serif;
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: #2e2e2e;
+}
+.Ajouter_consult form .ajouter_information .input_info .input_container input {
+  font-family: inter, sans-serif;
+  padding-left: 0.5rem;
+  height: 2.5rem;
+  outline: none;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #333;
+  border-radius: 5px;
+  border: 1px solid #aaa;
+  background-color: #fff;
+}
+.Ajouter_consult form .ajouter_information .input_info .input_container input:hover {
+  border: 1px solid #8d8d8d;
+}
+.Ajouter_consult form .ajouter_information .input_info .input_container input:focus {
+  outline: 2px solid darkgreen;
+}
+.Ajouter_consult form .ajouter_document {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 0px 0px 19px 1px rgba(0, 0, 0, 0.3);
+  background-color: #fff;
+  flex-grow: 1;
+  padding: 1rem;
+}
+.Ajouter_consult form .ajouter_document .ajouter_document_container .fichier_externe {
+  display: flex;
+  flex-direction: column;
+}
+.Ajouter_consult form .ajouter_document .ajouter_document_container .fichier_externe .fichier_externe_input {
+  display: flex;
+  gap: 1rem;
+}
+.Ajouter_consult form .ajouter_document .ajouter_document_container .fichier_externe .fichier_externe_input input {
+  font-family: inter, sans-serif;
+  padding-left: 0.5rem;
+  height: 2.5rem;
+  outline: none;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #333;
+  border-radius: 5px;
+  border: 1px solid #aaa;
+  background-color: #fff;
+}
+.Ajouter_consult form .ajouter_document .ajouter_document_container .fichier_externe .fichier_externe_input input:hover {
+  border: 1px solid #8d8d8d;
+}
+.Ajouter_consult form .ajouter_document .ajouter_document_container .fichier_externe .fichier_externe_input input:focus {
+  outline: 2px solid darkgreen;
+}
+.Ajouter_consult form .ajouter_document .ajouter_document_container .fichier_externe .fichier_externe_input .input_container {
+  display: flex;
+  font-family: inter, sans-serif;
+  padding-left: 0.5rem;
+  height: 2.5rem;
+  outline: none;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #333;
+  border-radius: 5px;
+  border: 1px solid #aaa;
+  background-color: #fff;
+  align-items: center;
+}
+.Ajouter_consult form .ajouter_document .ajouter_document_container .fichier_externe .fichier_externe_input .input_container input[type=file] {
+  display: none;
+}
+.Ajouter_consult form .ajouter_document .ajouter_document_container .fichier_externe .fichier_externe_input .input_container svg {
+  fill: darkgreen;
+  cursor: pointer;
+}
+.Ajouter_consult form .ajouter_document .ajouter_document_container .fichier_externe .fichier_externe_input .input_container svg:hover {
+  filter: brightness(80%);
+}
+.Ajouter_consult form .ajouter_document .ajouter_document_container .fichier_externe .fichier_externe_input .input_container #fileName {
+  outline: 0;
+  background-color: transparent;
+  border: 0;
+}
+.Ajouter_consult form .ajouter_document .ajouter_document_container .fichier_externe .fichier_externe_input .btn_ajout {
+  display: flex;
+  align-items: center;
+  background-color: darkgreen;
+  color: #fff;
+  padding: 5px 10px;
+  cursor: pointer;
+  gap: 0.2rem;
+  border-radius: 4px;
+  letter-spacing: 0.5px;
+}
+.Ajouter_consult form .ajouter_document .ajouter_document_container .fichier_externe .fichier_externe_input .btn_ajout:hover {
+  filter: brightness(80%);
+}
+.Ajouter_consult form .ajouter_document .ajouter_document_container .fichier_externe .liste_file ul {
+  padding: 0;
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+.Ajouter_consult form .ajouter_document .ajouter_document_container .fichier_externe .liste_file ul li {
+  animation: table 300ms ease-in;
+  display: flex;
+  gap: 1rem;
+  padding: 5px;
+  color: #fff;
+  background-color: green;
+  border-radius: 4px;
+}
+.Ajouter_consult form .ajouter_document .ajouter_document_container .document_interne .document_interne_input {
+  display: flex;
+  gap: 1rem;
+}
+.Ajouter_consult form .ajouter_document .ajouter_document_container .document_interne .document_interne_input select {
+  font-family: inter, sans-serif;
+  padding-left: 0.5rem;
+  height: 2.5rem;
+  outline: none;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #333;
+  border-radius: 5px;
+  border: 1px solid #aaa;
+  background-color: #fff;
+  flex-grow: 2;
+}
+.Ajouter_consult form .ajouter_document .ajouter_document_container .document_interne .document_interne_input select:hover {
+  border: 1px solid #8d8d8d;
+}
+.Ajouter_consult form .ajouter_document .ajouter_document_container .document_interne .document_interne_input select:focus {
+  outline: 2px solid darkgreen;
+}
+.Ajouter_consult form .ajouter_document .ajouter_document_container .document_interne .document_interne_input .btn_ajout {
+  display: flex;
+  align-items: center;
+  background-color: darkgreen;
+  color: #fff;
+  padding: 5px 10px;
+  cursor: pointer;
+  gap: 0.2rem;
+  border-radius: 4px;
+  letter-spacing: 0.5px;
+}
+.Ajouter_consult form .ajouter_document .ajouter_document_container .document_interne .document_interne_input .btn_ajout:hover {
+  filter: brightness(80%);
+}
+.Ajouter_consult form .ajouter_document .ajouter_document_container h3 {
+  color: darkgreen;
+  text-align: center;
+}
+.Ajouter_consult form .ajouter_document .btn {
+  display: flex;
+  gap: 2rem;
+}
+.Ajouter_consult form .ajouter_document .btn span {
+  font-size: 1rem;
+  font-weight: 500;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  background-color: darkred;
+  border: 0;
+  width: 6rem;
+  padding: 5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.Ajouter_consult form .ajouter_document .btn span:hover {
+  filter: brightness(80%);
+}
+.Ajouter_consult form .ajouter_document .btn button {
+  font-size: 1rem;
+  font-weight: 500;
+  color: #fff;
+  background-color: darkgreen;
+  border: 0;
+  width: 6rem;
+  padding: 5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.Ajouter_consult form .ajouter_document .btn button:hover {
+  filter: brightness(80%);
+}/*# sourceMappingURL=ajouterConsult.css.map */

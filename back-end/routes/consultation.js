@@ -2,11 +2,13 @@ const express = require('express');
 
 const router = express.Router();
 const consultControl = require ('../controllers/consultation');
+const multerFile = require('../middleware/multerdocumentConfig');
  
 
 
-router.post('/',consultControl.ajoutConsultation);
-router.get('/',consultControl.afficherConsultation);
+router.post('/',multerFile,consultControl.ajoutConsultation);
+//router.get('/',consultControl.afficherConsultation);
 router.delete('/:id',consultControl.supprimerConsultation)
+router.get('/patient/:id',consultControl.afficherConsultationPatient)
 
  module.exports = router;
