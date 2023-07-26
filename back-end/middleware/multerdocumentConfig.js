@@ -18,4 +18,7 @@ const storage = multer.diskStorage({
   }
 });
 
-module.exports = multer({ storage: storage }).array('fichierExterne');
+module.exports = multer({ storage: storage }).fields([
+  { name: 'fichierExterne' },
+  { name: 'documentMedical' }
+]);

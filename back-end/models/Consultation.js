@@ -11,14 +11,15 @@ const consultationShema =mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: "Patient",
         required: true,
-    
+     
       },
-//diagnostic :{type:String,required:false,default:""},
+diagnostic :{type:String,required:false,default:""},
 symptome:{type:[String],required:false,default:[]},
 date : {type:Date,required:true},
-montant : {type:String,required:true},
+montant : {type:String,required:false,default:"2000"},
 informationsMedical:{type:Object,required:false,default:{}},
-fichierExterne:{type:[Object],required:false,default:[]}
+fichierExterne:{type:[Object],required:false,default:[]},
+documentMedical:{type:[Object],required:false,default:[]}
  
 
 })

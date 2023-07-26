@@ -2,10 +2,12 @@ import React from 'react';
 import logo from "../../../assets/logo (1).png"
 import "../../../style/medecinStyle/documentMedical/ordonnance.css"
 import { useReactToPrint } from 'react-to-print';
-import { useState,useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useState,useEffect,useContext } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import "../../../style/loader/loader.css"
-import { createClient } from 'pdfcrowd';
+import html2canvas from "html2canvas"
+import { DocumentContext } from '../../../util/context/Context';
+ 
  
 
  
@@ -16,6 +18,7 @@ import { createClient } from 'pdfcrowd';
  
   
 const Ordonnance = () => {
+  const {documents,setDocuments} = useContext(DocumentContext)
 
 
 
@@ -24,8 +27,7 @@ const Ordonnance = () => {
     
 
 
-    const [pdfData, setPdfData] = useState(null);
-
+ 
     const componentRef = React.useRef();
     const [traitement,setTraitement] = useState([])
     const [inputTraitement,setInput] = useState("")
@@ -34,6 +36,8 @@ const Ordonnance = () => {
     const [isLoading, setLoading] = useState(false);
     const [patient, setPatient] = useState([]);
     const [erreur, setErreur] = useState(false);
+    const navigate = useNavigate()
+ 
     
 
 
@@ -100,19 +104,62 @@ const Ordonnance = () => {
       const envoie =(e)=>{
         e.preventDefault()
       }
-     
-      const convertToPdf = () => {
-        const client = createClient("your-username", "your-api-key");
-    
-        const capture = document.querySelector('.ordonnance_container');
-        client.convertHtml(capture.outerHTML, (err, pdf) => {
-          if (err) {
-            console.error('Erreur lors de la conversion en PDF :', err);
-          } else {
-            setPdfData(pdf);
+
+      function cleanBase64String(base64String) {
+        // Supprimer les entêtes "data:image/jpeg;base64," ou "data:image/png;base64," si présents
+        const base64HeaderRegex = /^data:(image\/(jpeg|png));base64,/;
+        const cleanedBase64String = base64String.replace(base64HeaderRegex, '');
+        
+        // Supprimer tous les caractères non valides
+        const validBase64Characters = /^[A-Za-z0-9+/=]+$/;
+        if (!validBase64Characters.test(cleanedBase64String)) {
+          throw new Error('Chaîne Base64 invalide : caractères non valides détectés.');
+        }
+      
+        return cleanedBase64String;
+      }
+      
+      function base64ToFile(base64String, filename, mimeType) {
+        const byteCharacters = atob(base64String); // Convertit la chaîne Base64 en caractères binaires
+        const byteArrays = [];
+      
+        for (let offset = 0; offset < byteCharacters.length; offset += 512) {
+          const slice = byteCharacters.slice(offset, offset + 512);
+      
+          const byteNumbers = new Array(slice.length);
+          for (let i = 0; i < slice.length; i++) {
+            byteNumbers[i] = slice.charCodeAt(i);
           }
-        });
-      };
+      
+          const byteArray = new Uint8Array(byteNumbers);
+          byteArrays.push(byteArray);
+        }
+      
+        const file = new File(byteArrays, filename, { type: mimeType });
+        return file;
+      }
+      
+      
+      const convertPdf =() =>{
+        const content = componentRef.current
+        html2canvas(content).then((canvas)=>{
+          const imageBase64 = canvas.toDataURL("image/jpeg");
+          const cleanedImageBase64 = cleanBase64String(imageBase64);
+
+          const imageFile = base64ToFile(cleanedImageBase64, "ordonnace", "image/jpeg");
+
+          const documentData=  {
+            titre:"ordonnace",
+            image :imageFile
+          }
+ 
+          // Mettre à jour le state pour afficher l'image capturée
+           setDocuments([...documents,documentData])
+            navigate(-1)
+         
+        })
+
+      } 
 
 
 
@@ -235,7 +282,7 @@ const Ordonnance = () => {
            {traitement.length !==0 && (
             <div className="btn">
             <div className='btn_1'>
-             <button onClick={convertToPdf}>Enregistré</button>
+             <button onClick={convertPdf} >Enregistré</button>
             <button    onClick={(e)=>{window.close()}}>Annuler</button>
             </div>
             <div className='print' onClick={handlePrint}>
@@ -258,12 +305,7 @@ const Ordonnance = () => {
             </>)
             }
           
-          {pdfData && (
-            <div className="pdf_preview">
-              <h2>Aperçu du PDF :</h2>
-              <iframe src={`data:application/pdf;base64,${pdfData}`} title="Aperçu du PDF" />
-            </div>
-          )}
+     
  
  
   

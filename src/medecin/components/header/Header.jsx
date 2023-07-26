@@ -14,7 +14,7 @@ const Header = () => {
 
              <nav className='header_medecin_menu'> 
                 <ul className='header_medecin_menu_liste'>
-                    <li><Link to="/medecin/consultation" className='lien'> Consultations </Link></li>
+                    
                     <li><Link to="/medecin/patient" className='lien'>Patients</Link></li>
                     <li><Link to="/medecin/rendez-vous" className='lien'>Rendez-vous </Link></li>
                     <li><Link to= {`/medecin/profil`} className='lien'>Mon Profil </Link></li>

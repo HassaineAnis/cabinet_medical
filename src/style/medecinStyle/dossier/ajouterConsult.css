@@ -70,6 +70,41 @@
 .Ajouter_consult form .ajouter_symptome .Ajouter_symptome_input svg:hover {
   cursor: pointer;
 }
+.Ajouter_consult form .ajouter_symptome .diagnos {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.Ajouter_consult form .ajouter_symptome .diagnos .input_container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+.Ajouter_consult form .ajouter_symptome .diagnos .input_container label {
+  font-family: inter, sans-serif;
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: #2e2e2e;
+}
+.Ajouter_consult form .ajouter_symptome .diagnos .input_container input {
+  font-family: inter, sans-serif;
+  padding-left: 0.5rem;
+  height: 2.5rem;
+  outline: none;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #333;
+  border-radius: 5px;
+  border: 1px solid #aaa;
+  background-color: #fff;
+  flex-grow: 2;
+}
+.Ajouter_consult form .ajouter_symptome .diagnos .input_container input:hover {
+  border: 1px solid #8d8d8d;
+}
+.Ajouter_consult form .ajouter_symptome .diagnos .input_container input:focus {
+  outline: 2px solid darkgreen;
+}
 .Ajouter_consult form .ajouter_symptome .liste_symptome {
   display: flex;
   flex-direction: column;
@@ -258,6 +293,21 @@
 }
 .Ajouter_consult form .ajouter_document .ajouter_document_container .document_interne .document_interne_input .btn_ajout:hover {
   filter: brightness(80%);
+}
+.Ajouter_consult form .ajouter_document .ajouter_document_container .document_interne .liste_file ul {
+  padding: 0;
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+.Ajouter_consult form .ajouter_document .ajouter_document_container .document_interne .liste_file ul li {
+  animation: table 300ms ease-in;
+  display: flex;
+  gap: 1rem;
+  padding: 5px;
+  color: #fff;
+  background-color: green;
+  border-radius: 4px;
 }
 .Ajouter_consult form .ajouter_document .ajouter_document_container h3 {
   color: darkgreen;

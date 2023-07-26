@@ -1,5 +1,5 @@
 const Consultation = require("../models/Consultation");
-const Document = require('../models/Document')
+ 
 
 
 // ajouter une consultation
@@ -7,18 +7,28 @@ const Document = require('../models/Document')
 exports.ajoutConsultation = async(req,res,next)=>{
 console.log("consultation", req.body)
 const newConsultation = {...req.body ,informationsMedical:JSON.parse(req.body.informationsMedical),symptome:JSON.parse(req.body.symptome)};
+
+let fichierExterneUrl =  "";
+let documentMedicalUrl =  "";
  
+      //verifie des fichier sont envoyé du coté front 
+if (req.files){
+    //si oui
+    //on recupere les fichiers avec le nom de champs documentMedical s'il existe
+    documentMedicalUrl =  req.files["documentMedical"] && req.files["documentMedical"].map((file) => `${req.protocol}://${req.get('host')}/document/${file.filename}`);
+    //on recupere les fichiers avec  le nom de champs fichierExterne s'il existe 
+    fichierExterneUrl =req.files["fichierExterne"] && req.files["fichierExterne"].map((file) => `${req.protocol}://${req.get('host')}/document/${file.filename}`);
+ 
+    }
 
     try{
-        let fichiersUrl =  "";
- 
-       if (req.files){
-        fichiersUrl = req.files.map((file) => `${req.protocol}://${req.get('host')}/document/${file.filename}`);
-        }
+         
         //on enregistre la consultation 
+        
         const consultation = new Consultation({
             ...newConsultation,
-            fichierExterne:fichiersUrl
+            fichierExterne:fichierExterneUrl,
+            documentMedical: documentMedicalUrl
    
        })
        await consultation.save()
@@ -61,7 +71,7 @@ exports.supprimerConsultation = (req,res,next) =>{
 exports.afficherConsultationPatient = (req,res,next) =>{
     console.log('consultation patient', req.params.id)
     Consultation.find({patient:req.params.id})
-    .then(rdv=>res.status(200).json(rdv))
+    .then(consult=>res.status(200).json(consult))
     .catch(error=>res.status(400).json({error}))
 
 }

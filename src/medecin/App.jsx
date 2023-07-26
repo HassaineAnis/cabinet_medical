@@ -4,7 +4,7 @@ import { Routes,Route} from "react-router-dom";
  import Header from './components/header/Header';
  
  import DossierMedical from './components/dossierMedical/DossierMedical';
-import Consultation from "./pages/Consultation"
+ 
 import '../style/medecinStyle/app.css'
  
 import { RechargeProvider } from '../util/context/Context';
@@ -16,8 +16,9 @@ import Patient from './pages/Patient';
 import TableRdvArchive from './components/tables/TableRdvArchive';
 import AjouterPatient from './components/ajout/AjouterPatient';
 import ModifierPatient from './components/modifie/ModifierPatient';
-import TableConsultation from './components/tables/TableConsultation';
+ 
 import AjouterConsult from './components/ajout/AjouterConsult';
+ 
 
 const App = () => {
     return (
@@ -34,7 +35,11 @@ const App = () => {
                 <Route path='/patient/dossier/:id' element={<DossierMedical/>}/>
                 <Route path='/patient/dossier/rendez-vous/ajouter/:id' element={<AjouterRDV/>}/>
                 <Route path='/patient/dossier/rendez-vous/archives/:id' element={<TableRdvArchive/>}/>
-                <Route path='/patient/dossier/consultation/ajouter/:id' element ={<AjouterConsult/>}/>
+
+                <Route path='/patient/dossier/consultation/ajouter/:id' element ={<AjouterConsult/>}>
+                    
+
+                </Route>
 
                 </Route>
 
@@ -48,10 +53,10 @@ const App = () => {
 
                 </Route>
 
-                <Route path='/consultation' element={<Consultation/>} >
+                 
                
 
-                </Route>
+                
                  
             </Routes>
             </RechargeProvider>

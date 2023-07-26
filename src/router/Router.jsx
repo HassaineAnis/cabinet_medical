@@ -5,9 +5,10 @@ import AdminApp from "../admin/App";
 import Login from "../auto/Login";
 import PrivateRoute from "./PrivateRoute";
 import PrivateMedecin from "./PrivateMedecin";
-import { AuthoProvider } from "../util/context/Context";
-import RoutePrive from "./RoutePrive";
-import Ordonnance from "../medecin/components/documentMedical/Ordonnance";
+import { AuthoProvider,DocumentProvider } from "../util/context/Context";
+//import RoutePrive from "./RoutePrive";
+import Ordonnance  from "../medecin/components/documentMedical/Ordonnance";
+ 
  
 function Router() {
    
@@ -17,9 +18,11 @@ function Router() {
   return (
     
      <AuthoProvider> 
+      <DocumentProvider> 
     <Routes>
-      <Route path="/ordonnance/:id" element={<Ordonnance/>} />
 
+       
+    <Route path='/ordonnance/:id' element={<Ordonnance/>} />
       
       <Route element={<PrivateRoute />}>
       
@@ -43,7 +46,9 @@ function Router() {
       <Route path="/login" element={<Login />} />
       <Route path="*" element={<Login />} />
     </Routes>
+    </DocumentProvider>
     </AuthoProvider>
+    
    
      
   );
