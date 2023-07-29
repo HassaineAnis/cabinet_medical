@@ -50,10 +50,31 @@ export const RechargeProvider = ({ children }) => {
 export const DocumentContext = createContext();
 export const DocumentProvider = ({ children }) => {
   const [documents, setDocuments]=useState([]) ;
+  console.log(documents)
  
   return(
     <DocumentContext.Provider value={{ documents , setDocuments}}>
       {children}
       </DocumentContext.Provider>
+  )
+}
+
+export const ConsultationContext = createContext();
+export const ConsultationProvider = ({ children }) => {
+  const [symptome,setSymptome] = useState([])
+  const [fichier,setFichier]= useState([])
+  const [tension,setTension] = useState("") 
+  const [poid,setPoid] = useState("")
+  const [glycemie,setGlycemie] =useState("")
+  const [respiration,setRespiration] = useState("")
+
+  const [montant,setMontant] = useState("")
+  const [diagnostic,setDiagnostic] = useState("") 
+ 
+ 
+  return(
+    <ConsultationContext.Provider value={{symptome,setSymptome,fichier,setFichier,tension,setTension,poid,setPoid,glycemie,setGlycemie,respiration,setRespiration,montant,setMontant,diagnostic,setDiagnostic}}>
+      {children}
+      </ConsultationContext.Provider>
   )
 }

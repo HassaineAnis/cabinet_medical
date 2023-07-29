@@ -6,19 +6,25 @@ const Consultation = require("../models/Consultation");
 
 exports.ajoutConsultation = async(req,res,next)=>{
 console.log("consultation", req.body)
-const newConsultation = {...req.body ,informationsMedical:JSON.parse(req.body.informationsMedical),symptome:JSON.parse(req.body.symptome)};
-
+const newConsultation = {...req.body ,informationsMedical:JSON.parse(req.body.informationsMedical),symptome:JSON.parse(req.body.symptome) , documentMedical:JSON.parse(req.body.documentMedical)};
+ 
 let fichierExterneUrl =  "";
-let documentMedicalUrl =  "";
+//let documentMedicalUrl =  [];
  
       //verifie des fichier sont envoyé du coté front 
 if (req.files){
     //si oui
     //on recupere les fichiers avec le nom de champs documentMedical s'il existe
-    documentMedicalUrl =  req.files["documentMedical"] && req.files["documentMedical"].map((file) => `${req.protocol}://${req.get('host')}/document/${file.filename}`);
-    //on recupere les fichiers avec  le nom de champs fichierExterne s'il existe 
-    fichierExterneUrl =req.files["fichierExterne"] && req.files["fichierExterne"].map((file) => `${req.protocol}://${req.get('host')}/document/${file.filename}`);
- 
+    /*
+    if(req.files['documentMedical']){
+        documentMedicalUrl = req.files["documentMedical"].map((file)=>({url:`${req.protocol}://${req.get('host')}/document/${file.filename}`,nom : file.originalname,}
+        ))
+    }*/
+    
+  if(req.files['fichierExterne']){
+        fichierExterneUrl = req.files["fichierExterne"].map((file)=>({url:`${req.protocol}://${req.get('host')}/document/${file.filename}`,nom : file.originalname,}
+        ))
+    }
     }
 
     try{
@@ -28,7 +34,7 @@ if (req.files){
         const consultation = new Consultation({
             ...newConsultation,
             fichierExterne:fichierExterneUrl,
-            documentMedical: documentMedicalUrl
+            
    
        })
        await consultation.save()
@@ -75,3 +81,26 @@ exports.afficherConsultationPatient = (req,res,next) =>{
     .catch(error=>res.status(400).json({error}))
 
 }
+exports.afficherDetailConsultation = (req, res, next) => {
+    console.log("details consultation");
+    Consultation.findOne({ _id: req.params.id })
+      .populate('patient','nom prenom age') // Populate the 'patient' field with the patient's details
+      .exec()
+      .then(consult => {
+        if (!consult) {
+          return res.status(404).json({ message: 'Consultation introuvable.' });
+        }
+  
+        // You can access patient's nom and prenom from the populated 'patient' field
+         
+        
+         
+        // Return the consultation details along with patient's nom and prenom
+        return res.status(200).json({
+          ...consult.toJSON(),
+          
+          
+        });
+      })
+      .catch(error => res.status(400).json({ error }));
+  };

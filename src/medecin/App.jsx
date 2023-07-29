@@ -7,7 +7,7 @@ import { Routes,Route} from "react-router-dom";
  
 import '../style/medecinStyle/app.css'
  
-import { RechargeProvider } from '../util/context/Context';
+import {    RechargeProvider } from '../util/context/Context';
 import AjouterRDV from './components/ajout/AjouterRDV';
 import RendezVous from './pages/RendezVous';
 import ModifierRdv from './components/modifie/ModifierRdv';
@@ -18,17 +18,20 @@ import AjouterPatient from './components/ajout/AjouterPatient';
 import ModifierPatient from './components/modifie/ModifierPatient';
  
 import AjouterConsult from './components/ajout/AjouterConsult';
+import Consultation from './pages/Consultation';
  
 
 const App = () => {
+  
     return (
         <div className='medecinApp'>
             <Header/>
             <RechargeProvider> 
+                
             <Routes>
               
                 
-
+                
                 <Route path='/patient' element={<Patient/>} >
                 <Route path='/patient/ajouter' element={<AjouterPatient/>}/> 
                 <Route path='/patient/modifier/:id' element={<ModifierPatient/>}/>
@@ -36,22 +39,30 @@ const App = () => {
                 <Route path='/patient/dossier/rendez-vous/ajouter/:id' element={<AjouterRDV/>}/>
                 <Route path='/patient/dossier/rendez-vous/archives/:id' element={<TableRdvArchive/>}/>
 
-                <Route path='/patient/dossier/consultation/ajouter/:id' element ={<AjouterConsult/>}>
+                <Route path='/patient/dossier/consultation/details/:id' element={<Consultation/>} />
+
+                <Route path='/patient/dossier/consultation/ajouter/:id' element ={<AjouterConsult/>}/>
                     
 
+                 
                 </Route>
-
-                </Route>
+                 
 
 
                 <Route path='/profil' element={<Profil/>} />
-
-                <Route path='/rendez-vous' element={<RendezVous/>} >
+               
+                 <Route path='/' element={<RendezVous/>} >
                  
                 <Route path='/rendez-vous/archives' element={<TableRdvArchive/>}/>
                 <Route path='/rendez-vous/modifier/:id' element={<ModifierRdv/>}/>
 
                 </Route>
+               
+               
+               
+               
+                
+               
 
                  
                
@@ -59,6 +70,7 @@ const App = () => {
                 
                  
             </Routes>
+      
             </RechargeProvider>
             
         </div> 

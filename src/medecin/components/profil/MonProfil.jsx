@@ -57,7 +57,7 @@ const MonProfil = ({specialite}) =>{
     const prenomRef = useRef(null);
    const [dateNaissance,setDateNaissance] = useState(null)
     const sexeRef = useRef(null);
-    const dateRef = useRef(null);
+   
     const numeroTelRef = useRef(null);
     const numeroSecurite = useRef(null);
     const passwordRef = useRef(null);
@@ -114,9 +114,15 @@ const MonProfil = ({specialite}) =>{
         formaData.append("photo", fetchData.user.photo);
       }
   
-      formaData.append("nom", nomRef.current.value.toUpperCase());
-      formaData.append("prenom", prenomRef.current.value.toUpperCase());
-      formaData.append("dateNaissance", dateRef.current.value);
+      formaData.append("nom", nomRef.current.value.toLowerCase());
+      formaData.append("prenom", prenomRef.current.value.toLowerCase() );
+       if(dateNaissance){
+        formaData.append("dateNaissance",dateNaissance)
+       }else{
+        formaData.append("dateNaissance",fetchData.user.dateNaissance);
+
+       }
+ 
       formaData.append("adresse", adresseRef.current.value);
       formaData.append("sexe", sexeRef.current.value);
       formaData.append("numeroTel", numeroTelRef.current.value);
@@ -247,7 +253,7 @@ const MonProfil = ({specialite}) =>{
                     type="text"
                     id="dateAffiche"
                     readOnly={true}
-                    ref={dateRef}
+                
                      
                     value={dateNaissance?  new Date(dateNaissance).toLocaleDateString() : fetchData.user && new Date(fetchData.user.dateNaissance).toLocaleDateString()}
                    

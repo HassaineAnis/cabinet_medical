@@ -71,6 +71,41 @@
 .Ajouter_consult form .ajouter_symptome .Ajouter_symptome_input svg:hover {
   cursor: pointer;
 }
+.Ajouter_consult form .ajouter_symptome .diagnos {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.Ajouter_consult form .ajouter_symptome .diagnos .input_container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+.Ajouter_consult form .ajouter_symptome .diagnos .input_container label {
+  font-family: inter, sans-serif;
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: #2e2e2e;
+}
+.Ajouter_consult form .ajouter_symptome .diagnos .input_container input {
+  font-family: inter, sans-serif;
+  padding-left: 0.5rem;
+  height: 2.5rem;
+  outline: none;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #333;
+  border-radius: 5px;
+  border: 1px solid #aaa;
+  background-color: #fff;
+  flex-grow: 2;
+}
+.Ajouter_consult form .ajouter_symptome .diagnos .input_container input:hover {
+  border: 1px solid #8d8d8d;
+}
+.Ajouter_consult form .ajouter_symptome .diagnos .input_container input:focus {
+  outline: 2px solid darkgreen;
+}
 .Ajouter_consult form .ajouter_symptome .liste_symptome {
   display: flex;
   flex-direction: column;
@@ -260,6 +295,21 @@
 .Ajouter_consult form .ajouter_document .ajouter_document_container .document_interne .document_interne_input .btn_ajout:hover {
   filter: brightness(80%);
 }
+.Ajouter_consult form .ajouter_document .ajouter_document_container .document_interne .liste_file ul {
+  padding: 0;
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+.Ajouter_consult form .ajouter_document .ajouter_document_container .document_interne .liste_file ul li {
+  animation: table 300ms ease-in;
+  display: flex;
+  gap: 1rem;
+  padding: 5px;
+  color: #fff;
+  background-color: green;
+  border-radius: 4px;
+}
 .Ajouter_consult form .ajouter_document .ajouter_document_container h3 {
   color: darkgreen;
   text-align: center;
@@ -312,11 +362,14 @@
 }
 .ordonnance .ord_c {
   box-shadow: 0px 0px 19px 1px rgba(0, 0, 0, 0.3);
+  height: 100%;
   padding: 1rem;
 }
 .ordonnance .ord_c .ordonnance_Container {
-  background-color: #fff;
+  position: relative;
+  background-color: #ffffff;
   flex-grow: 1;
+  width: 100%;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -357,7 +410,14 @@
   margin: 0.2rem;
   text-align: center;
 }
-.ordonnance .ord_c .ordonnance_Container .section2 p {
+.ordonnance .ord_c .ordonnance_Container .section1 .traitement ul li {
+  list-style: decimal;
+}
+.ordonnance .ord_c .ordonnance_Container .section2 p p {
+  position: fixed; /* Position absolue par rapport à la section .ord_c */
+  bottom: 0; /* Coller le pied de page en bas */
+  left: 0;
+  right: 0;
   text-align: center;
   font-size: 0.9rem;
 }
@@ -373,6 +433,7 @@
   gap: 1rem;
 }
 .ordonnance form .ajout_traitement span {
+  cursor: pointer;
   height: 2.5rem;
   align-self: flex-end;
   display: flex;
@@ -381,6 +442,9 @@
   border-radius: 4px;
   background-color: darkgreen;
   color: #fff;
+}
+.ordonnance form .ajout_traitement span:hover {
+  filter: brightness(80%);
 }
 .ordonnance form .ajout_traitement .input_container {
   display: flex;
@@ -399,6 +463,9 @@
   border-radius: 5px;
   border: 1px solid #aaa;
   background-color: #fff;
+  padding: 1rem 1rem;
+  height: 3.5rem;
+  font-size: 1.2rem;
   resize: none;
   width: 100%;
 }
@@ -414,12 +481,17 @@
   font-weight: 500;
   color: #2e2e2e;
 }
+.ordonnance form .liste_traitement ul li {
+  animation: table 300ms ease;
+  list-style: decimal;
+}
 .ordonnance form .liste_traitement ul li div {
   display: flex;
   gap: 2rem;
   align-items: center;
 }
 .ordonnance form .btn {
+  animation: table 300ms ease;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -439,8 +511,14 @@
   border-radius: 4px;
   width: 6rem;
 }
+.ordonnance form .btn .btn_1 button:hover {
+  filter: brightness(80%);
+}
 .ordonnance form .btn .btn_1 button:nth-child(2) {
   background-color: darkred;
+}
+.ordonnance form .btn .btn_1 button:nth-child(2):hover {
+  filter: brightness(80%);
 }
 .ordonnance form .btn .print {
   display: flex;
@@ -449,8 +527,12 @@
   cursor: pointer;
   color: #fff;
   padding: 5px;
+  border-radius: 4px;
   width: 6rem;
   gap: 4px;
+}
+.ordonnance form .btn .print:hover {
+  filter: brightness(80%);
 }
 .ordonnance form .btn .print svg {
   width: 25ppx;
@@ -458,9 +540,10 @@
 
 @media print {
   .ordonnance_Container {
+    position: relative;
     padding: 1rem;
     width: 100%;
-    height: 297mm;
+    height: 100vh;
     background-color: #fff;
     display: flex;
     flex-direction: column;
@@ -496,12 +579,20 @@
   }
   .ordonnance_Container .section1 .section1_titre {
     align-self: center;
+    margin-bottom: 3rem;
   }
   .ordonnance_Container .section1 .section1_titre h3 {
     margin: 0.2rem;
     text-align: center;
   }
+  .ordonnance_Container .section1 .traitement ul li {
+    list-style: decimal;
+  }
   .ordonnance_Container .section2 p {
+    position: fixed; /* Position absolue par rapport à la section .ord_c */
+    bottom: 0; /* Coller le pied de page en bas */
+    left: 0;
+    right: 0;
     text-align: center;
     font-size: 0.9rem;
   }

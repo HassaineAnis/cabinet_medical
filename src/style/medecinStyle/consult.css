@@ -1,0 +1,165 @@
+.details_container {
+  padding: 1rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  position: relative;
+}
+.details_container img {
+  display: none;
+}
+.details_container .entete {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+.details_container .section {
+  display: flex;
+  height: 100%;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+.details_container .section .information {
+  background-color: #fff;
+  box-shadow: 0px 2px 10px 0px rgba(58, 53, 65, 0.1);
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1rem;
+}
+.details_container .section .information h3 {
+  margin: 0;
+}
+.details_container .section .information .info ul li p {
+  font-size: 1rem;
+}
+.details_container .section .information .symptome ul li {
+  font-size: 1rem;
+  font-weight: 600;
+  list-style-type: square;
+}
+.details_container .section .information .diagnostic ul li {
+  list-style-type: square;
+}
+.details_container .section .information .diagnostic ul li p {
+  font-size: 1rem;
+  font-weight: 600;
+}
+.details_container .section .documents {
+  flex-grow: 4;
+  padding: 1rem;
+  background-color: #fff;
+  box-shadow: 0px 2px 10px 0px rgba(58, 53, 65, 0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.details_container .section .documents h3 {
+  margin: 0;
+}
+.details_container .section .documents .doc {
+  background-color: rgba(196, 196, 196, 0.7411764706);
+  padding: 0.5rem 1rem;
+  display: flex;
+  justify-content: space-between;
+}
+.details_container .section .documents .doc span {
+  align-self: center;
+  text-transform: capitalize;
+}
+.details_container .section .documents .doc .doc_btn {
+  display: flex;
+  gap: 1rem;
+  align-self: center;
+}
+.details_container .section .documents .doc .doc_btn button {
+  width: 6rem;
+  background-color: green;
+  color: #fff;
+  border: 0;
+  border-radius: 4px;
+  padding: 8px;
+  height: -moz-fit-content;
+  height: fit-content;
+  font-weight: 500;
+  font-size: 1rem;
+  cursor: pointer;
+}
+.details_container .section .documents .doc .doc_btn button:hover {
+  filter: brightness(80%);
+}
+.details_container button {
+  width: 6rem;
+  background-color: green;
+  color: #fff;
+  border: 0;
+  border-radius: 4px;
+  padding: 8px;
+  height: -moz-fit-content;
+  height: fit-content;
+  font-weight: 500;
+  font-size: 1rem;
+  cursor: pointer;
+}
+.details_container button:hover {
+  filter: brightness(80%);
+}
+
+@media print {
+  .details_container .doc_print {
+    display: inline-block;
+  }
+}
+.custom_modal .ordonnance_Container {
+  position: relative;
+  background-color: #ffffff;
+  flex-grow: 1;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.custom_modal .ordonnance_Container .section1 {
+  display: flex;
+  flex-direction: column;
+}
+.custom_modal .ordonnance_Container .section1 .entete {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.custom_modal .ordonnance_Container .section1 .entete .entete_text h3 {
+  margin: 0;
+}
+.custom_modal .ordonnance_Container .section1 .entete .entete_text h4 {
+  margin: 0;
+  text-align: center;
+}
+.custom_modal .ordonnance_Container .section1 .entete img {
+  height: 80px;
+  width: 80px;
+}
+.custom_modal .ordonnance_Container .section1 .section1_info {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: space-between;
+}
+.custom_modal .ordonnance_Container .section1 .section1_info .date {
+  align-self: flex-start;
+}
+.custom_modal .ordonnance_Container .section1 .section1_titre {
+  align-self: center;
+}
+.custom_modal .ordonnance_Container .section1 .section1_titre h3 {
+  margin: 0.2rem;
+  text-align: center;
+}
+.custom_modal .ordonnance_Container .section1 .traitement ul li {
+  list-style: decimal;
+}
+.custom_modal .ordonnance_Container .section2 p {
+  text-align: center;
+  font-size: 0.9rem;
+}/*# sourceMappingURL=consult.css.map */

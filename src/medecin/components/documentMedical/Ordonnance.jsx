@@ -7,7 +7,8 @@ import { useNavigate, useParams } from 'react-router-dom';
 import "../../../style/loader/loader.css"
 import html2canvas from "html2canvas"
 import { DocumentContext } from '../../../util/context/Context';
- 
+ import jsPDF from 'jspdf';
+ import html2pdf from 'html2pdf.js';
  
 
  
@@ -104,7 +105,7 @@ const Ordonnance = () => {
       const envoie =(e)=>{
         e.preventDefault()
       }
-
+      //----------------------------------- conversion en image------------------------------------------------//
       function cleanBase64String(base64String) {
         // Supprimer les entêtes "data:image/jpeg;base64," ou "data:image/png;base64," si présents
         const base64HeaderRegex = /^data:(image\/(jpeg|png));base64,/;
@@ -142,7 +143,10 @@ const Ordonnance = () => {
       
       const convertPdf =() =>{
         const content = componentRef.current
-        html2canvas(content).then((canvas)=>{
+        const width = content.scrollWidth;
+        const height =  content.scrollHeight;
+    
+        html2canvas(content, { width, height }).then((canvas)=>{
           const imageBase64 = canvas.toDataURL("image/jpeg");
           const cleanedImageBase64 = cleanBase64String(imageBase64);
 
@@ -160,7 +164,20 @@ const Ordonnance = () => {
         })
 
       } 
+      //---------------------------------------------*****---------------------------------------//
+      
+       const saveDocument =()=>{
+        const documentData=  {
+          titre:"ordonnace",
+          donnes :[...traitement]
+        }
+        setDocuments([...documents,documentData])
+        navigate(-1)
 
+       }
+
+
+      
 
 
       if(erreur)
@@ -206,7 +223,7 @@ const Ordonnance = () => {
         </div>
 
         <div className='date'>
-            <p ><strong> DBK, le :</strong> <span>12/10/1999</span></p>
+            <p ><strong> DBK, le :</strong> <span>{new Date().toLocaleDateString()}</span></p>
         </div>
 
     </div>
@@ -246,7 +263,7 @@ const Ordonnance = () => {
                
         
        
-             
+              
              
          
             <form className='no-print' onSubmit={envoie}>
@@ -282,8 +299,8 @@ const Ordonnance = () => {
            {traitement.length !==0 && (
             <div className="btn">
             <div className='btn_1'>
-             <button onClick={convertPdf} >Enregistré</button>
-            <button    onClick={(e)=>{window.close()}}>Annuler</button>
+             <button onClick={saveDocument} >Enregistré</button>
+            <button    onClick={(e)=>{navigate(-1)}}>Annuler</button>
             </div>
             <div className='print' onClick={handlePrint}>
 

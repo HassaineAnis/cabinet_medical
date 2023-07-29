@@ -5,7 +5,7 @@ import AdminApp from "../admin/App";
 import Login from "../auto/Login";
 import PrivateRoute from "./PrivateRoute";
 import PrivateMedecin from "./PrivateMedecin";
-import { AuthoProvider,DocumentProvider } from "../util/context/Context";
+import { AuthoProvider,DocumentProvider,ConsultationProvider } from "../util/context/Context";
 //import RoutePrive from "./RoutePrive";
 import Ordonnance  from "../medecin/components/documentMedical/Ordonnance";
  
@@ -19,6 +19,7 @@ function Router() {
     
      <AuthoProvider> 
       <DocumentProvider> 
+      <ConsultationProvider> 
     <Routes>
 
        
@@ -46,6 +47,7 @@ function Router() {
       <Route path="/login" element={<Login />} />
       <Route path="*" element={<Login />} />
     </Routes>
+    </ConsultationProvider>
     </DocumentProvider>
     </AuthoProvider>
     

@@ -6,25 +6,27 @@ import useModal from "../../../util/hooks/UseModal";
 import { ToastContainer  } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Modal from "react-modal";
-import { DocumentContext } from '../../../util/context/Context';
+import { DocumentContext,ConsultationContext } from '../../../util/context/Context';
+import { set } from 'date-fns';
 
  
 
 const AjouterConsult = () => {
     const {documents,setDocuments}= useContext(DocumentContext)
-    console.log("ajout:",documents)
+    const {symptome,setSymptome,fichier,setFichier,tension,setTension,poid,setPoid,glycemie,setGlycemie,respiration,setRespiration,montant,setMontant,diagnostic,setDiagnostic} = useContext(ConsultationContext)
     const jetonString = sessionStorage.getItem("user");
     const jeton = JSON.parse(jetonString);
     const {id} = useParams()
+     
     
     const [document,setDocument] = useState("")
      
     const { modalIsOpen, openModal, closeModal , modalIsOpen1 , openModal1, closeModal1 } = useModal();
 
-    const [symptome,setSymptome] = useState([])
+   // const [symptome,setSymptome] = useState([])
     const [symInput,setInput] = useState("")
     const [titre,setTitre] = useState("")
-    const [fichier,setFichier]= useState([])
+  //  const [fichier,setFichier]= useState([])
     const fichierRef = useRef(null)
    const formRef =useRef(null)
     const tensionRef = useRef(null)
@@ -101,12 +103,14 @@ const AjouterConsult = () => {
     formaData.append("informationsMedical",JSON.stringify(infos));
     formaData.append("diagnostic",diagnosticRef.current.value);
     formaData.append("date",new Date())
+    formaData.append("documentMedical",JSON.stringify(documents))
     fichier.map((element) =>
         formaData.append("fichierExterne", element.file,element.titre)
   )
+  /*
   documents.map((element) =>
   formaData.append("documentMedical", element.image,element.titre)
-)
+)*/
  
     
     try {
@@ -139,6 +143,13 @@ const AjouterConsult = () => {
     setSymptome([])
     setFichier([])
     setDocuments([])
+    setTension("")
+    setRespiration("")
+    setPoid("")
+    setGlycemie("")
+    setMontant("")
+    setDiagnostic("")
+
 
   }
 
@@ -180,13 +191,13 @@ const AjouterConsult = () => {
                 <div className='diagnos'>
                     <div className="input_container">
                         <label htmlFor="montant">Montant:</label>
-                        <input type="text" placeholder='Montant DZ...' id='montant' ref={montantRef} />
+                        <input type="text" placeholder='Montant DZ...' id='montant' onChange={(e)=>setMontant(e.target.value)} value={montant} ref={montantRef} />
 
                     </div>
 
                     <div className="input_container">
                     <label htmlFor="diagnostic">Diagnostic:</label>
-                        <input type="text" placeholder='Diagnostic...' id='diagnostic' ref={diagnosticRef} />
+                        <input type="text" placeholder='Diagnostic...' id='diagnostic'onChange={(e)=>setDiagnostic(e.target.value)} value={diagnostic} ref={diagnosticRef} />
 
                         
                     </div>
@@ -201,19 +212,19 @@ const AjouterConsult = () => {
             <div className="input_info">
                 <div className="input_container">
                     <label htmlFor="tension">Tension Artérielle:</label>
-                    <input type="text" id='tension' ref={tensionRef} />
+                    <input type="text" id='tension' onChange={(e)=>setTension(e.target.value)} value={tension} ref={tensionRef} />
                 </div>
                 <div className="input_container">
                     <label htmlFor="poid">Poids: ---KG</label>
-                    <input type="text"id='poid' ref={poidRef} />
+                    <input type="text"id='poid' onChange={(e)=>setPoid(e.target.value)} value={poid} ref={poidRef} />
                 </div>
                 <div className="input_container">
                     <label htmlFor="glycemie">Glycémie: ---G/L</label>
-                    <input type="text" id='glycemie' ref={glycemieRef}/>
+                    <input type="text" id='glycemie' onChange={(e)=>setGlycemie(e.target.value)} value={glycemie} ref={glycemieRef}/>
                 </div>
                 <div className="input_container">
                     <label htmlFor="respiration">Respiration:</label>
-                    <input type="text" id='respiration' ref={respirationRef}/>
+                    <input type="text" id='respiration' onChange={(e)=>setRespiration(e.target.value)} value={respiration} ref={respirationRef}/>
                 </div>
             </div>
 
@@ -304,7 +315,7 @@ const AjouterConsult = () => {
 
 
                <div className="btn">
-                <button onClick={(confirmeData)}>Enregister</button>
+                <button onClick={confirmeData}>Enregister</button>
                 <span onClick={(e)=>navigation(-1)} >Annuler</span>
                </div>
             </div>

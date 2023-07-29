@@ -11,7 +11,7 @@ const RendezVous = (props) => {
       <div className="consultation__container">
          
         {/*  tableau des rendez-vous*/}
-        {location.pathname === "/medecin/rendez-vous" ? <> <h2>Mes Rendez-vous</h2> <TableRdv /></> : <Outlet />}
+        {location.pathname === "/medecin" ? <> <h2>Mes Rendez-vous</h2> <TableRdv /></> : <Outlet />}
       </div>
     </div>
   );

@@ -16,14 +16,14 @@ const Header = () => {
                 <ul className='header_medecin_menu_liste'>
                     
                     <li><Link to="/medecin/patient" className='lien'>Patients</Link></li>
-                    <li><Link to="/medecin/rendez-vous" className='lien'>Rendez-vous </Link></li>
+                    <li><Link to="/medecin" className='lien'>Rendez-vous </Link></li>
                     <li><Link to= {`/medecin/profil`} className='lien'>Mon Profil </Link></li>
                      
                 </ul>
              </nav>  
               <div className='header_medecin_profil'>
                 <div className="header_medecin_profil_info">
-                    <span>{`${data.nom} ${data.prenom}`}</span>
+                    <span style={{textTransform:"capitalize"}}> {`${data.nom} ${data.prenom}`}</span>
                     <span>{data.role}</span>
                 </div>
                 <img src={data.photo? data.photo : profil} alt="profil" />

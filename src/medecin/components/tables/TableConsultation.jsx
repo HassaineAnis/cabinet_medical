@@ -2,7 +2,7 @@ import React, { useState,useEffect } from 'react';
  
 import Pagination from '../../../admin/components/pagination/Pagination';
 import "../../../style/medecinStyle/consultation.css"
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { ToastContainer  } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Modal from "react-modal";
@@ -14,8 +14,7 @@ import "../../../style/medecinStyle/popup/modalRdv.css"
 const nombreElementPage = 6;
 
 const TableConsultation = ({id}) =>{
-    const jetonString = sessionStorage.getItem("user");
-    const jeton = JSON.parse(jetonString); 
+     
   
     const { modalIsOpen, openModal, closeModal  } = useModal();
     const [currentObjet,setObjet]=useState({})
@@ -31,7 +30,11 @@ const TableConsultation = ({id}) =>{
     const [erreur, setErreur] = useState(false);
   
     
-    
+    const navigate = useNavigate()
+    const navigation = (id)=>{
+      navigate(`/medecin/patient/dossier/consultation/details/${id}`)
+
+    }
     
    
       
@@ -40,11 +43,12 @@ const TableConsultation = ({id}) =>{
         
       const fetchRdv = async () => {
         setLoading(true);
+        if(id){
         try {
           const response = await fetch(`http://localhost:3000/api/consultation/patient/${id}`);
     
           const consult = await response.json();
-          consult.sort((a, b) => new Date(a.date) - new Date(b.date));
+         // consult.sort((a, b) => new Date(a.date) - new Date(b.date));
           setTotalPages( Math.ceil(consult.length / nombreElementPage) );
           setData(consult);
     
@@ -60,6 +64,7 @@ const TableConsultation = ({id}) =>{
      
         
         }
+      }
       };
       
          
@@ -158,6 +163,7 @@ const TableConsultation = ({id}) =>{
                       width={20}
                       height={20}
                       fill="#637381"
+                      onClick={(e)=>navigation(element._id)}
                      
                    
                     >
