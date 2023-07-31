@@ -19,6 +19,7 @@ import ModifierPatient from './components/modifie/ModifierPatient';
  
 import AjouterConsult from './components/ajout/AjouterConsult';
 import Consultation from './pages/Consultation';
+import Erreur from '../admin/pages/Erreur';
  
 
 const App = () => {
@@ -42,16 +43,14 @@ const App = () => {
                 <Route path='/patient/dossier/consultation/details/:id' element={<Consultation/>} />
 
                 <Route path='/patient/dossier/consultation/ajouter/:id' element ={<AjouterConsult/>}/>
-                    
-
-                 
-                </Route>
+              </Route>
                  
 
-
+                <Route path='/*' element={<Erreur/>} />
                 <Route path='/profil' element={<Profil/>} />
                
                  <Route path='/' element={<RendezVous/>} >
+                
                  
                 <Route path='/rendez-vous/archives' element={<TableRdvArchive/>}/>
                 <Route path='/rendez-vous/modifier/:id' element={<ModifierRdv/>}/>

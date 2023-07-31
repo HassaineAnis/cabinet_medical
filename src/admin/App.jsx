@@ -26,6 +26,7 @@ import ProfilMedecin from "./components/profil/ProfilMedecin";
 import Employe from "./pages/Employe";
 import AjouterEmploye from "./components/ajout/AjouterEmploye";
 import ProfilEmploye from "./components/profil/ProfilEmploye"
+import AjouterConge from "./components/ajout/AjouterConge";
  
  
  
@@ -74,8 +75,12 @@ function App() {
          
           </Route>
          
-        <Route path="/conge"element={<Conge/>}/>
-        <Route path="/magasin"element={<Magasin/>}/>
+        <Route path="/conge"element={<Conge/>}>
+        <Route path="/conge/ajouter" element={<AjouterConge/>} />
+        </Route>
+        <Route path="/magasin"element={<Magasin/>}>
+           
+        </Route>
         <Route path="/convention"element={<Convention/>}/>  
         <Route path="/*"element={<Erreur/>}/>  
         </Routes>

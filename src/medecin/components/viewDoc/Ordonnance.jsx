@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 import logo from "../../../assets/logo (1).png" 
-const Ordonnance = ({consultation,cible}) => {
+const Ordonnance = ({consultation,cible,document}) => {
 
   
     return (
@@ -45,6 +45,13 @@ const Ordonnance = ({consultation,cible}) => {
 
     <div className='traitement'>
         <ul>
+            {
+                document.donnes&& document.donnes.map((data,index)=>
+                (<li key={index}>{data}</li>)
+                )
+            }
+        </ul>
+       {/* <ul>
         {consultation.documentMedical && consultation.documentMedical.map((data, index) => (
   <ul key={index}>
     {data.donnes.map((element, index) => (
@@ -54,7 +61,7 @@ const Ordonnance = ({consultation,cible}) => {
 ))}
             
         
-        </ul>
+    </ul>*/}
     </div>
 
 

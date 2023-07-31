@@ -5,6 +5,7 @@ import useModal from '../../util/hooks/UseModal';
 import { useReactToPrint } from 'react-to-print';  
 import Modal from 'react-modal' 
 import Ordonnance from '../components/viewDoc/Ordonnance';
+import ArretTravail from '../components/viewDoc/ArretTravail';
 
  
  
@@ -19,6 +20,8 @@ const Consultation = () => {
     const [consultation, setConsultation] = useState([]);
     const [erreur, setErreur] = useState(false);
     const componentRef = useRef(null)
+   const [currentDoc,setCurrentDoc] = useState({})
+
     const handlePrint = useReactToPrint({
         content: () => componentRef.current,
        
@@ -48,7 +51,35 @@ const Consultation = () => {
         fetchConsult(); 
       }, []); 
 
+      const choisirComposant = (titre, reference) => {
+        switch (titre) {
+          case "ordonnance":
+            return reference ? (
+              <Ordonnance consultation={consultation} document={currentDoc} cible={componentRef} />
+            ) : (
+              <Ordonnance consultation={consultation} document={currentDoc} />
+            );
+          case "arret de travail":
+            return reference ? (
+              <ArretTravail consultation={consultation} document={currentDoc} cible={componentRef} />
+            ) : (
+              <ArretTravail consultation={consultation} document={currentDoc} />
+            );
+          default:
+            // Cas où le titre n'est pas reconnu, vous pouvez retourner un message d'erreur ou autre chose.
+            return <div>Composant non trouvé pour le titre : {titre}</div>;
+        }
+      };
+      
      
+ 
+ console.log(currentDoc)
+ const imprimerDoc= async(doc)=>{
+    await setCurrentDoc(doc)
+    handlePrint()
+
+ }
+ 
   
          
       
@@ -69,7 +100,8 @@ const Consultation = () => {
             :
             (<>
                   <div className='doc_print'  style={{position:"absolute",top:"-1000%",opacity:"0"}}  > 
-                 < Ordonnance  consultation={consultation} cible={componentRef}/>
+                {/* < Ordonnance  consultation={consultation} cible={componentRef}/>*/}  
+                {currentDoc && choisirComposant(currentDoc.titre,true) }
                  </div>
                
           
@@ -124,11 +156,11 @@ const Consultation = () => {
                 (   <div className="doc" key={`${doc.titre}-${index}`}>
                 <span><strong>{doc.titre}</strong></span>
                 <div className="doc_btn">
-                    <button onClick={openModal} >Voir</button>
-                    <button onClick={handlePrint}   >Imprimer</button>
+                    <button  onClick={(e)=> {setCurrentDoc(doc) ;openModal()}}  >Voir</button>
+                    <button onClick={ (e)=>{ imprimerDoc(doc)}  } >Imprimer</button>
                 </div>
             </div>) 
-                )
+                ) 
              
                 
                 }
@@ -154,8 +186,8 @@ const Consultation = () => {
              style={{ overlay: { backgroundColor: "rgba(0, 0, 0, 0.6)" ,zIndex:"99" } 
              }}
           >
-           < Ordonnance  consultation={consultation}  />
- 
+          {/** < Ordonnance  consultation={consultation}  />*/}  
+            {currentDoc&& choisirComposant(currentDoc.titre,false)} 
           
           </Modal>
          

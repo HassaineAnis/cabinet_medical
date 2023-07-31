@@ -282,6 +282,7 @@ const AjouterConsult = () => {
                   <select name="fichierMedical" id="fichierMedical" value={document} onChange={(e)=>setDocument(e.target.value)}>
                   <option value="">Choisi un document</option>
                       <option value={`/ordonnance/${id}`} >Ordonnance</option>
+                      <option value={`/arret_travaille/${id}`} >Arret de travail</option>
                   </select>
                   <div className='btn_ajout' onClick={(e)=>navigation(document)}>Ajouter 
                   <svg xmlns="http://www.w3.org/2000/svg" height={25} width={25} fill='#fff' viewBox="0 0 576 512">

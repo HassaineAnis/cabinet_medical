@@ -8,6 +8,7 @@ import PrivateMedecin from "./PrivateMedecin";
 import { AuthoProvider,DocumentProvider,ConsultationProvider } from "../util/context/Context";
 //import RoutePrive from "./RoutePrive";
 import Ordonnance  from "../medecin/components/documentMedical/Ordonnance";
+import ArretTravaille from "../medecin/components/documentMedical/ArretTravaille";
  
  
 function Router() {
@@ -24,6 +25,7 @@ function Router() {
 
        
     <Route path='/ordonnance/:id' element={<Ordonnance/>} />
+    <Route path='/arret_travaille/:id' element={<ArretTravaille/>} />
       
       <Route element={<PrivateRoute />}>
       

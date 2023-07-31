@@ -413,11 +413,7 @@
 .ordonnance .ord_c .ordonnance_Container .section1 .traitement ul li {
   list-style: decimal;
 }
-.ordonnance .ord_c .ordonnance_Container .section2 p p {
-  position: fixed; /* Position absolue par rapport à la section .ord_c */
-  bottom: 0; /* Coller le pied de page en bas */
-  left: 0;
-  right: 0;
+.ordonnance .ord_c .ordonnance_Container .section2 p {
   text-align: center;
   font-size: 0.9rem;
 }
@@ -452,7 +448,7 @@
   gap: 0.5rem;
   width: 100%;
 }
-.ordonnance form .ajout_traitement .input_container textarea {
+.ordonnance form .ajout_traitement .input_container textarea, .ordonnance form .ajout_traitement .input_container input {
   font-family: inter, sans-serif;
   padding-left: 0.5rem;
   height: 2.5rem;
@@ -469,10 +465,10 @@
   resize: none;
   width: 100%;
 }
-.ordonnance form .ajout_traitement .input_container textarea:hover {
+.ordonnance form .ajout_traitement .input_container textarea:hover, .ordonnance form .ajout_traitement .input_container input:hover {
   border: 1px solid #8d8d8d;
 }
-.ordonnance form .ajout_traitement .input_container textarea:focus {
+.ordonnance form .ajout_traitement .input_container textarea:focus, .ordonnance form .ajout_traitement .input_container input:focus {
   outline: 2px solid darkgreen;
 }
 .ordonnance form .ajout_traitement .input_container label {

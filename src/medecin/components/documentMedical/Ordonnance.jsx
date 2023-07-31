@@ -7,8 +7,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import "../../../style/loader/loader.css"
 import html2canvas from "html2canvas"
 import { DocumentContext } from '../../../util/context/Context';
- import jsPDF from 'jspdf';
- import html2pdf from 'html2pdf.js';
+ 
  
 
  
@@ -168,7 +167,7 @@ const Ordonnance = () => {
       
        const saveDocument =()=>{
         const documentData=  {
-          titre:"ordonnace",
+          titre:"ordonnance",
           donnes :[...traitement]
         }
         setDocuments([...documents,documentData])
