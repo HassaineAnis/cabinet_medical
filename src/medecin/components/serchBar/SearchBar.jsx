@@ -7,7 +7,7 @@ const SearchBar = ({  onSearchChange }) => {
       <input
         type="text"
         placeholder="Rechercher..."
-      //  value={searchTerm}
+        
         onChange={onSearchChange}
       />
       <svg

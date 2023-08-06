@@ -1,23 +1,20 @@
- 
-import Navbar from "./components/navigation/Navbar"
-import Header from "./components/header/Header"
+import Navbar from "./components/navigation/Navbar";
+import Header from "./components/header/Header";
 import Acceuil from "./pages/Acceuil";
-import "../style/adminStyle/app.css"
-import { Route,Routes } from "react-router-dom";
-import Profile from "../admin/pages/Profile"
- 
-import Conge from "../admin/pages/Conge"
-import Magasin from "../admin/pages/Magasin"
-import Convention from "../admin/pages/Convention"
- 
+import "../style/adminStyle/app.css";
+import { Route, Routes } from "react-router-dom";
+import Profile from "../admin/pages/Profile";
+
+import Conge from "../admin/pages/Conge";
+import Magasin from "../admin/pages/Magasin";
+import Convention from "../admin/pages/Convention";
+
 import Medecins from "./pages/Medecin";
 import UsersRestant from "./pages/UsersRestant";
- 
+
 import Erreur from "./pages/Erreur";
 import { specialiteMedecin, specialitePersonnel } from "../data/ListMedecin";
- 
- 
- 
+
 import Utilisateur from "./pages/Utilisateur";
 import AjouterUser from "./components/ajout/AjouterUser";
 import AjouterAutreUsers from "./components/ajout/AjouterAutreUsers";
@@ -25,66 +22,133 @@ import ProfilUsers from "./components/profil/ProfilUsers";
 import ProfilMedecin from "./components/profil/ProfilMedecin";
 import Employe from "./pages/Employe";
 import AjouterEmploye from "./components/ajout/AjouterEmploye";
-import ProfilEmploye from "./components/profil/ProfilEmploye"
+import ProfilEmploye from "./components/profil/ProfilEmploye";
 import AjouterConge from "./components/ajout/AjouterConge";
- 
- 
- 
- 
+import ModifierConge from "./components/modifie/ModifierConge";
+import TableArchive from "./components/tables/TableArchive";
+import AjouterProduit from "./components/ajout/AjouterProduit";
+import ModifierProduit from "./components/modifie/ModifierProduit";
+
 function App() {
-  
   return (
     <div className="app">
-       <Navbar/>
+      <Navbar />
 
-       <Header/>
-       
-        <Routes>
-        <Route path="/"element={<Acceuil/>}/>
-        <Route path="/profile"element={<Profile/>}/>
-        
-        <Route path="/utilisateurs" element={<Utilisateur/>}>
-          
-           
-        </Route>
-        <Route  path="/utilisateurs/medecin" element={<Medecins/>}>
-        <Route  path="/utilisateurs/medecin/ajouter" element={<AjouterUser specialite={specialiteMedecin}/>}/ >
-        <Route path="/utilisateurs/medecin/profile/:id" element={<ProfilMedecin specialite={specialiteMedecin}/>}/ >
-        </Route>
+      <Header />
 
-        <Route  path="/utilisateurs/receptionniste" element={<UsersRestant role="Réceptionniste" route={"/admin/utilisateurs/receptionniste"} nomBtn="Ajouter Un Réceptionniste" titre="Liste Des Récecionnistes" /> }>
-        <Route  path="/utilisateurs/receptionniste/ajouter" element={<AjouterAutreUsers titre="Informations Du Réceptionniste" role="Réceptionniste"/>}/ >
-        <Route path="/utilisateurs/receptionniste/profile/:id" element={<ProfilUsers />}/>
+      <Routes>
+        <Route path="/" element={<Acceuil />} />
+        <Route path="/profile" element={<Profile />} />
+
+        <Route path="/utilisateurs" element={<Utilisateur />}></Route>
+        <Route path="/utilisateurs/medecin" element={<Medecins />}>
+          <Route
+            path="/utilisateurs/medecin/ajouter"
+            element={<AjouterUser specialite={specialiteMedecin} />}
+          />
+          <Route
+            path="/utilisateurs/medecin/profile/:id"
+            element={<ProfilMedecin specialite={specialiteMedecin} />}
+          />
         </Route>
 
-        <Route  path="/utilisateurs/pharmacien" element={<UsersRestant role="Pharmacien"route={"/admin/utilisateurs/pharmacien"} nomBtn="Ajouter Un Pharmacien" titre="Liste Des Pharmaciens"/>}>
-        <Route  path="/utilisateurs/pharmacien/ajouter" element={<AjouterAutreUsers titre="Informations Du Pharmacien" role="Pharmacien" />}/ >
+        <Route
+          path="/utilisateurs/receptionniste"
+          element={
+            <UsersRestant
+              role="Réceptionniste"
+              route={"/admin/utilisateurs/receptionniste"}
+              nomBtn="Ajouter Un Réceptionniste"
+              titre="Liste Des Récecionnistes"
+            />
+          }
+        >
+          <Route
+            path="/utilisateurs/receptionniste/ajouter"
+            element={
+              <AjouterAutreUsers
+                titre="Informations Du Réceptionniste"
+                role="Réceptionniste"
+              />
+            }
+          />
+          <Route
+            path="/utilisateurs/receptionniste/profile/:id"
+            element={<ProfilUsers />}
+          />
         </Route>
 
-        <Route  path="/utilisateurs/laborantinACP" element={<UsersRestant role="LaborantinAM" route={"/admin/utilisateurs/laborantinACP"} nomBtn="Ajouter Un LaborantinAM" titre="Liste Des LaborantinAM"/>}>
-        <Route  path="/utilisateurs/laborantinACP/ajouter" element={<AjouterAutreUsers titre="Informations Du LAborantin"/>}/>
+        <Route
+          path="/utilisateurs/pharmacien"
+          element={
+            <UsersRestant
+              role="Pharmacien"
+              route={"/admin/utilisateurs/pharmacien"}
+              nomBtn="Ajouter Un Pharmacien"
+              titre="Liste Des Pharmaciens"
+            />
+          }
+        >
+          <Route
+            path="/utilisateurs/pharmacien/ajouter"
+            element={
+              <AjouterAutreUsers
+                titre="Informations Du Pharmacien"
+                role="Pharmacien"
+              />
+            }
+          />
         </Route>
-        <Route  path="/utilisateurs/pharmacienAM" element={<UsersRestant role="RéceptionnisteACP"route={"/admin/utilisateurs/pharmacienAM"}/>}/>
 
+        <Route
+          path="/utilisateurs/laborantinACP"
+          element={
+            <UsersRestant
+              role="LaborantinAM"
+              route={"/admin/utilisateurs/laborantinACP"}
+              nomBtn="Ajouter Un LaborantinAM"
+              titre="Liste Des LaborantinAM"
+            />
+          }
+        >
+          <Route
+            path="/utilisateurs/laborantinACP/ajouter"
+            element={<AjouterAutreUsers titre="Informations Du LAborantin" />}
+          />
+        </Route>
+        <Route
+          path="/utilisateurs/pharmacienAM"
+          element={
+            <UsersRestant
+              role="RéceptionnisteACP"
+              route={"/admin/utilisateurs/pharmacienAM"}
+            />
+          }
+        />
 
-         
-      
-        <Route path="/personnel"element={<Employe/>}>
-        <Route path="/personnel/ajouter" element={<AjouterEmploye specialite={specialitePersonnel}/>} />
-        <Route path="/personnel/profile/:id" element={<ProfilEmploye specialite={specialitePersonnel}/>}/>
-         
-          </Route>
-         
-        <Route path="/conge"element={<Conge/>}>
-        <Route path="/conge/ajouter" element={<AjouterConge/>} />
+        <Route path="/personnel" element={<Employe />}>
+          <Route
+            path="/personnel/ajouter"
+            element={<AjouterEmploye specialite={specialitePersonnel} />}
+          />
+          <Route
+            path="/personnel/profile/:id"
+            element={<ProfilEmploye specialite={specialitePersonnel} />}
+          />
         </Route>
-        <Route path="/magasin"element={<Magasin/>}>
-           
+
+        <Route path="/conge" element={<Conge />}>
+          <Route path="/conge/ajouter" element={<AjouterConge />} />
+          <Route path="/conge/modifie/:id" element={<ModifierConge />} />
+          <Route path="/conge/archive" element={<TableArchive />} />
         </Route>
-        <Route path="/convention"element={<Convention/>}/>  
-        <Route path="/*"element={<Erreur/>}/>  
-        </Routes>
-             
+        <Route path="/magasin" element={<Magasin />}>
+          <Route path="/magasin/ajouter" element={<AjouterProduit />} />
+          <Route path="/magasin/modifier/:id" element={<ModifierProduit />} />
+        </Route>
+        <Route path="/convention" element={<Convention />} />
+        <Route path="/*" element={<Erreur />} />
+      </Routes>
     </div>
   );
 }

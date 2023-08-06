@@ -21,6 +21,24 @@
   display: flex;
   justify-content: space-between;
 }
+.user .user_table .user_table_btn select {
+  font-family: inter, sans-serif;
+  padding-left: 0.5rem;
+  height: 2.5rem;
+  outline: none;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #333;
+  border-radius: 5px;
+  border: 1px solid #aaa;
+  background-color: #fff;
+}
+.user .user_table .user_table_btn select:hover {
+  border: 1px solid #8d8d8d;
+}
+.user .user_table .user_table_btn select:focus {
+  outline: 2px solid darkgreen;
+}
 .user .user_table .user_table_btn .btn_ajouter {
   display: flex;
   flex-direction: row-reverse;
@@ -33,17 +51,24 @@
   font: inherit;
   cursor: pointer;
   background-color: darkgreen;
-  color: #FFF;
-  border-radius: 5px;
+  color: #fff;
+  border-radius: 4px;
   border: 0;
   font-weight: 600;
 }
 .user .user_table .user_table_btn .btn_ajouter:hover {
   background-color: green;
 }
+.user .user_table .card_container {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  padding: 1rem;
+  flex-wrap: wrap;
+}
 .user .consultation_table__content {
   box-shadow: 0px 2px 10px 0px rgba(58, 53, 65, 0.1);
-  background-color: #FFF;
+  background-color: #fff;
   animation: table 300ms ease-in-out;
   transform-origin: center;
 }

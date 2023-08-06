@@ -1,16 +1,19 @@
+ 
 import React, { useRef,useState,useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import "../../../style/loader/loader.css"
 import Modal from "react-modal";
 import useModal from "../../../util/hooks/UseModal";
 import Notification from "../../../util/Notifiation";
 
 import { ToastContainer } from "react-toastify";
-import notification from "../../../util/Notifiation";
+ 
+import {convertToISO8601} from "../../../util/OperationDate" 
  
 
-const AjouterConge = () => {
-
+const ModifierConge = () => {
+    const {id} = useParams() 
+    const congeData = JSON.parse(id)
     const { modalIsOpen, openModal, closeModal } = useModal();
     const formulaireRef = useRef(null)
 
@@ -23,21 +26,22 @@ const AjouterConge = () => {
       const [isLoading, setLoading] = useState(false);
     const [fetchData, setFetch] = useState([]);
     const [erreur, setErreur] = useState(false);
-  const [presonneID,setID]  =useState("")
-      const [service,setService]  = useState("")
-      const employeRef = useRef(null)
+ 
+      
+      const [dateSortie,setSortie] = useState(null)
       const dateSortieRef = useRef(null)
      
       
       const nbrJourRef = useRef(null) 
       const remplacantRef = useRef(null)
+      
 
       useEffect(() => {
         
         const fetchUsers = async () => {
           setLoading(true);
           try {
-            const response = await fetch(service ==="personnel"? "http://localhost:3000/api/personnel":`http://localhost:3000/api/users/tout`);
+            const response = await fetch(congeData.typeEmpoye ==="personnel"? "http://localhost:3000/api/personnel":`http://localhost:3000/api/users/tout`);
     
             const users = await response.json();
            // users.sort((a, b) => new Date(b.date) - new Date(a.date));
@@ -59,23 +63,24 @@ const AjouterConge = () => {
         fetchUsers();
    
         
-      }, [service] ); 
-      console.log(service)
+      }, [] ); 
+     
+      
       const verifierData = (e)=>{
         e.preventDefault();
-        console.log("id employe: ",employeRef.current.value ,"id remplacant : ",remplacantRef.current.value)
+        
       
          openModal()
       }
       const envoyerData = async (e) => {
         closeModal()
         
-      
-       const conge = {
-        employe: employeRef.current.value,
+       
+       const conge = {  
+        
+
         nombreJour: parseInt(nbrJourRef.current.value)  ,
-        dateSortie: dateSortieRef.current.value,
-        typeEmpoye: service ,
+        dateSortie:    convertToISO8601(dateSortieRef.current.value)  ,
         remplacant: remplacantRef.current.value !== "" ? remplacantRef.current.value : null,
       };
         
@@ -83,8 +88,8 @@ const AjouterConge = () => {
   
    
        try {
-         const response = await fetch("http://localhost:3000/api/conge", {
-           method: "POST",
+         const response = await fetch(`http://localhost:3000/api/conge/${congeData._id}`, {
+           method: "PUT",
            headers: {
             'Content-Type': 'application/json', // En-tête pour indiquer le type de contenu (JSON)
           },
@@ -113,6 +118,16 @@ const AjouterConge = () => {
        }
      };
       
+
+     const afficherService =(service)=>{
+        if(service==="ADMIN")return "Administrateur"
+
+        if(service === "Médecin")return 'Médecin';
+
+        if(service === "personnel") return "Personnel"
+
+     }
+     const afficherNomPrenom =()=>`${congeData.employe.nom} ${congeData.employe.prenom}`
      
 
       
@@ -124,7 +139,7 @@ const AjouterConge = () => {
         <div className="container_form">
         
      
-        <h2>Ajouter un Congé</h2>
+        <h2>Modifier le Congé</h2>
         <hr />
         {isLoading? <div className="spinner"  ></div>:
         
@@ -135,47 +150,32 @@ const AjouterConge = () => {
             <div className="input_section">
               <div className="input_conteneur">
                 <label htmlFor="service">Service:</label>
-                <select name="service" id="service" required onChange={(e)=>setService(e.target.value)} value={service}>
-                  <option value="">-- Choisissez le service --</option>
-                  <option value="ADMIN">Administration</option>
-                  <option value="Médecin">Médecin</option>
-                  <option value="personnel">Personnel</option>
-                </select>
+                <input type="text" id='service'defaultValue={afficherService(congeData.typeEmpoye)} readOnly={true} />
               </div>
 
-              {service === "personnel" ?
-              (
-                <div className="input_conteneur">
-                <label htmlFor="nom">Nom/Prénom</label>
-                <select name="nom" id="nom" required  ref={employeRef} onChange={(e)=>setID(e.target.value)}>
-                  <option value="">-- Choisissez une personne --</option>
-                  {fetchData.map((element,index)=>(
-                    <option key={index} value={element._id}>{element.nom} {element.prenom}</option>
-                  ))}
-                </select>
              
-              </div>):
-              (
                 <div className="input_conteneur">
                 <label htmlFor="nom">Nom/Prénom</label>
-                <select name="nom" id="nom" required  ref={employeRef} onChange={(e)=>setID(e.target.value)}>
-                  <option value="">-- Choisissez une personne --</option>
-                  {fetchData.filter(filtre=>filtre.role === service).map((element,index)=>(
-                    <option key={index} style={{"textTransform":'capitalize'}}value={element._id}>{element.nom} {element.prenom}</option>
-                  ))}
-                </select>
+                <input type="text" id="nom" defaultValue={afficherNomPrenom()}  readOnly={true}/>
             
               </div>
-              )
+             
 
               
 
-              }
+              
   
             
               <div className="input_conteneur">
                 <label htmlFor="date">Date De Sortie</label>
-                <input type="date" id="date"      ref={dateSortieRef}/>
+              
+                <div className='dates'>
+                <input type="date" id="date" onChange={(e)=>setSortie(e.target.value)} />
+                    <input type="text" name="text" id="dateAffiche" ref={dateSortieRef}
+                    value={dateSortie? new Date(dateSortie).toLocaleDateString(): new Date(congeData.dateSortie).toLocaleDateString()}
+                    readOnly={true}/>
+                    
+                </div>
               </div>
     
               
@@ -189,7 +189,7 @@ const AjouterConge = () => {
                  ref={nbrJourRef} 
                   type="text"
                   id="jour"
-                   
+                defaultValue={congeData.nombreJour}
                   
                   pattern="[0-9]*"
                   title="il doit contenir des nombres"
@@ -199,24 +199,24 @@ const AjouterConge = () => {
               </div>
   
                
-              {service === "personnel" ?
+              {congeData.typeEmpoye === "personnel" ?
               (
                 <div className="input_conteneur">
                 <label htmlFor="remplacant">Remplaçants</label>
                 <select name="remplacant" id="remplacant" ref={remplacantRef}>
                   <option value="" >-- Choisissez un remplaçant --</option>
-                  {fetchData.filter(filtre=>filtre._id!== presonneID).map((element,index)=>(
+                  {fetchData.filter(filtre=>filtre._id!== congeData.employe._id).map((element,index)=>(
                     <option key={element._id} value={element._id}>{element.nom} {element.prenom}</option>
                   ))}
                 </select>
             
-              </div>):
+              </div>):  
               (
                 <div className="input_conteneur">
                 <label htmlFor="remplacant">Remplaçants</label>
                 <select name="remplacant" id="remplacant" ref={remplacantRef} >
                   <option value="">-- Choisissez une remplaçant --</option>
-                  {fetchData.filter(filtre=>filtre.role===service && filtre._id !== presonneID).map((element,index)=>(
+                  {fetchData.filter(filtre=>filtre.role ===congeData.typeEmpoye && filtre._id !== congeData.employe._id ).map((element,index)=>(
                     <option key={element._id} style={{"textTransform":'capitalize'}}value={element._id}>{element.nom} {element.prenom}</option>
                   ))}
                 </select>
@@ -226,7 +226,7 @@ const AjouterConge = () => {
 
               
 
-              }
+              } 
               
     
              
@@ -266,4 +266,4 @@ const AjouterConge = () => {
     );
 };
 
-export default AjouterConge;
+export default ModifierConge;
