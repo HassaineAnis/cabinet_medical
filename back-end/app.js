@@ -11,6 +11,7 @@ const rendezVousRoutes = require("./routes/rendezVous");
 const patientRoutes = require("./routes/patient");
 const congeRoutes = require("./routes/conge");
 const magasinRoutes = require("./routes/magasin");
+const interventionRoutes = require("./routes/intervention");
 
 const app = express();
 const server = http.createServer(app);
@@ -58,6 +59,7 @@ app.use("/api/patient", patientRoutes);
 
 app.use("/api/conge", congeRoutes);
 app.use("/api/magasin", magasinRoutes);
+app.use("/api/intervention", interventionRoutes);
 
 io.on("connection", (socket) => {
   console.log(socket.id);

@@ -349,71 +349,87 @@
   filter: brightness(80%);
 }
 
-.dossier {
-  padding: 0.2rem 0;
+.intervention {
   display: flex;
-  flex-direction: column;
-  gap: 1rem;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+  align-items: center;
   height: 100%;
-  box-sizing: border-box;
-}
-.dossier h2 {
-  margin-top: 0.4rem;
-  margin: 0;
-}
-.dossier .dossier_container {
-  display: grid;
-  grid-template-columns: repeat(10, 1fr);
-  grid-template-rows: repeat(10, 1fr);
-  height: 100%;
-  -moz-column-gap: 1rem;
-       column-gap: 1rem;
-  row-gap: 1rem;
-}
-.dossier .information_personnel {
-  grid-area: 1/1/11/4;
-  display: flex;
-  flex-direction: column;
+  padding: 1rem;
   gap: 1rem;
 }
-.dossier .information_personnel h3 {
-  text-align: center;
-}
-.dossier .information_personnel .container {
-  animation: table 300ms ease-in-out;
+.intervention .section1 {
   box-shadow: 0px 0px 19px 1px rgba(0, 0, 0, 0.3);
+  background-color: #fff;
+  width: 100%;
+  height: 100%;
+  padding: 1rem;
+  flex-grow: 1;
+}
+.intervention .section1 .section1_container {
+  background-color: #fff;
+}
+.intervention .section1 .section1_container table {
+  width: 100%;
+  border-collapse: collapse;
+  height: auto;
+}
+.intervention .section1 .section1_container table thead tr th {
+  border: 1px solid black;
+}
+.intervention .section1 .section1_container table tbody tr td {
+  vertical-align: top;
+  padding: 1rem;
+  border: 1px solid black;
+  max-width: 0;
+  word-break: break-all;
+}
+.intervention .section1 .section1_container table tbody tr td .cellule_patient {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+.intervention .section1 .section1_container table tbody tr td .cellule_patient p {
+  margin: 0;
+  text-align: left;
+}
+.intervention .section1 .section1_container table tbody tr td .cellule_patient p span {
+  text-transform: capitalize;
+}
+.intervention .section1 .section1_container .observation {
+  display: flex;
+  flex-direction: column;
+}
+.intervention .section1 .section1_container .observation strong {
+  align-self: center;
+}
+.intervention .section1 .section1_container .observation p {
+  word-break: break-all;
+}
+.intervention .formulaire {
+  width: 100%;
+}
+.intervention .formulaire form {
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  background-color: #fff;
-  padding: 1rem 0;
-  height: -moz-max-content;
-  height: max-content;
 }
-.dossier .information_personnel .container .info {
-  display: flex;
-  justify-content: center;
+.intervention .formulaire form .partie1 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+  gap: 1rem;
 }
-.dossier .information_personnel .container .info span:nth-child(1) {
-  font-weight: 600;
-  width: 10rem;
-}
-.dossier .information_personnel .container .info span:nth-child(2) {
-  width: 10rem;
-  font-weight: 500;
-}
-.dossier .information_personnel .input_container {
+.intervention .formulaire form .partie1 .input_container {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
 }
-.dossier .information_personnel .input_container label {
+.intervention .formulaire form .partie1 .input_container label {
   font-family: inter, sans-serif;
   font-size: 1.1rem;
   font-weight: 500;
   color: #2e2e2e;
 }
-.dossier .information_personnel .input_container select {
+.intervention .formulaire form .partie1 .input_container input {
   font-family: inter, sans-serif;
   padding-left: 0.5rem;
   height: 2.5rem;
@@ -425,160 +441,191 @@
   border: 1px solid #aaa;
   background-color: #fff;
 }
-.dossier .information_personnel .input_container select:hover {
+.intervention .formulaire form .partie1 .input_container input:hover {
   border: 1px solid #8d8d8d;
 }
-.dossier .information_personnel .input_container select:focus {
+.intervention .formulaire form .partie1 .input_container input:focus {
   outline: 2px solid darkgreen;
 }
-.dossier .table_rdv {
-  grid-area: 1/4/6/11;
+.intervention .formulaire form .partie1 .input_container .dates {
+  width: 100%;
+  position: relative;
 }
-.dossier .table_rdv .table_rdv_patient {
+.intervention .formulaire form .partie1 .input_container .dates input[type=date] {
+  width: 1.4rem;
+  border: 0;
+  background-color: transparent;
+  right: 0.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 0;
+  position: absolute;
+  outline: 0;
+}
+.intervention .formulaire form .partie1 .input_container .dates input[type=text] {
+  width: 100%;
+  box-sizing: border-box;
+}
+.intervention .formulaire form .partie2 {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}
+.intervention .formulaire form .partie2 .input_container {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
 }
-.dossier .table_rdv .table_rdv_patient .table_btn {
+.intervention .formulaire form .partie2 .input_container label {
+  font-family: inter, sans-serif;
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: #2e2e2e;
+}
+.intervention .formulaire form .partie2 .input_container input {
+  font-family: inter, sans-serif;
+  padding-left: 0.5rem;
+  height: 2.5rem;
+  outline: none;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #333;
+  border-radius: 5px;
+  border: 1px solid #aaa;
+  background-color: #fff;
+}
+.intervention .formulaire form .partie2 .input_container input:hover {
+  border: 1px solid #8d8d8d;
+}
+.intervention .formulaire form .partie2 .input_container input:focus {
+  outline: 2px solid darkgreen;
+}
+.intervention .formulaire form .input_container {
   display: flex;
-  justify-content: space-evenly;
+  flex-direction: column;
 }
-.dossier .table_rdv .table_rdv_patient .table_btn .btn_archive {
+.intervention .formulaire form .input_container label {
+  font-family: inter, sans-serif;
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: #2e2e2e;
+}
+.intervention .formulaire form .input_container textarea {
+  font-family: inter, sans-serif;
+  padding-left: 0.5rem;
+  height: 2.5rem;
+  outline: none;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #333;
+  border-radius: 5px;
+  border: 1px solid #aaa;
+  background-color: #fff;
+  resize: none;
+  height: 5rem;
+}
+.intervention .formulaire form .input_container textarea:hover {
+  border: 1px solid #8d8d8d;
+}
+.intervention .formulaire form .input_container textarea:focus {
+  outline: 2px solid darkgreen;
+}
+.intervention .formulaire form .btn {
+  display: flex;
+  justify-content: space-between;
+}
+.intervention .formulaire form .btn span {
+  font-weight: 500;
+  font-size: 1rem;
+  padding: 0.3rem 0.4rem;
+  width: 8rem;
+  height: 2rem;
+  cursor: pointer;
+  border: 0;
+  color: #fff;
+  border-radius: 4px;
+  letter-spacing: 0.8px;
+  background-color: darkgreen;
+  background-color: darkblue;
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 0.5rem;
-  width: 10rem;
+}
+.intervention .formulaire form .btn span:hover {
+  filter: brightness(80%);
+}
+.intervention .formulaire form .btn .btn_save {
+  display: flex;
+  gap: 1rem;
+}
+.intervention .formulaire form .btn .btn_save span {
+  font-weight: 500;
+  font-size: 1rem;
+  padding: 0.3rem 0.4rem;
+  width: 8rem;
+  height: 2rem;
+  cursor: pointer;
+  border: 0;
   color: #fff;
-  background-color: darkgreen;
   border-radius: 4px;
-  padding: 5px 15px;
-}
-.dossier .table_rdv .table_rdv_patient .table_btn .btn_archive svg {
-  fill: #fff;
-}
-.dossier .table_rdv .table_rdv_patient .table_btn .btn_archive:hover {
-  filter: brightness(80%);
-}
-.dossier .table_rdv .table_rdv_patient .table_btn .btn_ajout {
-  display: flex;
-  align-items: center;
-  width: 10rem;
-  font: inherit;
-  cursor: pointer;
+  letter-spacing: 0.8px;
   background-color: darkgreen;
-  color: #fff;
-  border-radius: 5px;
-  border: 0;
-  padding: 0.4rem;
-  font-weight: 500;
+  background-color: darkred;
 }
-.dossier .table_rdv .table_rdv_patient .table_btn .btn_ajout:hover {
+.intervention .formulaire form .btn .btn_save span:hover {
   filter: brightness(80%);
 }
-.dossier .table_rdv .table_rdv_patient .consultation_table__content {
-  box-shadow: 0px 2px 10px 0px rgba(58, 53, 65, 0.1);
-  background-color: #fff;
-  animation: table 300ms ease-in-out;
-}
-.dossier .table_rdv .table_rdv_patient .consultation_table__content .table {
-  font-family: Inter, sans-serif;
-  border-collapse: collapse;
-  width: 100%;
-}
-.dossier .table_rdv .table_rdv_patient .consultation_table__content .table thead tr {
-  height: 2.5rem;
-  border-bottom: 1px solid rgba(58, 53, 65, 0.12);
-}
-.dossier .table_rdv .table_rdv_patient .consultation_table__content .table thead tr td {
-  padding: 0 1rem;
-  font-weight: 600;
-  background-color: rgba(0, 128, 0, 0.301);
-  color: rgba(58, 53, 65, 0.87);
-}
-.dossier .table_rdv .table_rdv_patient .consultation_table__content .table tbody tr {
-  height: 2.5rem;
-  background-color: rgb(255, 255, 255);
-  border-bottom: 1px solid rgba(58, 53, 65, 0.12);
-}
-.dossier .table_rdv .table_rdv_patient .consultation_table__content .table tbody tr td {
-  color: rgba(58, 53, 65, 0.68);
-  padding: 0 1rem;
-  height: 100%;
+.intervention .formulaire form .btn .btn_save button {
   font-weight: 500;
-}
-.dossier .table_rdv .table_rdv_patient .consultation_table__content .table tbody tr td .action {
-  width: 100%;
-  display: flex;
-  gap: 1rem;
-}
-.dossier .table_rdv .table_rdv_patient .consultation_table__content .table tbody tr td .action svg {
+  font-size: 1rem;
+  padding: 0.3rem 0.4rem;
+  width: 8rem;
+  height: 2rem;
   cursor: pointer;
-}
-.dossier .table_consult {
-  grid-area: 6/4/11/11;
-}
-.dossier .table_consult .table_rdv_patient {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-.dossier .table_consult .table_rdv_patient .table_btn {
-  display: flex;
-  justify-content: space-evenly;
-}
-.dossier .table_consult .table_rdv_patient .table_btn .btn_ajout {
-  display: flex;
-  align-items: center;
-  width: 10rem;
-  font: inherit;
-  cursor: pointer;
+  border: 0;
+  color: #fff;
+  border-radius: 4px;
+  letter-spacing: 0.8px;
   background-color: darkgreen;
-  color: #fff;
-  border-radius: 5px;
-  border: 0;
-  padding: 0.4rem;
-  font-weight: 500;
 }
-.dossier .table_consult .table_rdv_patient .table_btn .btn_ajout:hover {
+.intervention .formulaire form .btn .btn_save button:hover {
   filter: brightness(80%);
 }
-.dossier .table_consult .table_rdv_patient .consultation_table__content {
-  box-shadow: 0px 2px 10px 0px rgba(58, 53, 65, 0.1);
-  background-color: #fff;
-  animation: table 300ms ease-in-out;
-}
-.dossier .table_consult .table_rdv_patient .consultation_table__content .table {
-  font-family: Inter, sans-serif;
-  border-collapse: collapse;
-  width: 100%;
-}
-.dossier .table_consult .table_rdv_patient .consultation_table__content .table thead tr {
-  height: 2.5rem;
-  border-bottom: 1px solid rgba(58, 53, 65, 0.12);
-}
-.dossier .table_consult .table_rdv_patient .consultation_table__content .table thead tr td {
-  padding: 0 1rem;
-  font-weight: 600;
-  background-color: rgba(0, 128, 0, 0.301);
-  color: rgba(58, 53, 65, 0.87);
-}
-.dossier .table_consult .table_rdv_patient .consultation_table__content .table tbody tr {
-  height: 2.5rem;
-  background-color: rgb(255, 255, 255);
-  border-bottom: 1px solid rgba(58, 53, 65, 0.12);
-}
-.dossier .table_consult .table_rdv_patient .consultation_table__content .table tbody tr td {
-  color: rgba(58, 53, 65, 0.68);
-  padding: 0 1rem;
-  height: 100%;
-  font-weight: 500;
-}
-.dossier .table_consult .table_rdv_patient .consultation_table__content .table tbody tr td .action {
-  width: 100%;
-  display: flex;
-  gap: 1rem;
-}
-.dossier .table_consult .table_rdv_patient .consultation_table__content .table tbody tr td .action svg {
-  cursor: pointer;
-}/*# sourceMappingURL=dossierMedical.css.map */
+
+@media print {
+  .section1_container {
+    background-color: #fff;
+    padding: 1rem;
+  }
+  .section1_container table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  .section1_container table thead tr th {
+    border: 2px solid black;
+  }
+  .section1_container table tbody tr td {
+    vertical-align: top;
+    padding: 1rem;
+    border: 2px solid black;
+    max-width: 0;
+    word-break: break-all;
+  }
+  .section1_container table tbody tr td .cellule_patient {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+  .section1_container table tbody tr td .cellule_patient p {
+    margin: 0;
+  }
+  .section1_container .observation {
+    display: flex;
+    flex-direction: column;
+  }
+  .section1_container .observation strong {
+    align-self: center;
+  }
+  .section1_container .observation p {
+    word-break: break-all;
+  }
+}/*# sourceMappingURL=ajouterIntervension.css.map */
