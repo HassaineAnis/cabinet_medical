@@ -1,0 +1,27 @@
+.analyse {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1rem;
+}
+.analyse h2 {
+  margin: 0;
+}
+.analyse p {
+  font-size: 1.2rem;
+  margin: 0;
+  background-color: #fff;
+  padding: 1rem;
+  box-shadow: 0px 2px 10px 0px rgba(58, 53, 65, 0.1);
+}
+.analyse p span {
+  text-transform: capitalize;
+}
+.analyse .analyse_items {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}/*# sourceMappingURL=analyseM.css.map */

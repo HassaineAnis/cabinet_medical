@@ -1,0 +1,236 @@
+@charset "UTF-8";
+.tp {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 3rem;
+  height: 100%;
+}
+.tp .partie1_container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.tp .partie1_container .entete {
+  border-bottom: 2px solid;
+  display: flex;
+  align-items: center;
+}
+.tp .partie1_container .entete h3 {
+  margin: 0;
+  text-align: center;
+}
+.tp .partie1_container .entete img {
+  height: 80px;
+  width: 80px;
+}
+.tp .partie1_container .partie1 {
+  display: flex;
+  justify-content: space-between;
+}
+.tp .partie1_container .partie1 .infoPatient {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  border: 2px solid;
+  padding: 0.2rem;
+  width: 50%;
+}
+.tp .partie1_container .partie1 .infoPatient p {
+  margin: 0;
+}
+.tp .partie1_container .partie1 .infoPatient p span {
+  display: inline-block;
+  min-width: 4rem;
+}
+.tp .partie2 {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.tp .partie2 .gsr {
+  display: flex;
+  justify-content: center;
+  gap: 5rem;
+}
+.tp .partie2 table {
+  table-layout: fixed;
+  width: 100%;
+  border-collapse: collapse;
+  height: auto;
+}
+.tp .partie2 table thead tr th {
+  border: 1px solid black;
+}
+.tp .partie2 table tbody tr td {
+  border: 1px solid black;
+}
+.tp .partie2 .liste {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.tp .partie2 .liste .liste_container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.tp .partie2 .liste .liste_container p {
+  margin: 0;
+  text-align: left;
+}
+.tp .partie2 .liste .liste_container .point::before {
+  content: "•";
+  vertical-align: sub;
+}
+.tp .partie2 .inr {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.tp .partie2 .inr .intervalle {
+  display: flex;
+  align-items: center;
+}
+.tp .partie2 .inr .intervalle p {
+  margin: 0;
+  width: 12rem;
+}
+.tp .partie2 .tck {
+  display: flex;
+  justify-content: space-between;
+}
+.tp .partie2 .tck p {
+  margin: 0;
+}
+.tp .partie2 .hiv {
+  align-self: center;
+}
+.tp .partie2 .bas-page {
+  text-align: center;
+  font-size: 0.9rem;
+}
+.tp .partie2 .bas-page p {
+  margin: 0;
+}
+
+@media print {
+  .tp {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 10rem;
+    height: 100vh;
+    padding: 1rem;
+    width: 100%;
+  }
+  .tp .partie1_container .entete {
+    display: flex;
+    align-items: center;
+  }
+  .tp .partie1_container .entete h3 {
+    margin: 0;
+    text-align: center;
+  }
+  .tp .partie1_container .entete img {
+    height: 80px;
+    width: 80px;
+  }
+  .tp .partie1_container .partie1 {
+    display: flex;
+    justify-content: space-between;
+  }
+  .tp .partie1_container .partie1 .infoPatient {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    border: 2px solid;
+    padding: 0.2rem;
+    width: 50%;
+  }
+  .tp .partie1_container .partie1 .infoPatient p {
+    margin: 0;
+  }
+  .tp .partie1_container .partie1 .infoPatient p span {
+    display: inline-block;
+    min-width: 4rem;
+  }
+  .tp .partie2 {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .tp .partie2 .table1 {
+    align-self: center;
+    table-layout: fixed;
+    width: 100%;
+    border-collapse: collapse;
+    height: auto;
+  }
+  .tp .partie2 .table1 thead tr th {
+    border: 2px solid black;
+    text-align: center;
+    padding: 5px;
+  }
+  .tp .partie2 .table1 tbody tr td {
+    border: 2px solid black;
+    padding: 5px;
+  }
+  .tp .partie2 .table2 {
+    align-self: center;
+    table-layout: fixed;
+    width: 90%;
+    border-collapse: collapse;
+    height: auto;
+  }
+  .tp .partie2 .table2 thead tr th {
+    border: 1px solid black;
+    text-align: center;
+    padding: 5px;
+  }
+  .tp .partie2 .table2 tbody tr td {
+    border: 1px solid black;
+    padding: 5px;
+  }
+  .tp .partie2 .inr {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .tp .partie2 .inr .intervalle {
+    display: flex;
+    align-items: center;
+  }
+  .tp .partie2 .inr .intervalle p {
+    margin: 0;
+    width: 12rem;
+  }
+  .tp .partie2 .tck {
+    display: flex;
+    justify-content: space-between;
+  }
+  .tp .partie2 .tck p {
+    margin: 0;
+  }
+  .tp .partie2 .hiv {
+    margin-top: 1rem;
+  }
+  .tp .partie2 .bas-page {
+    position: absolute; /* Position absolue par rapport à la section .ord_c */
+    bottom: 0; /* Coller le pied de page en bas */
+    left: 0;
+    right: 0;
+    text-align: center;
+    padding: 1rem;
+  }
+  .tp .partie2 .bas-page p {
+    border-top: 2px solid;
+    padding-top: 0.5rem;
+    margin: 0;
+    text-align: center;
+  }
+  .no_print {
+    display: none;
+  }
+}/*# sourceMappingURL=tp.css.map */

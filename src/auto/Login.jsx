@@ -8,7 +8,6 @@ import { AuthoContext } from "../util/context/Context";
 const Login = () => {
   const [afficherPassword, setAfficher] = useState(false);
   const { login } = useContext(AuthoContext);
-  
 
   const [roleVal, setRoleVal] = useState(null);
   const [userId, setUserId] = useState(null);
@@ -17,15 +16,17 @@ const Login = () => {
   const [users, setUser] = useState([]);
   const [erreur, setErreur] = useState(false);
 
-
-  const routes =(role)=>{
-     if(role === "Médecin"){
-      return "/medecin"
-     }
-     if((role === "ADMIN")){
-      return "/admin"
-     }
-  }
+  const routes = (role) => {
+    if (role === "Médecin") {
+      return "/medecin";
+    }
+    if (role === "ADMIN") {
+      return "/admin";
+    }
+    if (role === "LaborantinAM") {
+      return "/laboAM";
+    }
+  };
   useEffect(() => {
     const fetchUsers = async () => {
       setLoading(true);
@@ -79,14 +80,11 @@ const Login = () => {
       if (response.ok) {
         notificationReussite();
         login(token);
-         
 
-       navigation(`${routes(roleVal)}`);
-       
+        navigation(`${routes(roleVal)}`);
       } else {
         console.log("erreur de l'authontification");
         notificationEchec();
-        
       }
     } catch (e) {
       console.log("Erreur lors de la requête", e);
@@ -106,7 +104,7 @@ const Login = () => {
       autoClose: 1000,
     });
   };
- console.log(roleVal)
+  console.log(roleVal);
   return (
     <div className="login">
       <ToastContainer />

@@ -429,7 +429,8 @@
   font-weight: 500;
   color: #2e2e2e;
 }
-.intervention .formulaire form .partie1 .input_container input {
+.intervention .formulaire form .partie1 .input_container input,
+.intervention .formulaire form .partie1 .input_container select {
   font-family: inter, sans-serif;
   padding-left: 0.5rem;
   height: 2.5rem;
@@ -441,10 +442,12 @@
   border: 1px solid #aaa;
   background-color: #fff;
 }
-.intervention .formulaire form .partie1 .input_container input:hover {
+.intervention .formulaire form .partie1 .input_container input:hover,
+.intervention .formulaire form .partie1 .input_container select:hover {
   border: 1px solid #8d8d8d;
 }
-.intervention .formulaire form .partie1 .input_container input:focus {
+.intervention .formulaire form .partie1 .input_container input:focus,
+.intervention .formulaire form .partie1 .input_container select:focus {
   outline: 2px solid darkgreen;
 }
 .intervention .formulaire form .partie1 .input_container .dates {

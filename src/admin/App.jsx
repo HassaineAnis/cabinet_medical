@@ -101,30 +101,48 @@ function App() {
         </Route>
 
         <Route
-          path="/utilisateurs/laborantinACP"
+          path="/utilisateurs/laborantinAM"
           element={
             <UsersRestant
               role="LaborantinAM"
-              route={"/admin/utilisateurs/laborantinACP"}
+              route={"/admin/utilisateurs/laborantinAM"}
               nomBtn="Ajouter Un LaborantinAM"
               titre="Liste Des LaborantinAM"
             />
           }
         >
           <Route
-            path="/utilisateurs/laborantinACP/ajouter"
-            element={<AjouterAutreUsers titre="Informations Du LAborantin" />}
+            path="/utilisateurs/laborantinAM/ajouter"
+            element={
+              <AjouterAutreUsers
+                titre="Informations Du LAborantin"
+                role="LaborantinAM"
+              />
+            }
           />
         </Route>
+
         <Route
-          path="/utilisateurs/pharmacienAM"
+          path="/utilisateurs/laborantinACP"
           element={
             <UsersRestant
-              role="RéceptionnisteACP"
-              route={"/admin/utilisateurs/pharmacienAM"}
+              role="laborantinACP"
+              route={"/admin/utilisateurs/laborantinACP"}
+              nomBtn="Ajouter Un LaborantinACP"
+              titre="Liste Des LaborantinACP"
             />
           }
-        />
+        >
+          <Route
+            path="/utilisateurs/laborantinACP/ajouter"
+            element={
+              <AjouterAutreUsers
+                titre="Informations Du LAborantin"
+                role="LaborantinACP"
+              />
+            }
+          />
+        </Route>
 
         <Route path="/personnel" element={<Employe />}>
           <Route
