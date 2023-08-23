@@ -2,15 +2,14 @@ import React, { useContext } from "react";
 import logo from "../../../../assets/logo (1).png";
 import "../../../../style/laboAM/documentAM/tp.css";
 import { BpoContext } from "../../../../util/context/Context";
-function Hiv({ reference, nom, prenom, sexe, age }) {
+const Hgpo = ({ reference, nom, prenom, age, sexe }) => {
   const {
     date,
+    dosage1,
+    dosage2,
+    dosage3,
 
     service,
-    hiv,
-    hbs,
-    hcv,
-    bw,
   } = useContext(BpoContext);
   return (
     <div className="tp" ref={reference}>
@@ -45,9 +44,8 @@ function Hiv({ reference, nom, prenom, sexe, age }) {
             </p>
             <p>
               <span>
-                <strong>Sérvice </strong>
-              </span>
-
+                <strong>Sérvice</strong>
+              </span>{" "}
               <span>
                 <strong>: </strong>
                 {service}
@@ -68,8 +66,7 @@ function Hiv({ reference, nom, prenom, sexe, age }) {
                 <strong>Sexe</strong>
               </span>{" "}
               <span>
-                <strong>: </strong>
-                {sexe}
+                <strong>: </strong> {sexe}
               </span>
             </p>
           </div>
@@ -80,33 +77,62 @@ function Hiv({ reference, nom, prenom, sexe, age }) {
         </div>
       </div>
       <div className="partie2">
-        <div className="liste">
-          <dis className="liste_container">
-            <p style={{ marginBottom: "1rem" }}>
-              <strong>
-                <span style={{ textDecoration: "underline" }}>HGPO</span>
-              </strong>
-              :(Hyperglycémie provoqué pas voie orale)
-            </p>
-            <p className="point">
-              <strong>HIV :</strong>
-              {` ${hiv}`}
-            </p>
-            <p className="point">
-              <strong>HBS :</strong>
-              {` ${hbs}`}
-            </p>
-            <p className="point">
-              <strong>HCV :</strong>
-              {` ${hcv}`}
-            </p>
-            <p className="point">
-              <strong>BW :</strong>
-              {` ${bw}`}
-            </p>
-          </dis>
-        </div>
+        <p style={{ alignSelf: "center" }}>
+          <strong>HGPO :</strong>(Hyperglycémie provoquéé par voie orale)
+        </p>
+        <table className="table2">
+          <thead>
+            <tr>
+              <th>
+                <strong>Examens</strong>
+              </th>
+              <th>
+                <strong>Resultats</strong>
+              </th>
 
+              <th>
+                <strong>Valeurs Normales</strong>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <strong>Dosage 1 (à jeun)</strong>
+              </td>
+              <td>
+                <strong>{dosage1}</strong>
+              </td>
+              <td>
+                <strong>
+                  <strong>{"<0.92 g/l"}</strong>{" "}
+                </strong>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <strong>Dosage 2 (à 1 h)</strong>
+              </td>
+              <td>
+                <strong>{dosage2}</strong>
+              </td>
+              <td>
+                <strong>{"<1.80 g/l"}</strong>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <strong>Dosage 3 (à 2 h)</strong>
+              </td>
+              <td>
+                <strong>{dosage3}</strong>
+              </td>
+              <td>
+                <strong>{"<1.53 g/l"}</strong>
+              </td>
+            </tr>
+          </tbody>
+        </table>
         <div className="bas-page">
           <hr className="no_print" />
           <p>
@@ -117,6 +143,6 @@ function Hiv({ reference, nom, prenom, sexe, age }) {
       </div>
     </div>
   );
-}
+};
 
-export default Hiv;
+export default Hgpo;

@@ -23,4 +23,10 @@ export const ListeAnalyse = [
     description:
       "Analyses évaluant les composants sanguins, tels que les globules rouges, blancs et les plaquettes.",
   },
+  {
+    Abreviation: "Hormonologie",
+    titre: "Hormonologie:",
+    description:
+      "Analyses évaluant les composants sanguins, tels que les globules rouges, blancs et les plaquettes.",
+  },
 ];

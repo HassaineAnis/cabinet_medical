@@ -2,21 +2,26 @@ import React, { useContext } from "react";
 import logo from "../../../../assets/logo (1).png";
 import "../../../../style/laboAM/documentAM/tp.css";
 import { BpoContext } from "../../../../util/context/Context";
-
-const Tp = ({ reference, nom, prenom, sexe, age }) => {
+const Rubeole = ({ reference, nom, prenom, age, sexe }) => {
   const {
     date,
+    rubeole,
 
     service,
-
-    inr,
-
-    taux,
-
-    tempProth,
-
-    tck,
   } = useContext(BpoContext);
+  const verifieToxoplasmose = (valeur) => {
+    const intvaleur = parseFloat(valeur);
+    if (intvaleur < 4) {
+      return "Négatif";
+    }
+    if (intvaleur >= 4 && intvaleur <= 8) {
+      return "Douteux";
+    }
+    if (intvaleur >= 8) {
+      return "Positif";
+    }
+  };
+
   return (
     <div className="tp" ref={reference}>
       <div className="partie1_container">
@@ -35,8 +40,7 @@ const Tp = ({ reference, nom, prenom, sexe, age }) => {
                 <strong>Nom </strong>
               </span>{" "}
               <span>
-                <strong>: </strong>
-                {nom}
+                <strong>: </strong>hassaine
               </span>
             </p>
             <p>
@@ -44,8 +48,7 @@ const Tp = ({ reference, nom, prenom, sexe, age }) => {
                 <strong>Prénom</strong>
               </span>{" "}
               <span>
-                <strong>: </strong>
-                {prenom}
+                <strong>: </strong>hassaine
               </span>
             </p>
             <p>
@@ -63,8 +66,7 @@ const Tp = ({ reference, nom, prenom, sexe, age }) => {
                 <strong>Age</strong>
               </span>{" "}
               <span>
-                <strong>: </strong>
-                {age}
+                <strong>: </strong>hassaine
               </span>
             </p>{" "}
             <p>
@@ -72,8 +74,7 @@ const Tp = ({ reference, nom, prenom, sexe, age }) => {
                 <strong>Sexe</strong>
               </span>{" "}
               <span>
-                <strong>: </strong>
-                {sexe}
+                <strong>: </strong>hassaine
               </span>
             </p>
           </div>
@@ -83,67 +84,66 @@ const Tp = ({ reference, nom, prenom, sexe, age }) => {
           </p>
         </div>
       </div>
-
       <div className="partie2">
-        <table>
+        <p className="point" style={{ textDecoration: "underline" }}>
+          <strong>Serodiagnostique de la Rubeole:</strong>
+        </p>
+        <ul style={{ margin: "0" }}>
+          <li className="no_decor_list">
+            <strong>Serologie:</strong>
+          </li>
+          <ul>
+            <li className="no_decor_list">
+              Rubéole, sérologie <strong>lgG</strong>
+              <strong>..... {`${rubeole} `}</strong>
+              UI/ml.
+            </li>
+            <li className="no_decor_list">
+              Rubéole, sérologie <strong> lgG</strong>
+              <strong>.....</strong>
+              <strong>{verifieToxoplasmose(rubeole)}.</strong>
+            </li>
+          </ul>
+        </ul>
+        <table className="table2">
           <thead>
             <tr>
-              <th>TP</th>
               <th>
-                <span>Temps de </span>
-                <br /> <span> prothrombine</span>(s)
+                <strong>{"<10 UI/ml"}</strong>
               </th>
+              <th>Négatif</th>
+
               <th>
-                {" "}
-                <span>Taux de</span>
-                <br /> <span>pourcentage(%)</span>
+                Patiente non immunisée, nécessite un controle sérologique le
+                statut immunitaire
               </th>
-              <th>I.N.R</th>
             </tr>
           </thead>
           <tbody>
             <tr>
               <td>
-                <strong>Témoin</strong>{" "}
+                <strong>{"10 <= Titre <= 15 UI/ml"}</strong>
               </td>
-              <td>12.5</td>
-              <td>100%</td>
-              <td>1.0</td>
+              <td>Douteux</td>
+              <td>
+                Zone équivoque a controler dans &5 jours pour interpréter le
+                statut immunitaire
+              </td>
             </tr>
             <tr>
               <td>
-                {" "}
-                <strong>Patient</strong>
+                <strong>{">= 15 UI/ml"}</strong>
               </td>
-              <td>{tempProth}</td>
-              <td>{taux}</td>
-              <td>{inr}</td>
+              <td>Positif</td>
+              <td>
+                1er détermination à controler dans 15 jours <br />
+                2eme détermination si taux stade d'IgG/absence d'IgM-immunité
+                ancienne <br />
+                si{">"} double titre-Dosage IgM recommandé
+              </td>
             </tr>
           </tbody>
         </table>
-
-        <div className="inr">
-          <div className="intervalle">
-            <p>Intervalle normal</p>
-            <span>
-              <strong>: </strong>activité :70-100%
-            </span>
-            <span style={{ marginLeft: "1rem" }}>INR :0.9-1.15</span>
-          </div>
-          <div className="intervalle">
-            <p>Intervalle thérapeurique</p>
-            <span>
-              <strong>: </strong>activité :17-35%
-            </span>
-            <span style={{ marginLeft: "1rem" }}>INR :1.5-4.5</span>
-          </div>
-        </div>
-        <div className="tck">
-          <p>
-            <strong>TCK :</strong> <span> {tck}</span> s
-          </p>
-          <p>Valeurs usuelles : 22 - 38 s</p>
-        </div>
 
         <div className="bas-page">
           <hr className="no_print" />
@@ -157,4 +157,4 @@ const Tp = ({ reference, nom, prenom, sexe, age }) => {
   );
 };
 
-export default Tp;
+export default Rubeole;

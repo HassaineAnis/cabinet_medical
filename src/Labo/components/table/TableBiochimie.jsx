@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import SearchBar from "../../../medecin/components/serchBar/SearchBar";
+
 import Pagination from "../../../admin/components/pagination/Pagination";
 import "../../../style/medecinStyle/consultation.css";
 import { Link, useNavigate, useParams } from "react-router-dom";
@@ -9,7 +9,8 @@ import Modal from "react-modal";
 import useModal from "../../../util/hooks/UseModal";
 
 const nombreElementPage = 6;
-const TableBpo = () => {
+
+const TableBiochimie = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const navigation = () => {
@@ -18,14 +19,14 @@ const TableBpo = () => {
 
   const { modalIsOpen, openModal, closeModal } = useModal();
 
-  const [filtreFiche, setFiche] = useState("tp");
+  const [filtreFiche, setFiche] = useState("hgpo");
 
   const [data, setData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
 
   const [isLoading, setLoading] = useState(false);
-  //const [, setPatient] = useState([]);
+
   const [erreur, setErreur] = useState(false);
   const [patient, setPatient] = useState({});
 
@@ -43,7 +44,7 @@ const TableBpo = () => {
         const analyseFilter = analyses.filter(
           (element) =>
             element.document.nom === filtreFiche &&
-            element.typeAnalyse === "B.P.O"
+            element.typeAnalyse === "biochimie"
         );
         setTotalPages(Math.ceil(analyseFilter.length / nombreElementPage));
         setData(analyseFilter);
@@ -76,12 +77,12 @@ const TableBpo = () => {
 
   return (
     <>
-      <h2>Liste des Analyse B.P.O</h2>{" "}
+      <h2>Liste des Analyse Biochimique</h2>{" "}
       <div className="consultation_table">
         <ToastContainer />
         <div className="consultation_table_btn">
           <Link
-            to={`/laboAM/B.P.O/ajouter/${filtreFiche}/${id}`}
+            to={`/laboAM/biochimie/ajouter/${filtreFiche}/${id}`}
             className="btn_ajout"
             style={{
               textDecoration: "none",
@@ -107,7 +108,6 @@ const TableBpo = () => {
             </svg>
             Ajouter une analyse
           </Link>
-
           <div className="info_patient">
             <p>
               <span>Nom:</span> <span>{patient && patient.nom}</span>
@@ -129,10 +129,12 @@ const TableBpo = () => {
             onChange={(e) => setFiche(e.target.value)}
             value={filtreFiche}
           >
-            <option value="tp">TP</option>
-            <option value="gs">GS</option>
-            <option value="hiv">HIV HBS HCV</option>
-            <option value="b.p.o">BPO</option>
+            <option value="hgpo">HGPO</option>
+            <option value="proteinurie">PROTEINURIE</option>
+            <option value="fer serrique">FER SERRIQUE</option>
+            <option value="crp">CRP</option>
+            <option value="bilirubine">BILIRUBINE</option>
+            <option value="calcuim">CALCUIM</option>
           </select>
         </div>
         {isLoading ? (
@@ -145,34 +147,48 @@ const TableBpo = () => {
                   <tr className="table_entete">
                     <td>Date</td>
                     <td>Sérvice</td>
-                    {filtreFiche === "b.p.o" && (
+                    {filtreFiche === "proteinurie" && (
                       <>
-                        <td>Glucose</td>
-                        <td>Uree</td>
-                        <td>Creatinemie</td>
+                        <td>Proteinurie</td>
+                        <td>Diurese</td>
                       </>
                     )}
-                    {(filtreFiche === "tp" || filtreFiche === "b.p.o") && (
+                    {filtreFiche === "calcuim" && (
                       <>
-                        <td>Temps de Prothrombine</td>
-                        <td>Taux{"(%)"}</td>
-                        <td>INR</td>
+                        <td>Calcium</td>
+                        <td>Phosphore</td>
+                        <td>Magnesium</td>
 
-                        <td>TCK</td>
+                        <td>Fer Serrique</td>
                       </>
                     )}
-                    {filtreFiche === "gs" && (
+                    {filtreFiche === "bilirubine" && (
                       <>
-                        <td>Groupe sanguin</td>
-                        <td>Rhésus</td>
+                        <td>Bilirubine T(sang)</td>
+                        <td>Bilirubine D(sang)</td>
+                        <td>Bilirubine T(urée)</td>
+                        <td>Bilirubine D(urée)</td>
+                        <td>RAI</td>
+                        <td>Test De Coombs</td>
+                        <td>CRP</td>
+                        <td>Calcium</td>
                       </>
                     )}
-                    {filtreFiche === "hiv" && (
+                    {filtreFiche === "crp" && (
                       <>
-                        <td>HIV</td>
-                        <td>HBS</td>
-                        <td>HCV</td>
-                        <td>BW</td>
+                        <td>CRP</td>
+                      </>
+                    )}
+                    {filtreFiche === "fer serrique" && (
+                      <>
+                        <td>Fer Sérique</td>
+                      </>
+                    )}
+                    {filtreFiche === "hgpo" && (
+                      <>
+                        <td>Dosage1</td>
+                        <td>Dosage2</td>
+                        <td>Dosage3</td>
                       </>
                     )}
 
@@ -184,84 +200,122 @@ const TableBpo = () => {
                     <tr key={element._id}>
                       <td>{new Date(element.date).toLocaleDateString()}</td>
                       <td>{element.service}</td>
-                      {filtreFiche === "b.p.o" && (
+                      {filtreFiche === "proteinurie" && (
                         <>
                           <td>
+                            {" "}
                             {element.document.data &&
-                              element.document.data.glucose}
+                              element.document.data.proteinurie}
                           </td>
                           <td>
+                            {" "}
                             {element.document.data &&
-                              element.document.data.uree}
-                          </td>
-                          <td>
-                            {element.document.data &&
-                              element.document.data.creatinimie}
+                              element.document.data.diurese}
                           </td>
                         </>
                       )}
-
-                      {(filtreFiche === "tp" || filtreFiche === "b.p.o") && (
+                      {filtreFiche === "calcuim" && (
                         <>
                           <td>
                             {" "}
                             {element.document.data &&
-                              element.document.data.temps}
-                          </td>
-                          <td>
-                            {element.document.data &&
-                              element.document.data.taux}
-                            {"(%)"}
+                              element.document.data.calcuim}
                           </td>
                           <td>
                             {" "}
-                            {element.document.data && element.document.data.inr}
+                            {element.document.data &&
+                              element.document.data.phosphore}
+                          </td>
+                          <td>
+                            {" "}
+                            {element.document.data &&
+                              element.document.data.magnesium}
                           </td>
 
                           <td>
                             {" "}
-                            {element.document.data && element.document.data.tck}
+                            {element.document.data &&
+                              element.document.data.ferSerrique}
                           </td>
                         </>
                       )}
-                      {filtreFiche === "gs" && (
+                      {filtreFiche === "bilirubine" && (
                         <>
                           <td>
                             {" "}
-                            {element.document.data && element.document.data.gs}
+                            {element.document.data &&
+                              element.document.data.bilirubineSangT}
                           </td>
                           <td>
                             {" "}
                             {element.document.data &&
-                              element.document.data.rhesus}
-                          </td>
-                        </>
-                      )}
-                      {filtreFiche === "hiv" && (
-                        <>
-                          <td>
-                            {" "}
-                            {element.document.data && element.document.data.hiv}
-                          </td>
-                          <td>
-                            {" "}
-                            {element.document.data && element.document.data.hbs}
-                          </td>
-                          <td>
-                            {" "}
-                            {element.document.data && element.document.data.hcv}
+                              element.document.data.bilirubineSangD}
                           </td>
                           <td>
                             {" "}
                             {element.document.data &&
-                              element.document.data.bw}{" "}
+                              element.document.data.bilirubineUrineD}
+                          </td>
+                          <td>
+                            {" "}
+                            {element.document.data &&
+                              element.document.data.bilirubineUrineD}
+                          </td>
+                          <td>
+                            {element.document.data && element.document.data.rai}
+                          </td>
+                          <td>
+                            {" "}
+                            {element.document.data &&
+                              element.document.data.coombs}
+                          </td>
+                          <td>
+                            {" "}
+                            {element.document.data && element.document.data.crp}
+                          </td>
+                          <td>
+                            {" "}
+                            {element.document.data &&
+                              element.document.data.calcuim}
+                          </td>
+                        </>
+                      )}
+                      {filtreFiche === "crp" && (
+                        <>
+                          <td>
+                            {" "}
+                            {element.document.data && element.document.data.crp}
+                          </td>
+                        </>
+                      )}
+                      {filtreFiche === "fer serrique" && (
+                        <>
+                          <td>
+                            {element.document.data &&
+                              element.document.data.ferSerrique}
+                          </td>
+                        </>
+                      )}
+                      {filtreFiche === "hgpo" && (
+                        <>
+                          <td>
+                            {element.document.data &&
+                              element.document.data.dosage1}
+                          </td>
+                          <td>
+                            {element.document.data &&
+                              element.document.data.dosage2}
+                          </td>
+                          <td>
+                            {element.document.data &&
+                              element.document.data.dosage3}
                           </td>
                         </>
                       )}
                       <td>
                         <div className="action">
                           <Link
-                            to={`/laboAM/B.P.O/modifier/${filtreFiche}/${element._id}`}
+                            to={`/laboAM/biochimie/modifier/${filtreFiche}/${element._id}`}
                           >
                             <svg
                               xmlns="http://www.w3.org/2000/svg"
@@ -312,4 +366,4 @@ const TableBpo = () => {
   );
 };
 
-export default TableBpo;
+export default TableBiochimie;

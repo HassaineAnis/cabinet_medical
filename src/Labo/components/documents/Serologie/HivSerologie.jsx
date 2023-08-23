@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import logo from "../../../../assets/logo (1).png";
 import "../../../../style/laboAM/documentAM/tp.css";
 import { BpoContext } from "../../../../util/context/Context";
-function Hiv({ reference, nom, prenom, sexe, age }) {
+const HivSerologie = ({ reference, nom, prenom, age, sexe }) => {
   const {
     date,
 
@@ -80,31 +80,42 @@ function Hiv({ reference, nom, prenom, sexe, age }) {
         </div>
       </div>
       <div className="partie2">
-        <div className="liste">
-          <dis className="liste_container">
-            <p style={{ marginBottom: "1rem" }}>
-              <strong>
-                <span style={{ textDecoration: "underline" }}>HGPO</span>
-              </strong>
-              :(Hyperglycémie provoqué pas voie orale)
+        <div
+          style={{
+            alignSelf: "center",
+            display: "flex",
+            flexDirection: "column",
+            gap: "1rem",
+          }}
+        >
+          <div style={{ display: "flex", gap: "0.1rem" }}>
+            <p style={{ margin: "0" }} className="point">
+              <strong>HIV</strong>
             </p>
-            <p className="point">
-              <strong>HIV :</strong>
-              {` ${hiv}`}
+            <strong>........</strong>
+            <p style={{ margin: "0" }}>{`${hiv}`}</p>
+          </div>
+          <div style={{ display: "flex", gap: "0.1rem" }}>
+            <p style={{ margin: "0" }} className="point">
+              <strong>HBS</strong>
             </p>
-            <p className="point">
-              <strong>HBS :</strong>
-              {` ${hbs}`}
+            <strong>......</strong>
+            <p style={{ margin: "0" }}>{`${hbs}`}</p>
+          </div>
+          <div style={{ display: "flex", gap: "0.1rem" }}>
+            <p style={{ margin: "0" }} className="point">
+              <strong>HCV</strong>
             </p>
-            <p className="point">
-              <strong>HCV :</strong>
-              {` ${hcv}`}
+            <strong>......</strong>
+            <p style={{ margin: "0" }}>{`${hcv}`}</p>
+          </div>
+          <div style={{ display: "flex", gap: "0.1rem" }}>
+            <p style={{ margin: "0" }} className="point">
+              <strong>BW</strong>
             </p>
-            <p className="point">
-              <strong>BW :</strong>
-              {` ${bw}`}
-            </p>
-          </dis>
+            <strong>........</strong>
+            <p style={{ margin: "0" }}>{`${bw}`}</p>
+          </div>
         </div>
 
         <div className="bas-page">
@@ -117,6 +128,6 @@ function Hiv({ reference, nom, prenom, sexe, age }) {
       </div>
     </div>
   );
-}
+};
 
-export default Hiv;
+export default HivSerologie;

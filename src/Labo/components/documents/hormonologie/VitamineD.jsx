@@ -1,16 +1,16 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
+import React from "react";
 import logo from "../../../../assets/logo (1).png";
 import "../../../../style/laboAM/documentAM/tp.css";
 import { BpoContext } from "../../../../util/context/Context";
-function Hiv({ reference, nom, prenom, sexe, age }) {
+
+const VitamineD = ({ reference, nom, prenom, sexe, age }) => {
   const {
     date,
+    calcuim,
+    vitamineD,
 
     service,
-    hiv,
-    hbs,
-    hcv,
-    bw,
   } = useContext(BpoContext);
   return (
     <div className="tp" ref={reference}>
@@ -30,8 +30,7 @@ function Hiv({ reference, nom, prenom, sexe, age }) {
                 <strong>Nom </strong>
               </span>{" "}
               <span>
-                <strong>: </strong>
-                {nom}
+                <strong>: </strong> {nom}
               </span>
             </p>
             <p>
@@ -45,9 +44,8 @@ function Hiv({ reference, nom, prenom, sexe, age }) {
             </p>
             <p>
               <span>
-                <strong>Sérvice </strong>
-              </span>
-
+                <strong>Sérvice</strong>
+              </span>{" "}
               <span>
                 <strong>: </strong>
                 {service}
@@ -68,8 +66,7 @@ function Hiv({ reference, nom, prenom, sexe, age }) {
                 <strong>Sexe</strong>
               </span>{" "}
               <span>
-                <strong>: </strong>
-                {sexe}
+                <strong>: </strong> {sexe}
               </span>
             </p>
           </div>
@@ -79,33 +76,78 @@ function Hiv({ reference, nom, prenom, sexe, age }) {
           </p>
         </div>
       </div>
+
       <div className="partie2">
-        <div className="liste">
-          <dis className="liste_container">
-            <p style={{ marginBottom: "1rem" }}>
-              <strong>
-                <span style={{ textDecoration: "underline" }}>HGPO</span>
-              </strong>
-              :(Hyperglycémie provoqué pas voie orale)
-            </p>
-            <p className="point">
-              <strong>HIV :</strong>
-              {` ${hiv}`}
-            </p>
-            <p className="point">
-              <strong>HBS :</strong>
-              {` ${hbs}`}
-            </p>
-            <p className="point">
-              <strong>HCV :</strong>
-              {` ${hcv}`}
-            </p>
-            <p className="point">
-              <strong>BW :</strong>
-              {` ${bw}`}
-            </p>
-          </dis>
+        <div style={{ display: "flex", alignSelf: "center", gap: "0.2rem" }}>
+          <p className="point">
+            <strong>25-(OH) Vitamine D:</strong>
+          </p>
+
+          <p>
+            <strong>......</strong>
+            {`${vitamineD} `}
+            <strong>ng/l.</strong>
+          </p>
         </div>
+        <table className="table2">
+          <thead>
+            <tr>
+              <th>Statut</th>
+              <th>25-(OH) Vitamine D</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <strong>Déficient</strong>{" "}
+              </td>
+
+              <td>{"< 20 ng/ml"}</td>
+            </tr>
+            <tr>
+              <td>
+                <strong>Insuffisant</strong>{" "}
+              </td>
+
+              <td>{"20 - 29 ng/ml"}</td>
+            </tr>
+            <tr>
+              <td>
+                <strong>Suffisant</strong>{" "}
+              </td>
+
+              <td> {"30 - 100 ng/MI"}</td>
+            </tr>
+            <tr>
+              <td>
+                <strong>Toxicité pontentielle</strong>{" "}
+              </td>
+
+              <td> {"> 100 ng/MI"}</td>
+            </tr>
+          </tbody>
+        </table>
+        <br />
+        <br />
+
+        <table className="table2">
+          <thead>
+            <tr>
+              <th>Examens</th>
+              <th>Resultats</th>
+              <th>Valeurs Normales</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <strong>Calcium</strong>{" "}
+              </td>
+              <td>{calcuim}</td>
+              <td>85.0 - 105 mg/l</td>
+            </tr>
+          </tbody>
+        </table>
 
         <div className="bas-page">
           <hr className="no_print" />
@@ -117,6 +159,6 @@ function Hiv({ reference, nom, prenom, sexe, age }) {
       </div>
     </div>
   );
-}
+};
 
-export default Hiv;
+export default VitamineD;

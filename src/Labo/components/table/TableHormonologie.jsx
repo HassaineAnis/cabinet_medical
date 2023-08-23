@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import SearchBar from "../../../medecin/components/serchBar/SearchBar";
+
 import Pagination from "../../../admin/components/pagination/Pagination";
 import "../../../style/medecinStyle/consultation.css";
 import { Link, useNavigate, useParams } from "react-router-dom";
@@ -9,23 +9,36 @@ import Modal from "react-modal";
 import useModal from "../../../util/hooks/UseModal";
 
 const nombreElementPage = 6;
-const TableBpo = () => {
+const TableHormonologie = () => {
   const { id } = useParams();
+
   const navigate = useNavigate();
   const navigation = () => {
     navigate(-1);
   };
+  const verifieToxoplasmose = (valeur) => {
+    const intvaleur = parseFloat(valeur);
+    if (intvaleur < 4) {
+      return "Négatif";
+    }
+    if (intvaleur >= 4 && intvaleur <= 8) {
+      return "Douteux";
+    }
+    if (intvaleur >= 8) {
+      return "Positif";
+    }
+  };
 
   const { modalIsOpen, openModal, closeModal } = useModal();
 
-  const [filtreFiche, setFiche] = useState("tp");
+  const [filtreFiche, setFiche] = useState("rubeole");
 
   const [data, setData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
 
   const [isLoading, setLoading] = useState(false);
-  //const [, setPatient] = useState([]);
+
   const [erreur, setErreur] = useState(false);
   const [patient, setPatient] = useState({});
 
@@ -42,8 +55,8 @@ const TableBpo = () => {
         setPatient(patient);
         const analyseFilter = analyses.filter(
           (element) =>
-            element.document.nom === filtreFiche &&
-            element.typeAnalyse === "B.P.O"
+            element.document.nom.toLowerCase() === filtreFiche.toLowerCase() &&
+            element.typeAnalyse === "hormonologie"
         );
         setTotalPages(Math.ceil(analyseFilter.length / nombreElementPage));
         setData(analyseFilter);
@@ -71,17 +84,17 @@ const TableBpo = () => {
   }
 
   if (erreur) {
-    <div className="consultation_table">Erreur de chargement...</div>;
+    return <div className="consultation_table">Erreur de chargement...</div>;
   }
 
   return (
     <>
-      <h2>Liste des Analyse B.P.O</h2>{" "}
+      <h2>Liste des Analyse Hormonologique</h2>{" "}
       <div className="consultation_table">
         <ToastContainer />
         <div className="consultation_table_btn">
           <Link
-            to={`/laboAM/B.P.O/ajouter/${filtreFiche}/${id}`}
+            to={`/laboAM/Hormonologie/ajouter/${filtreFiche}/${id}`}
             className="btn_ajout"
             style={{
               textDecoration: "none",
@@ -129,10 +142,16 @@ const TableBpo = () => {
             onChange={(e) => setFiche(e.target.value)}
             value={filtreFiche}
           >
-            <option value="tp">TP</option>
-            <option value="gs">GS</option>
-            <option value="hiv">HIV HBS HCV</option>
-            <option value="b.p.o">BPO</option>
+            <option value="rubeole">Rubeole</option>
+            <option value="tsh">TSH</option>
+            <option value="vitamine d">Vitamine D</option>
+            <option value="psa.t">PSA.T</option>
+            <option value="prolE2">ProlE2</option>
+            <option value="mini vidas">Mini Vidas</option>
+            <option value="hcg">HCG</option>
+            <option value="ft4">FT4</option>
+            <option value="ft3">FT3</option>
+            <option value="ferritine">Ferritine</option>
           </select>
         </div>
         {isLoading ? (
@@ -145,34 +164,58 @@ const TableBpo = () => {
                   <tr className="table_entete">
                     <td>Date</td>
                     <td>Sérvice</td>
-                    {filtreFiche === "b.p.o" && (
+                    {filtreFiche === "ferritine" && (
                       <>
-                        <td>Glucose</td>
-                        <td>Uree</td>
-                        <td>Creatinemie</td>
+                        <td>Ferritine</td>
+                        <td>Fer Serrique</td>
                       </>
                     )}
-                    {(filtreFiche === "tp" || filtreFiche === "b.p.o") && (
-                      <>
-                        <td>Temps de Prothrombine</td>
-                        <td>Taux{"(%)"}</td>
-                        <td>INR</td>
 
-                        <td>TCK</td>
+                    {filtreFiche === "hcg" && (
+                      <>
+                        <td>BHCG</td>
+                        <td>Seuil De Sensibilité</td>
                       </>
                     )}
-                    {filtreFiche === "gs" && (
+                    {filtreFiche === "prolE2" && (
                       <>
-                        <td>Groupe sanguin</td>
-                        <td>Rhésus</td>
+                        <td>Dosage De La Prolactine</td>
+                        <td>Dosage De L'oestradiol</td>
                       </>
                     )}
-                    {filtreFiche === "hiv" && (
+                    {filtreFiche === "psa.t" && (
                       <>
-                        <td>HIV</td>
-                        <td>HBS</td>
-                        <td>HCV</td>
-                        <td>BW</td>
+                        <td>Dosage de la PSA.T</td>
+                        <td>Ionogramme Sanguin</td>
+                        <td>Na+</td>
+                        <td>K+</td>
+                      </>
+                    )}
+                    {filtreFiche === "vitamine d" && (
+                      <>
+                        <td>Vitamine D</td>
+                        <td>Calcium</td>
+                      </>
+                    )}
+                    {filtreFiche === "tsh" && <td>TSH US</td>}
+                    {filtreFiche === "ft4" && (
+                      <td> Dosage de l'Hormone Thyroxine Libre(F-T4)</td>
+                    )}
+                    {filtreFiche === "ft3" && (
+                      <td> Dosage de l'Hormone triiodothyronine Libre(F-T3)</td>
+                    )}
+
+                    {filtreFiche === "mini vidas" && (
+                      <>
+                        <td>Dosage de l'hormone Thyreotrope(TSH US)</td>
+                        <td>Dosage de l'Hormone Thyroxine Libre(F-T4)</td>
+                        <td>Dosage de l'Hormone Triodothyronine Libre(F-T3)</td>
+                      </>
+                    )}
+                    {filtreFiche === "rubeole" && (
+                      <>
+                        <td>Rubéole,Sérologie lgG(UI/ml)</td>
+                        <td>Rubéole,Sérologie lgG</td>
                       </>
                     )}
 
@@ -184,58 +227,103 @@ const TableBpo = () => {
                     <tr key={element._id}>
                       <td>{new Date(element.date).toLocaleDateString()}</td>
                       <td>{element.service}</td>
-                      {filtreFiche === "b.p.o" && (
+                      {filtreFiche === "rubeole" && (
                         <>
                           <td>
+                            {" "}
                             {element.document.data &&
-                              element.document.data.glucose}
+                              element.document.data.rubeole}
                           </td>
                           <td>
+                            {" "}
                             {element.document.data &&
-                              element.document.data.uree}
-                          </td>
-                          <td>
-                            {element.document.data &&
-                              element.document.data.creatinimie}
+                              verifieToxoplasmose(
+                                element.document.data.rubeole
+                              )}
                           </td>
                         </>
                       )}
-
-                      {(filtreFiche === "tp" || filtreFiche === "b.p.o") && (
+                      {filtreFiche === "tsh" && (
+                        <td>
+                          {" "}
+                          {element.document.data && element.document.data.tsh}
+                        </td>
+                      )}
+                      {filtreFiche === "ferritine" && (
                         <>
                           <td>
                             {" "}
                             {element.document.data &&
-                              element.document.data.temps}
+                              element.document.data.ferritine}
                           </td>
                           <td>
+                            {" "}
                             {element.document.data &&
-                              element.document.data.taux}
-                            {"(%)"}
-                          </td>
-                          <td>
-                            {" "}
-                            {element.document.data && element.document.data.inr}
-                          </td>
-
-                          <td>
-                            {" "}
-                            {element.document.data && element.document.data.tck}
+                              element.document.data.ferSerrique}
                           </td>
                         </>
                       )}
-                      {filtreFiche === "gs" && (
+                      {filtreFiche === "prolE2" && (
                         <>
                           <td>
                             {" "}
-                            {element.document.data && element.document.data.gs}
+                            {element.document.data &&
+                              element.document.data.prolactine}
                           </td>
                           <td>
                             {" "}
                             {element.document.data &&
-                              element.document.data.rhesus}
+                              element.document.data.oestradiol}
                           </td>
                         </>
+                      )}
+                      {filtreFiche === "psa.t" && (
+                        <>
+                          <td>
+                            {" "}
+                            {element.document.data &&
+                              element.document.data.psat}
+                          </td>
+                          <td>
+                            {" "}
+                            {element.document.data &&
+                              element.document.data.inograme}
+                          </td>
+                          <td>
+                            {" "}
+                            {element.document.data && element.document.data.na}
+                          </td>
+                          <td>
+                            {" "}
+                            {element.document.data && element.document.data.k}
+                          </td>
+                        </>
+                      )}
+                      {filtreFiche === "vitamine d" && (
+                        <>
+                          <td>
+                            {" "}
+                            {element.document.data &&
+                              element.document.data.vitamineD}
+                          </td>
+                          <td>
+                            {" "}
+                            {element.document.data &&
+                              element.document.data.calcuim}
+                          </td>
+                        </>
+                      )}
+                      {filtreFiche === "ft4" && (
+                        <td>
+                          {" "}
+                          {element.document.data && element.document.data.ft4}
+                        </td>
+                      )}
+                      {filtreFiche === "ft3" && (
+                        <td>
+                          {" "}
+                          {element.document.data && element.document.data.ft3}
+                        </td>
                       )}
                       {filtreFiche === "hiv" && (
                         <>
@@ -253,15 +341,43 @@ const TableBpo = () => {
                           </td>
                           <td>
                             {" "}
+                            {element.document.data && element.document.data.bw}
+                          </td>
+                        </>
+                      )}
+
+                      {filtreFiche === "mini vidas" && (
+                        <>
+                          <td>
+                            {" "}
+                            {element.document.data && element.document.data.tsh}
+                          </td>
+                          <td>
+                            {" "}
+                            {element.document.data && element.document.data.ft4}
+                          </td>
+                          <td>
+                            {element.document.data && element.document.data.ft3}
+                          </td>
+                        </>
+                      )}
+                      {filtreFiche === "hcg" && (
+                        <>
+                          <td>
+                            {" "}
+                            {element.document.data && element.document.data.hcg}
+                          </td>
+                          <td>
+                            {" "}
                             {element.document.data &&
-                              element.document.data.bw}{" "}
+                              element.document.data.seuilSensibilite}
                           </td>
                         </>
                       )}
                       <td>
                         <div className="action">
                           <Link
-                            to={`/laboAM/B.P.O/modifier/${filtreFiche}/${element._id}`}
+                            to={`/laboAM/Hormonologie/modifier/${filtreFiche}/${element._id}`}
                           >
                             <svg
                               xmlns="http://www.w3.org/2000/svg"
@@ -312,4 +428,4 @@ const TableBpo = () => {
   );
 };
 
-export default TableBpo;
+export default TableHormonologie;

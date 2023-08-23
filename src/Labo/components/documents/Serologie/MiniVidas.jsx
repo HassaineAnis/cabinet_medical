@@ -2,15 +2,14 @@ import React, { useContext } from "react";
 import logo from "../../../../assets/logo (1).png";
 import "../../../../style/laboAM/documentAM/tp.css";
 import { BpoContext } from "../../../../util/context/Context";
-function Hiv({ reference, nom, prenom, sexe, age }) {
+const MiniVidas = ({ reference, nom, prenom, sexe, age }) => {
   const {
     date,
+    ft4,
+    ft3,
+    tsh,
 
     service,
-    hiv,
-    hbs,
-    hcv,
-    bw,
   } = useContext(BpoContext);
   return (
     <div className="tp" ref={reference}>
@@ -30,8 +29,7 @@ function Hiv({ reference, nom, prenom, sexe, age }) {
                 <strong>Nom </strong>
               </span>{" "}
               <span>
-                <strong>: </strong>
-                {nom}
+                <strong>: </strong> {nom}
               </span>
             </p>
             <p>
@@ -45,9 +43,8 @@ function Hiv({ reference, nom, prenom, sexe, age }) {
             </p>
             <p>
               <span>
-                <strong>Sérvice </strong>
-              </span>
-
+                <strong>Sérvice</strong>
+              </span>{" "}
               <span>
                 <strong>: </strong>
                 {service}
@@ -80,31 +77,59 @@ function Hiv({ reference, nom, prenom, sexe, age }) {
         </div>
       </div>
       <div className="partie2">
-        <div className="liste">
-          <dis className="liste_container">
-            <p style={{ marginBottom: "1rem" }}>
-              <strong>
-                <span style={{ textDecoration: "underline" }}>HGPO</span>
-              </strong>
-              :(Hyperglycémie provoqué pas voie orale)
+        <div
+          style={{
+            alignSelf: "center",
+            display: "flex",
+            flexDirection: "column",
+            gap: "1rem",
+          }}
+        >
+          <div style={{ display: "flex", gap: "0.1rem" }}>
+            <p style={{ margin: "0" }}>
+              <strong>Dosage De L'hormone Thyreotrope:(TSH US)</strong>
             </p>
-            <p className="point">
-              <strong>HIV :</strong>
-              {` ${hiv}`}
+            <p style={{ margin: "0" }}>
+              <strong>....</strong>
+              {`${tsh}`}
+              <strong>uUI/ml.</strong>
             </p>
-            <p className="point">
-              <strong>HBS :</strong>
-              {` ${hbs}`}
+          </div>
+          <div style={{ display: "flex", height: "3rem" }}>
+            {" "}
+            <span>Valeurs Usuelles : 0.26 - 4.7 uUI/ml.</span>
+            <span style={{ alignSelf: "flex-end" }}>
+              Nouveau né : {"<"}10 uUI/ml.
+            </span>
+          </div>
+          <div style={{ display: "flex", gap: "0.1rem" }}>
+            <p style={{ margin: "0" }}>
+              <strong>Dosage De L'hormone Thyroxine Libre:(F-T4)</strong>
             </p>
-            <p className="point">
-              <strong>HCV :</strong>
-              {` ${hcv}`}
+            <p style={{ margin: "0" }}>
+              <strong>....</strong>
+              {`${ft4}`}
+              <strong>pmol/l.</strong>
             </p>
-            <p className="point">
-              <strong>BW :</strong>
-              {` ${bw}`}
+          </div>
+          <div style={{ display: "flex", height: "3rem" }}>
+            {" "}
+            <span>Valeurs Usuelles : 9 - 20 pmo/ml.</span>
+          </div>
+          <div style={{ display: "flex", gap: "0.1rem" }}>
+            <p style={{ margin: "0" }}>
+              <strong>Dosage De L'hormone Triiodothyronine Libre:(F-T3)</strong>
             </p>
-          </dis>
+            <p style={{ margin: "0" }}>
+              <strong>....</strong>
+              {`${ft3}`}
+              <strong>pmol/l.</strong>
+            </p>
+          </div>
+          <div style={{ display: "flex", height: "3rem" }}>
+            {" "}
+            <span>Valeurs Usuelles : 4 - 8.3 pmo/ml.</span>
+          </div>
         </div>
 
         <div className="bas-page">
@@ -117,6 +142,6 @@ function Hiv({ reference, nom, prenom, sexe, age }) {
       </div>
     </div>
   );
-}
+};
 
-export default Hiv;
+export default MiniVidas;

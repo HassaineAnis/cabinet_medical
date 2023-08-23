@@ -1,34 +1,21 @@
-import { useContext } from "react";
-import React from "react";
+import React, { useContext } from "react";
 import logo from "../../../../assets/logo (1).png";
 import "../../../../style/laboAM/documentAM/tp.css";
 import { BpoContext } from "../../../../util/context/Context";
 
-const Bpo = ({ reference, nom, prenom, age, sexe }) => {
+const Bilirubine = ({ reference, nom, prenom, age, sexe }) => {
   const {
     date,
-
-    tempProth,
-
-    taux,
-
-    inr,
-
-    tck,
+    bilirubineSangT,
+    bilirubineSangD,
+    bilirubineUrineT,
+    bilirubineUrineD,
+    calcuim,
+    crp,
+    coombs,
+    rai,
 
     service,
-
-    hiv,
-
-    hbs,
-
-    hcv,
-
-    uree,
-
-    creatinemie,
-
-    glucose,
   } = useContext(BpoContext);
   return (
     <div className="tp" ref={reference}>
@@ -48,8 +35,7 @@ const Bpo = ({ reference, nom, prenom, age, sexe }) => {
                 <strong>Nom </strong>
               </span>{" "}
               <span>
-                <strong>: </strong>
-                {nom}
+                <strong>: </strong> {nom}
               </span>
             </p>
             <p>
@@ -57,8 +43,7 @@ const Bpo = ({ reference, nom, prenom, age, sexe }) => {
                 <strong>Prénom</strong>
               </span>{" "}
               <span>
-                <strong>: </strong>
-                {prenom}
+                <strong>: </strong> {prenom}
               </span>
             </p>
             <p>
@@ -76,8 +61,7 @@ const Bpo = ({ reference, nom, prenom, age, sexe }) => {
                 <strong>Age</strong>
               </span>{" "}
               <span>
-                <strong>: </strong>
-                {age}
+                <strong>: </strong> {age}
               </span>
             </p>{" "}
             <p>
@@ -85,8 +69,7 @@ const Bpo = ({ reference, nom, prenom, age, sexe }) => {
                 <strong>Sexe</strong>
               </span>{" "}
               <span>
-                <strong>: </strong>
-                {sexe}
+                <strong>: </strong> {sexe}
               </span>
             </p>
           </div>
@@ -96,122 +79,104 @@ const Bpo = ({ reference, nom, prenom, age, sexe }) => {
           </p>
         </div>
       </div>
-
       <div className="partie2">
+        <p className="point" style={{ alignSelf: "center" }}>
+          <span style={{ textDecoration: "underline" }}>
+            <strong>HGPO :</strong>
+          </span>
+          (Hyperglycémie provoquéé par voie orale)
+        </p>
         <table className="table1">
           <thead>
             <tr>
-              <th>Examens</th>
-              <th>Resultats</th>
-              <th>Valeurs Normales</th>
+              <th rowSpan={2}>Examens</th>
+              <th colSpan={2}>Sang</th>
+              <th colSpan={2}>Urine</th>
+            </tr>
+            <tr>
+              <th>Résultat</th>
+              <th>Valeur</th>
+              <th>Résultat</th>
+              <th>Valeur</th>
             </tr>
           </thead>
           <tbody>
             <tr>
               <td>
-                <strong>Glucose</strong>{" "}
+                <strong>Bilirubine T</strong>
               </td>
-              <td>{glucose}</td>
-              <td>0.70 - 1.10g/l</td>
+              <td>{bilirubineSangT}</td>
+              <td>
+                <strong>{"< à 10 mg/l"}</strong>
+              </td>
+              <td>{bilirubineUrineT}</td>
+              <td>.....</td>
             </tr>
             <tr>
               <td>
-                <strong>Uree</strong>{" "}
+                <strong>Bilirubine D</strong>
               </td>
-              <td>{uree}</td>
-              <td>0.15 - 0.50g/l</td>
-            </tr>
-            <tr>
+              <td> {bilirubineSangD}</td>
               <td>
-                <strong>Creatinemie</strong>{" "}
+                <strong>{"< à 2.5 mg/l"}</strong>
               </td>
-              <td>{creatinemie}</td>
-              <td>4.0 - 13.0mg/l</td>
+              <td>{bilirubineUrineD}</td>
+              <td>........</td>
             </tr>
+            {/* Ajoutez plus de lignes selon vos besoins */}
           </tbody>
         </table>
 
         <table className="table2">
           <thead>
             <tr>
-              <th>TP</th>
               <th>
-                <span>Temps de </span>
-                <br /> <span> prothrombine</span>(s)
+                <strong>Examens</strong>
               </th>
               <th>
-                {" "}
-                <span>Taux de</span>
-                <br /> <span>pourcentage(%)</span>
+                <strong>Resultats</strong>
               </th>
-              <th>I.N.R</th>
+
+              <th>
+                <strong>Valeurs Normales</strong>
+              </th>
             </tr>
           </thead>
           <tbody>
             <tr>
               <td>
-                <strong>Témoin</strong>{" "}
+                <strong>Calcuim</strong>
               </td>
-              <td>12.5</td>
-              <td>100%</td>
-              <td>1.0</td>
-            </tr>
-            <tr>
               <td>
-                {" "}
-                <strong>Patient</strong>
+                <strong>{calcuim}</strong>
               </td>
-              <td>{tempProth}</td>
-              <td>{taux}</td>
-              <td>{inr}</td>
+              <td>
+                <strong>85.0 - 105 mg/l</strong>
+              </td>
             </tr>
           </tbody>
         </table>
-
-        <div className="inr">
-          <div className="intervalle">
-            <p>Intervalle normal</p>
-            <span>
-              <strong>: </strong>activité :70-100%
-            </span>
-            <span style={{ marginLeft: "1rem" }}>INR :0.9-1.15</span>
-          </div>
-          <div className="intervalle">
-            <p>Intervalle thérapeurique</p>
-            <span>
-              <strong>: </strong>activité :17-35%
-            </span>
-            <span style={{ marginLeft: "1rem" }}>INR :1.5-4.5</span>
-          </div>
-        </div>
-        <div className="tck">
-          <p>
-            <strong>TCK :</strong> <span>{tck}</span> s
-          </p>
-          <p>Valeurs usuelles : 22 - 38 s</p>
-        </div>
         <div className="hiv">
           <p>
-            <span style={{ width: "4rem", display: "inline-block" }}>
-              <strong>HIV :</strong>
-            </span>
-            <span>{hiv}.</span>
-          </p>
-          <p>
-            <span style={{ width: "4em", display: "inline-block" }}>
-              <strong>HBS :</strong>
+            <span>
+              <strong>CRP( Protéine C-Réactive) :</strong>
             </span>{" "}
-            <span>{hbs}.</span>
+            <span>{`${crp}`}.</span>
           </p>
           <p>
-            <span style={{ width: "4rem", display: "inline-block" }}>
+            <span>
+              <strong>Test De Coombs :</strong>
+            </span>{" "}
+            <span>{`${coombs}`}.</span>
+          </p>
+          <p>
+            <span>
               {" "}
-              <strong>HCV :</strong>
+              <strong>RAI (Recherche d'agglutinines irrégulières) :</strong>
             </span>
-            <span>{hcv}</span>
+            <span>{`${rai}`}</span>
           </p>
         </div>
-
         <div className="bas-page">
           <hr className="no_print" />
           <p>
@@ -223,5 +188,4 @@ const Bpo = ({ reference, nom, prenom, age, sexe }) => {
     </div>
   );
 };
-
-export default Bpo;
+export default Bilirubine;

@@ -1,10 +1,16 @@
+import React, { useContext } from "react";
 import logo from "../../../../assets/logo (1).png";
 import "../../../../style/laboAM/documentAM/tp.css";
-import React, { useContext } from "react";
 import { BpoContext } from "../../../../util/context/Context";
 
-const Gs = ({ reference, nom, prenom, adresse }) => {
-  const { date, gs, rhesus } = useContext(BpoContext);
+const Proteinurie = ({ reference, nom, prenom, age, sexe }) => {
+  const {
+    date,
+    proteinurie,
+    diurese,
+
+    service,
+  } = useContext(BpoContext);
   return (
     <div className="tp" ref={reference}>
       <div className="partie1_container">
@@ -15,17 +21,15 @@ const Gs = ({ reference, nom, prenom, adresse }) => {
           </h3>
           <img src={logo} alt="logo" />
         </div>
-        <h3 style={{ textAlign: "center" }}>CARTE DE GROUPE SANGUIN</h3>
+
         <div className="partie1">
-          {" "}
           <div className="infoPatient">
             <p>
               <span>
                 <strong>Nom </strong>
               </span>{" "}
               <span>
-                <strong>: </strong>
-                {nom}
+                <strong>: </strong> {nom}
               </span>
             </p>
             <p>
@@ -33,17 +37,33 @@ const Gs = ({ reference, nom, prenom, adresse }) => {
                 <strong>Prénom</strong>
               </span>{" "}
               <span>
-                <strong>: </strong>
-                {prenom}
+                <strong>: </strong> {prenom}
               </span>
             </p>
             <p>
               <span>
-                <strong>Adresse</strong>
+                <strong>Sérvice</strong>
               </span>{" "}
               <span>
                 <strong>: </strong>
-                {adresse}
+                {service}
+              </span>
+            </p>
+            <p>
+              <span>
+                {" "}
+                <strong>Age</strong>
+              </span>{" "}
+              <span>
+                <strong>: </strong> {age}
+              </span>
+            </p>{" "}
+            <p>
+              <span>
+                <strong>Sexe</strong>
+              </span>{" "}
+              <span>
+                <strong>: </strong> {sexe}
               </span>
             </p>
           </div>
@@ -54,21 +74,35 @@ const Gs = ({ reference, nom, prenom, adresse }) => {
         </div>
       </div>
       <div className="partie2">
-        <div className="gsr">
-          <div className="gs">
+        <div style={{ alignSelf: "center" }}>
+          <div style={{ display: "flex", alignSelf: "center", gap: "0.2rem" }}>
             <p>
-              <strong>Groupe Sanguin:</strong>
+              <strong>Proteinurie de 24h:</strong>
             </p>
             <p>
-              <strong>{gs}</strong>
+              <strong>.......</strong>
+              {`${proteinurie} `}
+              <strong>mg/24h.</strong>
             </p>
           </div>
-          <div className="rs">
+
+          <div style={{ display: "flex", alignSelf: "center", gap: "1rem" }}>
             <p>
-              <strong>Facteur Rhésus:</strong>
+              <strong>Diurese:</strong>
             </p>
             <p>
-              <strong>{rhesus}</strong>
+              <strong>.......</strong>
+              {` ${diurese} `}
+              <strong>L.</strong>
+            </p>
+          </div>
+
+          <div style={{ display: "flex", alignSelf: "center", gap: "1rem" }}>
+            <p>
+              <strong>Valeurs Usuelles:</strong>
+            </p>
+            <p>
+              <strong>{"<150 "}mg/24h.</strong>
             </p>
           </div>
         </div>
@@ -85,4 +119,4 @@ const Gs = ({ reference, nom, prenom, adresse }) => {
   );
 };
 
-export default Gs;
+export default Proteinurie;

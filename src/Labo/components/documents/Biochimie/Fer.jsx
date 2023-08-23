@@ -2,16 +2,9 @@ import React, { useContext } from "react";
 import logo from "../../../../assets/logo (1).png";
 import "../../../../style/laboAM/documentAM/tp.css";
 import { BpoContext } from "../../../../util/context/Context";
-function Hiv({ reference, nom, prenom, sexe, age }) {
-  const {
-    date,
 
-    service,
-    hiv,
-    hbs,
-    hcv,
-    bw,
-  } = useContext(BpoContext);
+const Fer = ({ reference, nom, prenom, age, sexe }) => {
+  const { date, ferSerrique, service } = useContext(BpoContext);
   return (
     <div className="tp" ref={reference}>
       <div className="partie1_container">
@@ -30,8 +23,7 @@ function Hiv({ reference, nom, prenom, sexe, age }) {
                 <strong>Nom </strong>
               </span>{" "}
               <span>
-                <strong>: </strong>
-                {nom}
+                <strong>: </strong> {nom}
               </span>
             </p>
             <p>
@@ -45,9 +37,8 @@ function Hiv({ reference, nom, prenom, sexe, age }) {
             </p>
             <p>
               <span>
-                <strong>Sérvice </strong>
-              </span>
-
+                <strong>Sérvice</strong>
+              </span>{" "}
               <span>
                 <strong>: </strong>
                 {service}
@@ -68,8 +59,7 @@ function Hiv({ reference, nom, prenom, sexe, age }) {
                 <strong>Sexe</strong>
               </span>{" "}
               <span>
-                <strong>: </strong>
-                {sexe}
+                <strong>: </strong> {sexe}
               </span>
             </p>
           </div>
@@ -80,33 +70,48 @@ function Hiv({ reference, nom, prenom, sexe, age }) {
         </div>
       </div>
       <div className="partie2">
-        <div className="liste">
-          <dis className="liste_container">
-            <p style={{ marginBottom: "1rem" }}>
-              <strong>
-                <span style={{ textDecoration: "underline" }}>HGPO</span>
-              </strong>
-              :(Hyperglycémie provoqué pas voie orale)
-            </p>
-            <p className="point">
-              <strong>HIV :</strong>
-              {` ${hiv}`}
-            </p>
-            <p className="point">
-              <strong>HBS :</strong>
-              {` ${hbs}`}
-            </p>
-            <p className="point">
-              <strong>HCV :</strong>
-              {` ${hcv}`}
-            </p>
-            <p className="point">
-              <strong>BW :</strong>
-              {` ${bw}`}
-            </p>
-          </dis>
-        </div>
+        <table className="table2">
+          <thead>
+            <tr>
+              <th>
+                <strong>Examens</strong>
+              </th>
+              <th>
+                <strong>Resultats</strong>
+              </th>
 
+              <th>
+                <strong>Valeurs Normales</strong>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <strong>Fer Serrique</strong>
+              </td>
+              <td>
+                <strong>{ferSerrique}</strong>
+              </td>
+              <td>
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: "0.5rem",
+                  }}
+                >
+                  <p style={{ margin: "0" }}>
+                    <strong>Hommes: 65-175 ug/dl</strong>
+                  </p>
+                  <p style={{ margin: "0" }}>
+                    <strong>Femmes: 50-170 ug/dl</strong>
+                  </p>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
         <div className="bas-page">
           <hr className="no_print" />
           <p>
@@ -117,6 +122,6 @@ function Hiv({ reference, nom, prenom, sexe, age }) {
       </div>
     </div>
   );
-}
+};
 
-export default Hiv;
+export default Fer;

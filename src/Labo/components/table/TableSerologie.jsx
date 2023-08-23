@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import SearchBar from "../../../medecin/components/serchBar/SearchBar";
+
 import Pagination from "../../../admin/components/pagination/Pagination";
 import "../../../style/medecinStyle/consultation.css";
 import { Link, useNavigate, useParams } from "react-router-dom";
@@ -9,7 +9,8 @@ import Modal from "react-modal";
 import useModal from "../../../util/hooks/UseModal";
 
 const nombreElementPage = 6;
-const TableBpo = () => {
+
+const TableSerologie = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const navigation = () => {
@@ -18,14 +19,14 @@ const TableBpo = () => {
 
   const { modalIsOpen, openModal, closeModal } = useModal();
 
-  const [filtreFiche, setFiche] = useState("tp");
+  const [filtreFiche, setFiche] = useState("hiv");
 
   const [data, setData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
 
   const [isLoading, setLoading] = useState(false);
-  //const [, setPatient] = useState([]);
+
   const [erreur, setErreur] = useState(false);
   const [patient, setPatient] = useState({});
 
@@ -42,8 +43,8 @@ const TableBpo = () => {
         setPatient(patient);
         const analyseFilter = analyses.filter(
           (element) =>
-            element.document.nom === filtreFiche &&
-            element.typeAnalyse === "B.P.O"
+            element.document.nom.toLowerCase() === filtreFiche &&
+            element.typeAnalyse === "serologie"
         );
         setTotalPages(Math.ceil(analyseFilter.length / nombreElementPage));
         setData(analyseFilter);
@@ -69,19 +70,30 @@ const TableBpo = () => {
   function pageSuivante(page) {
     setCurrentPage(page);
   }
-
+  const verifieToxoplasmose = (valeur) => {
+    const intvaleur = parseFloat(valeur);
+    if (intvaleur < 4) {
+      return "Négatif";
+    }
+    if (intvaleur >= 4 && intvaleur <= 8) {
+      return "Douteux";
+    }
+    if (intvaleur >= 8) {
+      return "Positif";
+    }
+  };
   if (erreur) {
     <div className="consultation_table">Erreur de chargement...</div>;
   }
 
   return (
     <>
-      <h2>Liste des Analyse B.P.O</h2>{" "}
+      <h2>Liste des Analyse Sérologie</h2>{" "}
       <div className="consultation_table">
         <ToastContainer />
         <div className="consultation_table_btn">
           <Link
-            to={`/laboAM/B.P.O/ajouter/${filtreFiche}/${id}`}
+            to={`/laboAM/Sérologie/ajouter/${filtreFiche}/${id}`}
             className="btn_ajout"
             style={{
               textDecoration: "none",
@@ -107,7 +119,6 @@ const TableBpo = () => {
             </svg>
             Ajouter une analyse
           </Link>
-
           <div className="info_patient">
             <p>
               <span>Nom:</span> <span>{patient && patient.nom}</span>
@@ -129,10 +140,9 @@ const TableBpo = () => {
             onChange={(e) => setFiche(e.target.value)}
             value={filtreFiche}
           >
-            <option value="tp">TP</option>
-            <option value="gs">GS</option>
-            <option value="hiv">HIV HBS HCV</option>
-            <option value="b.p.o">BPO</option>
+            <option value="hiv">HIV</option>
+            <option value="mini vidas">Mini Vidas</option>
+            <option value="toxo g">Toxo G</option>
           </select>
         </div>
         {isLoading ? (
@@ -145,34 +155,26 @@ const TableBpo = () => {
                   <tr className="table_entete">
                     <td>Date</td>
                     <td>Sérvice</td>
-                    {filtreFiche === "b.p.o" && (
-                      <>
-                        <td>Glucose</td>
-                        <td>Uree</td>
-                        <td>Creatinemie</td>
-                      </>
-                    )}
-                    {(filtreFiche === "tp" || filtreFiche === "b.p.o") && (
-                      <>
-                        <td>Temps de Prothrombine</td>
-                        <td>Taux{"(%)"}</td>
-                        <td>INR</td>
-
-                        <td>TCK</td>
-                      </>
-                    )}
-                    {filtreFiche === "gs" && (
-                      <>
-                        <td>Groupe sanguin</td>
-                        <td>Rhésus</td>
-                      </>
-                    )}
                     {filtreFiche === "hiv" && (
                       <>
                         <td>HIV</td>
                         <td>HBS</td>
                         <td>HCV</td>
                         <td>BW</td>
+                      </>
+                    )}
+
+                    {filtreFiche === "mini vidas" && (
+                      <>
+                        <td>Dosage de l'hormone Thyreotrope(TSH US)</td>
+                        <td>Dosage de l'Hormone Thyroxine Libre(F-T4)</td>
+                        <td>Dosage de l'Hormone Triodothyronine Libre(F-T3)</td>
+                      </>
+                    )}
+                    {filtreFiche === "toxo g" && (
+                      <>
+                        <td>Toxoplasmose,Sérologie lgG(UI/ml)</td>
+                        <td>Toxoplasmose,Sérologie lgG</td>
                       </>
                     )}
 
@@ -184,59 +186,6 @@ const TableBpo = () => {
                     <tr key={element._id}>
                       <td>{new Date(element.date).toLocaleDateString()}</td>
                       <td>{element.service}</td>
-                      {filtreFiche === "b.p.o" && (
-                        <>
-                          <td>
-                            {element.document.data &&
-                              element.document.data.glucose}
-                          </td>
-                          <td>
-                            {element.document.data &&
-                              element.document.data.uree}
-                          </td>
-                          <td>
-                            {element.document.data &&
-                              element.document.data.creatinimie}
-                          </td>
-                        </>
-                      )}
-
-                      {(filtreFiche === "tp" || filtreFiche === "b.p.o") && (
-                        <>
-                          <td>
-                            {" "}
-                            {element.document.data &&
-                              element.document.data.temps}
-                          </td>
-                          <td>
-                            {element.document.data &&
-                              element.document.data.taux}
-                            {"(%)"}
-                          </td>
-                          <td>
-                            {" "}
-                            {element.document.data && element.document.data.inr}
-                          </td>
-
-                          <td>
-                            {" "}
-                            {element.document.data && element.document.data.tck}
-                          </td>
-                        </>
-                      )}
-                      {filtreFiche === "gs" && (
-                        <>
-                          <td>
-                            {" "}
-                            {element.document.data && element.document.data.gs}
-                          </td>
-                          <td>
-                            {" "}
-                            {element.document.data &&
-                              element.document.data.rhesus}
-                          </td>
-                        </>
-                      )}
                       {filtreFiche === "hiv" && (
                         <>
                           <td>
@@ -244,24 +193,48 @@ const TableBpo = () => {
                             {element.document.data && element.document.data.hiv}
                           </td>
                           <td>
-                            {" "}
                             {element.document.data && element.document.data.hbs}
                           </td>
                           <td>
-                            {" "}
                             {element.document.data && element.document.data.hcv}
                           </td>
                           <td>
-                            {" "}
+                            {element.document.data && element.document.data.bw}
+                          </td>
+                        </>
+                      )}
+
+                      {filtreFiche === "mini vidas" && (
+                        <>
+                          <td>
+                            {element.document.data && element.document.data.tsh}
+                          </td>
+                          <td>
+                            {element.document.data && element.document.data.ft4}
+                          </td>
+                          <td>
+                            {element.document.data && element.document.data.ft3}
+                          </td>
+                        </>
+                      )}
+                      {filtreFiche === "toxo g" && (
+                        <>
+                          <td>
                             {element.document.data &&
-                              element.document.data.bw}{" "}
+                              element.document.data.toxoplasmose}
+                          </td>
+                          <td>
+                            {element.document.data &&
+                              verifieToxoplasmose(
+                                element.document.data.toxoplasmose
+                              )}
                           </td>
                         </>
                       )}
                       <td>
                         <div className="action">
                           <Link
-                            to={`/laboAM/B.P.O/modifier/${filtreFiche}/${element._id}`}
+                            to={`/laboAM/Sérologie/modifier/${filtreFiche}/${element._id}`}
                           >
                             <svg
                               xmlns="http://www.w3.org/2000/svg"
@@ -278,6 +251,7 @@ const TableBpo = () => {
                     </tr>
                   ))}
                 </tbody>
+
                 <Modal
                   isOpen={modalIsOpen}
                   onRequestClose={closeModal}
@@ -312,4 +286,4 @@ const TableBpo = () => {
   );
 };
 
-export default TableBpo;
+export default TableSerologie;

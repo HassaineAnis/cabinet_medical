@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import SearchBar from "../../../medecin/components/serchBar/SearchBar";
+
 import Pagination from "../../../admin/components/pagination/Pagination";
 import "../../../style/medecinStyle/consultation.css";
 import { Link, useNavigate, useParams } from "react-router-dom";
@@ -9,7 +9,7 @@ import Modal from "react-modal";
 import useModal from "../../../util/hooks/UseModal";
 
 const nombreElementPage = 6;
-const TableBpo = () => {
+const TableHematologie = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const navigation = () => {
@@ -18,14 +18,14 @@ const TableBpo = () => {
 
   const { modalIsOpen, openModal, closeModal } = useModal();
 
-  const [filtreFiche, setFiche] = useState("tp");
+  const [filtreFiche, setFiche] = useState("fibrinogene");
 
   const [data, setData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
 
   const [isLoading, setLoading] = useState(false);
-  //const [, setPatient] = useState([]);
+
   const [erreur, setErreur] = useState(false);
   const [patient, setPatient] = useState({});
 
@@ -42,8 +42,8 @@ const TableBpo = () => {
         setPatient(patient);
         const analyseFilter = analyses.filter(
           (element) =>
-            element.document.nom === filtreFiche &&
-            element.typeAnalyse === "B.P.O"
+            element.document.nom.toLowerCase() === filtreFiche &&
+            element.typeAnalyse === "hematologie"
         );
         setTotalPages(Math.ceil(analyseFilter.length / nombreElementPage));
         setData(analyseFilter);
@@ -76,12 +76,12 @@ const TableBpo = () => {
 
   return (
     <>
-      <h2>Liste des Analyse B.P.O</h2>{" "}
+      <h2>Liste des Analyse Hématologique</h2>{" "}
       <div className="consultation_table">
         <ToastContainer />
         <div className="consultation_table_btn">
           <Link
-            to={`/laboAM/B.P.O/ajouter/${filtreFiche}/${id}`}
+            to={`/laboAM/Hématologie/ajouter/${filtreFiche}/${id}`}
             className="btn_ajout"
             style={{
               textDecoration: "none",
@@ -107,7 +107,6 @@ const TableBpo = () => {
             </svg>
             Ajouter une analyse
           </Link>
-
           <div className="info_patient">
             <p>
               <span>Nom:</span> <span>{patient && patient.nom}</span>
@@ -129,10 +128,10 @@ const TableBpo = () => {
             onChange={(e) => setFiche(e.target.value)}
             value={filtreFiche}
           >
-            <option value="tp">TP</option>
-            <option value="gs">GS</option>
-            <option value="hiv">HIV HBS HCV</option>
-            <option value="b.p.o">BPO</option>
+            <option value="fibrinogene">Fibrinogene</option>
+            <option value="tp-tck">TP-TCK</option>
+            <option value="gs">Gs</option>
+            <option value="vitesse">Vitesse de Sedimentation</option>
           </select>
         </div>
         {isLoading ? (
@@ -145,18 +144,17 @@ const TableBpo = () => {
                   <tr className="table_entete">
                     <td>Date</td>
                     <td>Sérvice</td>
-                    {filtreFiche === "b.p.o" && (
+                    {filtreFiche === "fibrinogene" && (
                       <>
-                        <td>Glucose</td>
-                        <td>Uree</td>
-                        <td>Creatinemie</td>
+                        <td>Fibrinogene</td>
                       </>
                     )}
-                    {(filtreFiche === "tp" || filtreFiche === "b.p.o") && (
+
+                    {filtreFiche === "tp-tck" && (
                       <>
-                        <td>Temps de Prothrombine</td>
-                        <td>Taux{"(%)"}</td>
-                        <td>INR</td>
+                        <td>Temps de prothrombine (s)</td>
+                        <td>Taux (%)</td>
+                        <td>I.N.R</td>
 
                         <td>TCK</td>
                       </>
@@ -167,12 +165,13 @@ const TableBpo = () => {
                         <td>Rhésus</td>
                       </>
                     )}
-                    {filtreFiche === "hiv" && (
+
+                    {filtreFiche === "vitesse" && (
                       <>
-                        <td>HIV</td>
-                        <td>HBS</td>
-                        <td>HCV</td>
-                        <td>BW</td>
+                        <td>CRP</td>
+                        <td>ASLO</td>
+                        <td>LATEX</td>
+                        <td>W ROSE</td>
                       </>
                     )}
 
@@ -184,34 +183,26 @@ const TableBpo = () => {
                     <tr key={element._id}>
                       <td>{new Date(element.date).toLocaleDateString()}</td>
                       <td>{element.service}</td>
-                      {filtreFiche === "b.p.o" && (
-                        <>
-                          <td>
-                            {element.document.data &&
-                              element.document.data.glucose}
-                          </td>
-                          <td>
-                            {element.document.data &&
-                              element.document.data.uree}
-                          </td>
-                          <td>
-                            {element.document.data &&
-                              element.document.data.creatinimie}
-                          </td>
-                        </>
-                      )}
-
-                      {(filtreFiche === "tp" || filtreFiche === "b.p.o") && (
+                      {filtreFiche === "fibrinogene" && (
                         <>
                           <td>
                             {" "}
                             {element.document.data &&
-                              element.document.data.temps}
+                              element.document.data.fibrinogene}
+                          </td>
+                        </>
+                      )}
+                      {filtreFiche === "tp-tck" && (
+                        <>
+                          <td>
+                            {" "}
+                            {element.document.data &&
+                              element.document.data.tempProth}
                           </td>
                           <td>
+                            {" "}
                             {element.document.data &&
                               element.document.data.taux}
-                            {"(%)"}
                           </td>
                           <td>
                             {" "}
@@ -237,31 +228,34 @@ const TableBpo = () => {
                           </td>
                         </>
                       )}
-                      {filtreFiche === "hiv" && (
+
+                      {filtreFiche === "vitesse" && (
                         <>
                           <td>
                             {" "}
-                            {element.document.data && element.document.data.hiv}
-                          </td>
-                          <td>
-                            {" "}
-                            {element.document.data && element.document.data.hbs}
-                          </td>
-                          <td>
-                            {" "}
-                            {element.document.data && element.document.data.hcv}
+                            {element.document.data && element.document.data.crp}
                           </td>
                           <td>
                             {" "}
                             {element.document.data &&
-                              element.document.data.bw}{" "}
+                              element.document.data.aslo}
+                          </td>
+                          <td>
+                            {" "}
+                            {element.document.data &&
+                              element.document.data.latex}
+                          </td>
+                          <td>
+                            {" "}
+                            {element.document.data &&
+                              element.document.data.wrose}
                           </td>
                         </>
                       )}
                       <td>
                         <div className="action">
                           <Link
-                            to={`/laboAM/B.P.O/modifier/${filtreFiche}/${element._id}`}
+                            to={`/laboAM/Hématologie/modifier/${filtreFiche}/${element._id}`}
                           >
                             <svg
                               xmlns="http://www.w3.org/2000/svg"
@@ -312,4 +306,4 @@ const TableBpo = () => {
   );
 };
 
-export default TableBpo;
+export default TableHematologie;

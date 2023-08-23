@@ -1,10 +1,10 @@
+import React, { useContext } from "react";
 import logo from "../../../../assets/logo (1).png";
 import "../../../../style/laboAM/documentAM/tp.css";
-import React, { useContext } from "react";
 import { BpoContext } from "../../../../util/context/Context";
 
-const Gs = ({ reference, nom, prenom, adresse }) => {
-  const { date, gs, rhesus } = useContext(BpoContext);
+const Crp = ({ nom, prenom, sexe, age, reference }) => {
+  const { date, crp, service } = useContext(BpoContext);
   return (
     <div className="tp" ref={reference}>
       <div className="partie1_container">
@@ -15,9 +15,8 @@ const Gs = ({ reference, nom, prenom, adresse }) => {
           </h3>
           <img src={logo} alt="logo" />
         </div>
-        <h3 style={{ textAlign: "center" }}>CARTE DE GROUPE SANGUIN</h3>
+
         <div className="partie1">
-          {" "}
           <div className="infoPatient">
             <p>
               <span>
@@ -39,11 +38,30 @@ const Gs = ({ reference, nom, prenom, adresse }) => {
             </p>
             <p>
               <span>
-                <strong>Adresse</strong>
+                <strong>Sérvice</strong>
               </span>{" "}
               <span>
                 <strong>: </strong>
-                {adresse}
+                {service}
+              </span>
+            </p>
+            <p>
+              <span>
+                {" "}
+                <strong>Age</strong>
+              </span>{" "}
+              <span>
+                <strong>: </strong>
+                {age}
+              </span>
+            </p>{" "}
+            <p>
+              <span>
+                <strong>Sexe</strong>
+              </span>{" "}
+              <span>
+                <strong>: </strong>
+                {sexe}
               </span>
             </p>
           </div>
@@ -54,23 +72,15 @@ const Gs = ({ reference, nom, prenom, adresse }) => {
         </div>
       </div>
       <div className="partie2">
-        <div className="gsr">
-          <div className="gs">
-            <p>
-              <strong>Groupe Sanguin:</strong>
-            </p>
-            <p>
-              <strong>{gs}</strong>
-            </p>
-          </div>
-          <div className="rs">
-            <p>
-              <strong>Facteur Rhésus:</strong>
-            </p>
-            <p>
-              <strong>{rhesus}</strong>
-            </p>
-          </div>
+        <div style={{ display: "flex", alignSelf: "center", gap: "0.2rem" }}>
+          <p>
+            <strong>CRP:</strong>
+          </p>
+          <p>
+            <strong>......</strong>
+            {`  ${crp}`}
+            <strong>mg/l.</strong>
+          </p>
         </div>
 
         <div className="bas-page">
@@ -85,4 +95,4 @@ const Gs = ({ reference, nom, prenom, adresse }) => {
   );
 };
 
-export default Gs;
+export default Crp;

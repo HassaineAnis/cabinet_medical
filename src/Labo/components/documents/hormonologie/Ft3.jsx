@@ -1,10 +1,14 @@
+import React, { useContext } from "react";
 import logo from "../../../../assets/logo (1).png";
 import "../../../../style/laboAM/documentAM/tp.css";
-import React, { useContext } from "react";
 import { BpoContext } from "../../../../util/context/Context";
+const Ft3 = ({ reference, nom, prenom, age, sexe }) => {
+  const {
+    date,
+    ft3,
 
-const Gs = ({ reference, nom, prenom, adresse }) => {
-  const { date, gs, rhesus } = useContext(BpoContext);
+    service,
+  } = useContext(BpoContext);
   return (
     <div className="tp" ref={reference}>
       <div className="partie1_container">
@@ -15,9 +19,8 @@ const Gs = ({ reference, nom, prenom, adresse }) => {
           </h3>
           <img src={logo} alt="logo" />
         </div>
-        <h3 style={{ textAlign: "center" }}>CARTE DE GROUPE SANGUIN</h3>
+
         <div className="partie1">
-          {" "}
           <div className="infoPatient">
             <p>
               <span>
@@ -39,11 +42,28 @@ const Gs = ({ reference, nom, prenom, adresse }) => {
             </p>
             <p>
               <span>
-                <strong>Adresse</strong>
+                <strong>Sérvice</strong>
               </span>{" "}
               <span>
                 <strong>: </strong>
-                {adresse}
+                {service}
+              </span>
+            </p>
+            <p>
+              <span>
+                {" "}
+                <strong>Age</strong>
+              </span>{" "}
+              <span>
+                <strong>: </strong> {age}
+              </span>
+            </p>{" "}
+            <p>
+              <span>
+                <strong>Sexe</strong>
+              </span>{" "}
+              <span>
+                <strong>: </strong> {sexe}
               </span>
             </p>
           </div>
@@ -54,22 +74,26 @@ const Gs = ({ reference, nom, prenom, adresse }) => {
         </div>
       </div>
       <div className="partie2">
-        <div className="gsr">
-          <div className="gs">
-            <p>
-              <strong>Groupe Sanguin:</strong>
+        <div
+          style={{
+            alignSelf: "center",
+            display: "flex",
+            flexDirection: "column",
+            gap: "1rem",
+          }}
+        >
+          <div style={{ display: "flex", gap: "0.5rem" }}>
+            <p style={{ margin: "0" }}>
+              <strong>Dosage De L'hormone Triiodothyronine Libre:(F-T3)</strong>
             </p>
-            <p>
-              <strong>{gs}</strong>
+            <p style={{ margin: "0" }}>
+              {"....."}
+              <strong>{`${ft3} `} pmol/l.</strong>
             </p>
           </div>
-          <div className="rs">
-            <p>
-              <strong>Facteur Rhésus:</strong>
-            </p>
-            <p>
-              <strong>{rhesus}</strong>
-            </p>
+          <div style={{ display: "flex", height: "3rem" }}>
+            {" "}
+            <span>Valeurs Usuelles : 4 - 8.3 pmo/l.</span>
           </div>
         </div>
 
@@ -85,4 +109,4 @@ const Gs = ({ reference, nom, prenom, adresse }) => {
   );
 };
 
-export default Gs;
+export default Ft3;

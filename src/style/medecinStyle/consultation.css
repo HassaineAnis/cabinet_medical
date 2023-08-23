@@ -1,5 +1,5 @@
 .consultation {
-  background-color: #F4F5FA;
+  background-color: #f4f5fa;
   grid-column: 1/7;
   grid-row: 2/7;
   height: -moz-max-content;
@@ -30,6 +30,25 @@
   display: flex;
   justify-content: space-between;
 }
+.consultation .consultation__container .consultation_table .consultation_table_btn .info_patient {
+  display: flex;
+  gap: 1.5rem;
+  background-color: #fff;
+  padding: 0 1rem;
+  border-radius: 4px;
+  box-shadow: 0px 0px 19px 1px rgba(0, 0, 0, 0.3);
+}
+.consultation .consultation__container .consultation_table .consultation_table_btn .info_patient p span:nth-child(1) {
+  font-weight: 700;
+  font-size: large;
+  text-decoration: underline;
+  color: darkgreen;
+}
+.consultation .consultation__container .consultation_table .consultation_table_btn .info_patient p span:nth-child(2) {
+  font-weight: 600;
+  font-size: medium;
+  text-transform: capitalize;
+}
 .consultation .consultation__container .consultation_table .consultation_table_btn .btn_archive {
   display: flex;
   justify-content: center;
@@ -41,7 +60,7 @@
   padding: 5px 15px;
 }
 .consultation .consultation__container .consultation_table .consultation_table_btn .btn_archive svg {
-  fill: #FFF;
+  fill: #fff;
 }
 .consultation .consultation__container .consultation_table .consultation_table_btn .btn_archive:hover {
   filter: brightness(80%);
@@ -54,7 +73,7 @@
   font: inherit;
   cursor: pointer;
   background-color: darkgreen;
-  color: #FFF;
+  color: #fff;
   border-radius: 5px;
   border: 0;
   padding: 0.4rem;
@@ -83,7 +102,7 @@
 }
 .consultation .consultation__container .consultation_table .consultation_table__content {
   box-shadow: 0px 2px 10px 0px rgba(58, 53, 65, 0.1);
-  background-color: #FFF;
+  background-color: #fff;
   animation: table 300ms ease;
 }
 .consultation .consultation__container .consultation_table .consultation_table__content .table {
@@ -119,4 +138,18 @@
 }
 .consultation .consultation__container .consultation_table .consultation_table__content .table tbody tr td .action svg {
   cursor: pointer;
+}
+.consultation .consultation__container .consultation_table .btn_retour {
+  color: #fff;
+  background-color: darkred;
+  border: 0;
+  width: 6rem;
+  padding: 8px 16px;
+  font-size: 1rem;
+  letter-spacing: 1px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.consultation .consultation__container .consultation_table .btn_retour:hover {
+  filter: brightness(80%);
 }/*# sourceMappingURL=consultation.css.map */

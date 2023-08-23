@@ -2,16 +2,10 @@ import React, { useContext } from "react";
 import logo from "../../../../assets/logo (1).png";
 import "../../../../style/laboAM/documentAM/tp.css";
 import { BpoContext } from "../../../../util/context/Context";
-function Hiv({ reference, nom, prenom, sexe, age }) {
-  const {
-    date,
 
-    service,
-    hiv,
-    hbs,
-    hcv,
-    bw,
-  } = useContext(BpoContext);
+const ProlE2 = ({ reference, nom, prenom, age, sexe }) => {
+  const { date, service, prolactine, oestradiol } = useContext(BpoContext);
+
   return (
     <div className="tp" ref={reference}>
       <div className="partie1_container">
@@ -45,9 +39,8 @@ function Hiv({ reference, nom, prenom, sexe, age }) {
             </p>
             <p>
               <span>
-                <strong>Sérvice </strong>
-              </span>
-
+                <strong>Sérvice</strong>
+              </span>{" "}
               <span>
                 <strong>: </strong>
                 {service}
@@ -80,32 +73,65 @@ function Hiv({ reference, nom, prenom, sexe, age }) {
         </div>
       </div>
       <div className="partie2">
-        <div className="liste">
-          <dis className="liste_container">
-            <p style={{ marginBottom: "1rem" }}>
-              <strong>
-                <span style={{ textDecoration: "underline" }}>HGPO</span>
-              </strong>
-              :(Hyperglycémie provoqué pas voie orale)
+        <div
+          style={{
+            alignSelf: "center",
+            display: "flex",
+            flexDirection: "column",
+            gap: "1rem",
+          }}
+        >
+          <div style={{ display: "flex", gap: "0.5rem" }}>
+            <p style={{ margin: "0" }}>
+              <strong>Dosage De La Prolactine</strong>
             </p>
-            <p className="point">
-              <strong>HIV :</strong>
-              {` ${hiv}`}
+            <p style={{ margin: "0" }}>
+              <strong>..........</strong>
+              <strong>{`${prolactine} `} ng/ml.</strong>
             </p>
-            <p className="point">
-              <strong>HBS :</strong>
-              {` ${hbs}`}
+          </div>
+          <p style={{ margin: "0", width: "fitContent", textAlign: "center" }}>
+            Valeur Usuelles : 4.79 - 23.63
+          </p>
+          <div style={{ display: "flex", gap: "0.5rem" }}>
+            <p style={{ margin: "0" }}>
+              <strong>Dosage De L'oestradiole</strong>
             </p>
-            <p className="point">
-              <strong>HCV :</strong>
-              {` ${hcv}`}
+            <p style={{ margin: "0" }}>
+              <strong>..........</strong>
+              <strong>{`${oestradiol} `} pg/ml.</strong>
             </p>
-            <p className="point">
-              <strong>BW :</strong>
-              {` ${bw}`}
-            </p>
-          </dis>
+          </div>
         </div>
+        <span style={{ textDecoration: "underline" }}>Valeur usuelles:</span>
+        <table className="table1">
+          <thead></thead>
+          <tbody>
+            <tr>
+              <td rowSpan={4}>Femme</td>
+              <td>Phase Folliculaire</td>
+
+              <td>12.5 - 166</td>
+            </tr>
+            <tr>
+              <td>Phase Ovulatoire</td>
+              <td>85.5 - 498</td>
+            </tr>
+            <tr>
+              <td>Phase Luteale</td>
+              <td>43.8 - 211</td>
+            </tr>
+            <tr>
+              <td>Post Menopause</td>
+              <td>5 - 54.7</td>
+            </tr>
+            <tr>
+              <td>Homme</td>
+              <td>/</td>
+              <td>7.6 - 43</td>
+            </tr>
+          </tbody>
+        </table>
 
         <div className="bas-page">
           <hr className="no_print" />
@@ -117,6 +143,6 @@ function Hiv({ reference, nom, prenom, sexe, age }) {
       </div>
     </div>
   );
-}
+};
 
-export default Hiv;
+export default ProlE2;

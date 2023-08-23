@@ -1,16 +1,14 @@
 import React, { useRef, useState, useEffect } from "react";
 import "../../../style/medecinStyle/ajout/ajouterIntervension.css";
 import { useParams } from "react-router-dom";
-import FormulaireTp from "./FormBpo/FormulaireTp";
-import FormulaireGs from "./FormBpo/FormulaireGs";
-import FormulaireHiv from "./FormBpo/FormulaireHiv";
+
 import Tp from "../documents/BPO/Tp";
 import { useReactToPrint } from "react-to-print";
 import Hiv from "../documents/BPO/Hiv";
 import Gs from "../documents/BPO/Gs";
-import FormulaireBpo from "./FormBpo/FormulaireBpo";
+import FormulaireBpo from "../modifier/FormulaireBpo";
 import Bpo from "../documents/BPO/Bpo";
-import FormulaireHgpo from "./FormBiochimie/FormulaireHgpo";
+import FormulaireBiochimie from "../modifier/FormulaireBiochimie";
 import Hgpo from "../documents/Biochimie/Hgpo";
 import Fer from "../documents/Biochimie/Fer";
 import Crp from "../documents/Biochimie/Crp";
@@ -18,14 +16,14 @@ import Proteinurie from "../documents/Biochimie/Proteinurie";
 import Bilirubine from "../documents/Biochimie/Bilirubine";
 import Caluim from "../documents/Biochimie/Caluim";
 import Fibrinogene from "../documents/hematologie/fibrinogene";
-import FormulaireHematologie from "./FormHematologie/FormulaireHematologie";
+import FormulaireHematologie from "./FormulaireHematologie";
 import VitesseS from "../documents/hematologie/VitesseS";
-import FormulaireSerologie from "./FormSerologie/FormulaireSerologie";
+
 import Toxo from "../documents/Serologie/Toxo";
 import HivSerologie from "../documents/Serologie/HivSerologie";
 import MiniVidas from "../documents/Serologie/MiniVidas";
 import Rubeole from "../documents/hormonologie/Rubeole";
-import FormulaireHormo from "./FormHormonologie/FormulaireHormo";
+import FormulaireHormonologie from "../modifier/FormulaireHormonologie";
 import Tsh from "../documents/hormonologie/Tsh";
 import Ft4 from "../documents/hormonologie/Ft4";
 import Ft3 from "../documents/hormonologie/Ft3";
@@ -33,26 +31,27 @@ import VitamineD from "../documents/hormonologie/VitamineD";
 import Psat from "../documents/hormonologie/Psat";
 import { ToastContainer } from "react-toastify";
 import "../../../style/loader/loader.css";
-import Ferritine from "../documents/hormonologie/Ferritine";
 import ProlE2 from "../documents/hormonologie/ProlE2";
 import Hcg from "../documents/hormonologie/Hcg";
-const AjouterAnalyse = ({ typeDocument }) => {
+import FormulaireSerologie from "./FormulaireSerologie";
+
+const ModifierAnalyse = ({ typeDocument }) => {
   const { id } = useParams();
   const [isLoading, setLoading] = useState(false);
-  const [patient, setPatient] = useState({});
+  const [analyse, setAnalyse] = useState({});
   const [erreur, setErreur] = useState(false);
-
+  console.log("modifer...doc", typeDocument);
   useEffect(() => {
     const fetchRdv = async () => {
       setLoading(true);
       try {
         const response = await fetch(
-          `http://localhost:3000/api/Patient/details/${id}`
+          `http://localhost:3000/api/analyse/details/${id}`
         );
 
-        const patient = await response.json();
+        const analyse = await response.json();
 
-        setPatient(patient);
+        setAnalyse(analyse);
       } catch (e) {
         console.log("erreur!!!", e);
         setErreur(true);
@@ -67,18 +66,10 @@ const AjouterAnalyse = ({ typeDocument }) => {
   const composantImprimable = useRef(null);
 
   const choiForm = (doc) => {
-    if (doc === "tp") {
-      return <FormulaireTp id={id} imprimer={handlePrint} />;
+    if (doc === "b.p.o" || doc === "tp" || doc === "gs" || doc === "hiv") {
+      return <FormulaireBpo type={typeDocument} imprimer={handlePrint} />;
     }
-    if (doc === "gs") {
-      return <FormulaireGs id={id} imprimer={handlePrint} />;
-    }
-    if (doc === "hiv") {
-      return <FormulaireHiv id={id} imprimer={handlePrint} />;
-    }
-    if (doc === "b.p.o") {
-      return <FormulaireBpo id={id} imprimer={handlePrint} />;
-    }
+
     if (
       doc === "hgpo" ||
       doc === "fer serrique" ||
@@ -87,9 +78,7 @@ const AjouterAnalyse = ({ typeDocument }) => {
       doc === "bilirubine" ||
       doc === "calcuim"
     ) {
-      return (
-        <FormulaireHgpo id={id} imprimer={handlePrint} type={typeDocument} />
-      );
+      return <FormulaireBiochimie imprimer={handlePrint} type={typeDocument} />;
     }
 
     if (
@@ -99,21 +88,11 @@ const AjouterAnalyse = ({ typeDocument }) => {
       doc === "Gs"
     ) {
       return (
-        <FormulaireHematologie
-          id={id}
-          imprimer={handlePrint}
-          type={typeDocument}
-        />
+        <FormulaireHematologie imprimer={handlePrint} type={typeDocument} />
       );
     }
     if (doc === "toxo g" || doc === "mini vidas" || doc === "Hiv") {
-      return (
-        <FormulaireSerologie
-          id={id}
-          imprimer={handlePrint}
-          type={typeDocument}
-        />
-      );
+      return <FormulaireSerologie imprimer={handlePrint} type={typeDocument} />;
     }
     if (
       doc === "rubeole" ||
@@ -128,7 +107,7 @@ const AjouterAnalyse = ({ typeDocument }) => {
       doc === "hcg"
     ) {
       return (
-        <FormulaireHormo id={id} imprimer={handlePrint} type={typeDocument} />
+        <FormulaireHormonologie imprimer={handlePrint} type={typeDocument} />
       );
     }
   };
@@ -367,17 +346,6 @@ const AjouterAnalyse = ({ typeDocument }) => {
         />
       );
     }
-    if (doc === "ferritine") {
-      return (
-        <Ferritine
-          nom={nom}
-          prenom={prenom}
-          age={age}
-          sexe={sexe}
-          reference={composantImprimable}
-        />
-      );
-    }
     if (doc === "prolE2") {
       return (
         <ProlE2
@@ -404,18 +372,6 @@ const AjouterAnalyse = ({ typeDocument }) => {
   const handlePrint = useReactToPrint({
     content: () => composantImprimable.current,
   });
-  console.log(
-    choiDoc(
-      typeDocument,
-      patient.nom,
-      patient.prenom,
-      patient.age,
-      patient.adresse,
-      patient.sexe
-    ),
-    "",
-    typeDocument
-  );
   return (
     <>
       <ToastContainer />
@@ -427,11 +383,11 @@ const AjouterAnalyse = ({ typeDocument }) => {
           <div className="section1">
             {choiDoc(
               typeDocument,
-              patient.nom,
-              patient.prenom,
-              patient.age,
-              patient.adresse,
-              patient.sexe
+              analyse.patient && analyse.patient.nom,
+              analyse.patient && analyse.patient.prenom,
+              analyse.patient && analyse.patient.age,
+              analyse.patient && analyse.patient.adresse,
+              analyse.patient && analyse.patient.sexe
             )}
           </div>
           <div className="formulaire">
@@ -448,4 +404,4 @@ const AjouterAnalyse = ({ typeDocument }) => {
   );
 };
 
-export default AjouterAnalyse;
+export default ModifierAnalyse;
