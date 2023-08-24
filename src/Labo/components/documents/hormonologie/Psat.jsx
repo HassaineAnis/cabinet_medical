@@ -3,7 +3,7 @@ import React from "react";
 import logo from "../../../../assets/logo (1).png";
 import "../../../../style/laboAM/documentAM/tp.css";
 import { BpoContext } from "../../../../util/context/Context";
-const Psat = ({ reference, nom, prenom, age, sexe }) => {
+const Psat = ({ reference, nom, prenom, age, sexe, data, dateService }) => {
   const {
     date,
     psat,
@@ -50,7 +50,7 @@ const Psat = ({ reference, nom, prenom, age, sexe }) => {
               </span>{" "}
               <span>
                 <strong>: </strong>
-                {service}
+                {dateService ? dateService.service : service}
               </span>
             </p>
             <p>
@@ -73,7 +73,12 @@ const Psat = ({ reference, nom, prenom, age, sexe }) => {
           </div>
           <p>
             <strong>DBK LE :</strong>{" "}
-            <span>{date && new Date(date).toLocaleDateString()}</span>
+            <span>
+              {" "}
+              {dateService
+                ? new Date(dateService.date).toLocaleDateString()
+                : date && new Date(date).toLocaleDateString()}
+            </span>
           </p>
         </div>
       </div>
@@ -90,7 +95,7 @@ const Psat = ({ reference, nom, prenom, age, sexe }) => {
 
             <p style={{ margin: "0" }}>
               <strong>......</strong>
-              {`${psat} `}
+              {`${data ? data.psat : psat} `}
               <strong>ng/ml.</strong>
             </p>
           </div>
@@ -153,7 +158,7 @@ const Psat = ({ reference, nom, prenom, age, sexe }) => {
 
             <p style={{ margin: "0" }}>
               <strong>......</strong>
-              {`${inograme} `}
+              {`${data ? data.inograme : inograme} `}
               <strong>ng/ml.</strong>
             </p>
           </div>
@@ -171,14 +176,14 @@ const Psat = ({ reference, nom, prenom, age, sexe }) => {
               <td>
                 <strong>Na+</strong>{" "}
               </td>
-              <td>{na}</td>
+              <td>{data ? data.na : na}</td>
               <td>135 - 148 Mmol/l</td>
             </tr>
             <tr>
               <td>
                 <strong>K+</strong>{" "}
               </td>
-              <td>{k}</td>
+              <td>{data ? data.k : k}</td>
               <td>3.5 - 5.3 Mmol/l</td>
             </tr>
           </tbody>

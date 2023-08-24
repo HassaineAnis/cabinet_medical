@@ -3,7 +3,7 @@ import logo from "../../../../assets/logo (1).png";
 import "../../../../style/laboAM/documentAM/tp.css";
 import { BpoContext } from "../../../../util/context/Context";
 
-const Bilirubine = ({ reference, nom, prenom, age, sexe }) => {
+const Bilirubine = ({ reference, nom, prenom, age, sexe, data, dateDoc }) => {
   const {
     date,
     bilirubineSangT,
@@ -75,7 +75,12 @@ const Bilirubine = ({ reference, nom, prenom, age, sexe }) => {
           </div>
           <p>
             <strong>DBK LE :</strong>{" "}
-            <span>{date && new Date(date).toLocaleDateString()}</span>
+            <span>
+              {" "}
+              {dateDoc
+                ? new Date(dateDoc).toLocaleDateString()
+                : date && new Date(date).toLocaleDateString()}
+            </span>
           </p>
         </div>
       </div>
@@ -105,22 +110,22 @@ const Bilirubine = ({ reference, nom, prenom, age, sexe }) => {
               <td>
                 <strong>Bilirubine T</strong>
               </td>
-              <td>{bilirubineSangT}</td>
+              <td>{data ? data.bilirubineSangT : bilirubineSangT}</td>
               <td>
                 <strong>{"< à 10 mg/l"}</strong>
               </td>
-              <td>{bilirubineUrineT}</td>
+              <td>{data ? data.bilirubineUrineT : bilirubineUrineT}</td>
               <td>.....</td>
             </tr>
             <tr>
               <td>
                 <strong>Bilirubine D</strong>
               </td>
-              <td> {bilirubineSangD}</td>
+              <td> {data ? data.bilirubineSangD : bilirubineSangD}</td>
               <td>
                 <strong>{"< à 2.5 mg/l"}</strong>
               </td>
-              <td>{bilirubineUrineD}</td>
+              <td>{data ? data.bilirubineUrineD : bilirubineUrineD}</td>
               <td>........</td>
             </tr>
             {/* Ajoutez plus de lignes selon vos besoins */}
@@ -148,7 +153,7 @@ const Bilirubine = ({ reference, nom, prenom, age, sexe }) => {
                 <strong>Calcuim</strong>
               </td>
               <td>
-                <strong>{calcuim}</strong>
+                <strong>{data ? data.calcuim : calcuim}</strong>
               </td>
               <td>
                 <strong>85.0 - 105 mg/l</strong>
@@ -161,20 +166,20 @@ const Bilirubine = ({ reference, nom, prenom, age, sexe }) => {
             <span>
               <strong>CRP( Protéine C-Réactive) :</strong>
             </span>{" "}
-            <span>{`${crp}`}.</span>
+            <span>{`${data ? data.crp : crp}`}.</span>
           </p>
           <p>
             <span>
               <strong>Test De Coombs :</strong>
             </span>{" "}
-            <span>{`${coombs}`}.</span>
+            <span>{`${data ? data.coombs : coombs}`}.</span>
           </p>
           <p>
             <span>
               {" "}
               <strong>RAI (Recherche d'agglutinines irrégulières) :</strong>
             </span>
-            <span>{`${rai}`}</span>
+            <span>{`${data ? data.rai : rai}`}</span>
           </p>
         </div>
         <div className="bas-page">

@@ -3,7 +3,15 @@ import logo from "../../../../assets/logo (1).png";
 import "../../../../style/laboAM/documentAM/tp.css";
 import { BpoContext } from "../../../../util/context/Context";
 
-const Ferritine = ({ reference, nom, prenom, age, sexe }) => {
+const Ferritine = ({
+  reference,
+  nom,
+  prenom,
+  age,
+  sexe,
+  data,
+  dateService,
+}) => {
   const { date, ferSerrique, service, ferritine } = useContext(BpoContext);
   return (
     <div className="tp" ref={reference}>
@@ -41,7 +49,7 @@ const Ferritine = ({ reference, nom, prenom, age, sexe }) => {
               </span>{" "}
               <span>
                 <strong>: </strong>
-                {service}
+                {dateService ? dateService.service : service}
               </span>
             </p>
             <p>
@@ -65,7 +73,12 @@ const Ferritine = ({ reference, nom, prenom, age, sexe }) => {
           </div>
           <p>
             <strong>DBK LE :</strong>{" "}
-            <span>{date && new Date(date).toLocaleDateString()}</span>
+            <span>
+              {" "}
+              {dateService
+                ? new Date(dateService.date).toLocaleDateString()
+                : date && new Date(date).toLocaleDateString()}
+            </span>
           </p>
         </div>
       </div>
@@ -90,7 +103,7 @@ const Ferritine = ({ reference, nom, prenom, age, sexe }) => {
               <td>
                 <strong>Ferritine</strong>
               </td>
-              <td>{`${ferritine}`}</td>
+              <td>{`${data ? data.ferSerrique : ferritine}`}</td>
 
               <td>
                 <strong>20 - 150 ng/ml</strong>
@@ -101,7 +114,7 @@ const Ferritine = ({ reference, nom, prenom, age, sexe }) => {
                 <strong>Fer Serrique</strong>
               </td>
               <td>
-                <strong>{ferSerrique}</strong>
+                <strong>{data ? data.ferSerrique : ferSerrique}</strong>
               </td>
               <td>
                 <div

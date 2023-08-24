@@ -2,7 +2,15 @@ import React, { useContext } from "react";
 import logo from "../../../../assets/logo (1).png";
 import "../../../../style/laboAM/documentAM/tp.css";
 import { BpoContext } from "../../../../util/context/Context";
-const MiniVidas = ({ reference, nom, prenom, sexe, age }) => {
+const MiniVidas = ({
+  reference,
+  nom,
+  prenom,
+  sexe,
+  age,
+  data,
+  dateService,
+}) => {
   const {
     date,
     ft4,
@@ -47,7 +55,7 @@ const MiniVidas = ({ reference, nom, prenom, sexe, age }) => {
               </span>{" "}
               <span>
                 <strong>: </strong>
-                {service}
+                {dateService ? dateService.service : service}
               </span>
             </p>
             <p>
@@ -72,7 +80,12 @@ const MiniVidas = ({ reference, nom, prenom, sexe, age }) => {
           </div>
           <p>
             <strong>DBK LE :</strong>{" "}
-            <span>{date && new Date(date).toLocaleDateString()}</span>
+            <span>
+              {" "}
+              {dateService
+                ? new Date(dateService.date).toLocaleDateString()
+                : date && new Date(date).toLocaleDateString()}
+            </span>
           </p>
         </div>
       </div>
@@ -91,7 +104,7 @@ const MiniVidas = ({ reference, nom, prenom, sexe, age }) => {
             </p>
             <p style={{ margin: "0" }}>
               <strong>....</strong>
-              {`${tsh}`}
+              {`${data ? data.tsh : tsh}`}
               <strong>uUI/ml.</strong>
             </p>
           </div>
@@ -108,7 +121,7 @@ const MiniVidas = ({ reference, nom, prenom, sexe, age }) => {
             </p>
             <p style={{ margin: "0" }}>
               <strong>....</strong>
-              {`${ft4}`}
+              {`${data ? data.ft4 : ft4}`}
               <strong>pmol/l.</strong>
             </p>
           </div>
@@ -122,7 +135,7 @@ const MiniVidas = ({ reference, nom, prenom, sexe, age }) => {
             </p>
             <p style={{ margin: "0" }}>
               <strong>....</strong>
-              {`${ft3}`}
+              {`${data ? data.ft3 : ft3}`}
               <strong>pmol/l.</strong>
             </p>
           </div>

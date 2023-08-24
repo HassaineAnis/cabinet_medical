@@ -3,7 +3,7 @@ import logo from "../../../../assets/logo (1).png";
 import "../../../../style/laboAM/documentAM/tp.css";
 import { BpoContext } from "../../../../util/context/Context";
 
-const Crp = ({ nom, prenom, sexe, age, reference }) => {
+const Crp = ({ nom, prenom, sexe, age, reference, data, dateDoc }) => {
   const { date, crp, service } = useContext(BpoContext);
   return (
     <div className="tp" ref={reference}>
@@ -67,7 +67,11 @@ const Crp = ({ nom, prenom, sexe, age, reference }) => {
           </div>
           <p>
             <strong>DBK LE :</strong>{" "}
-            <span>{date && new Date(date).toLocaleDateString()}</span>
+            <span>
+              {dateDoc
+                ? new Date(dateDoc).toLocaleDateString()
+                : date && new Date(date).toLocaleDateString()}
+            </span>
           </p>
         </div>
       </div>
@@ -78,7 +82,7 @@ const Crp = ({ nom, prenom, sexe, age, reference }) => {
           </p>
           <p>
             <strong>......</strong>
-            {`  ${crp}`}
+            {`  ${data ? data.crp : crp}`}
             <strong>mg/l.</strong>
           </p>
         </div>

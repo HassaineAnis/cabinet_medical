@@ -3,7 +3,7 @@ import logo from "../../../../assets/logo (1).png";
 import "../../../../style/laboAM/documentAM/tp.css";
 import { BpoContext } from "../../../../util/context/Context";
 
-const Fer = ({ reference, nom, prenom, age, sexe }) => {
+const Fer = ({ reference, nom, prenom, age, sexe, data, dateDoc }) => {
   const { date, ferSerrique, service } = useContext(BpoContext);
   return (
     <div className="tp" ref={reference}>
@@ -65,7 +65,12 @@ const Fer = ({ reference, nom, prenom, age, sexe }) => {
           </div>
           <p>
             <strong>DBK LE :</strong>{" "}
-            <span>{date && new Date(date).toLocaleDateString()}</span>
+            <span>
+              {" "}
+              {dateDoc
+                ? new Date(dateDoc).toLocaleDateString()
+                : date && new Date(date).toLocaleDateString()}
+            </span>
           </p>
         </div>
       </div>
@@ -91,7 +96,7 @@ const Fer = ({ reference, nom, prenom, age, sexe }) => {
                 <strong>Fer Serrique</strong>
               </td>
               <td>
-                <strong>{ferSerrique}</strong>
+                <strong>{data ? data.ferSerrique : ferSerrique}</strong>
               </td>
               <td>
                 <div

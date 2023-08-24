@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import logo from "../../../../assets/logo (1).png";
 import "../../../../style/laboAM/documentAM/tp.css";
 import { BpoContext } from "../../../../util/context/Context";
-const Tsh = ({ reference, nom, prenom, sexe, age }) => {
+const Tsh = ({ reference, nom, prenom, sexe, age, data, dateService }) => {
   const { date, tsh, service } = useContext(BpoContext);
   return (
     <div className="tp" ref={reference}>
@@ -41,7 +41,7 @@ const Tsh = ({ reference, nom, prenom, sexe, age }) => {
               </span>{" "}
               <span>
                 <strong>: </strong>
-                {service}
+                {dateService ? dateService.service : service}
               </span>
             </p>
             <p>
@@ -66,7 +66,12 @@ const Tsh = ({ reference, nom, prenom, sexe, age }) => {
           </div>
           <p>
             <strong>DBK LE :</strong>{" "}
-            <span>{date && new Date(date).toLocaleDateString()}</span>
+            <span>
+              {" "}
+              {dateService
+                ? new Date(dateService.date).toLocaleDateString()
+                : date && new Date(date).toLocaleDateString()}
+            </span>
           </p>
         </div>
       </div>
@@ -85,7 +90,7 @@ const Tsh = ({ reference, nom, prenom, sexe, age }) => {
             </p>
             <p style={{ margin: "0" }}>
               {"....."}
-              <strong>{`${tsh}`} uUI/ml.</strong>
+              <strong>{`${data ? data.tsh : tsh}`} uUI/ml.</strong>
             </p>
           </div>
           <div style={{ display: "flex", height: "3rem" }}>

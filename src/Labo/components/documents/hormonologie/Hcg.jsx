@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import logo from "../../../../assets/logo (1).png";
 import "../../../../style/laboAM/documentAM/tp.css";
 import { BpoContext } from "../../../../util/context/Context";
-const Hcg = ({ reference, nom, prenom, age, sexe }) => {
+const Hcg = ({ reference, nom, prenom, age, sexe, data, dateService }) => {
   const { date, seuilSensibilite, hcg, service } = useContext(BpoContext);
   return (
     <div className="tp" ref={reference}>
@@ -41,7 +41,7 @@ const Hcg = ({ reference, nom, prenom, age, sexe }) => {
               </span>{" "}
               <span>
                 <strong>: </strong>
-                {service}
+                {dateService ? dateService.service : service}
               </span>
             </p>
             <p>
@@ -64,7 +64,12 @@ const Hcg = ({ reference, nom, prenom, age, sexe }) => {
           </div>
           <p>
             <strong>DBK LE :</strong>{" "}
-            <span>{date && new Date(date).toLocaleDateString()}</span>
+            <span>
+              {" "}
+              {dateService
+                ? new Date(dateService.date).toLocaleDateString()
+                : date && new Date(date).toLocaleDateString()}
+            </span>
           </p>
         </div>
       </div>
@@ -83,7 +88,7 @@ const Hcg = ({ reference, nom, prenom, age, sexe }) => {
             </p>
             <p style={{ margin: "0" }}>
               <strong>.............</strong>
-              <strong>{`${hcg} `}.</strong>
+              <strong>{`${data ? data.hcg : hcg} `}.</strong>
             </p>
           </div>
         </div>
@@ -221,11 +226,13 @@ const Hcg = ({ reference, nom, prenom, age, sexe }) => {
 
         <div style={{ display: "flex", gap: "0.5rem", marginTop: "2rem" }}>
           <p style={{ margin: "0" }}>
-            <strong>BHCG:</strong>
+            <strong>Seuil De Sensibilité:</strong>
           </p>
           <p style={{ margin: "0" }}>
             <strong>......</strong>
-            <strong>{`${seuilSensibilite} `} UI/L.</strong>
+            <strong>
+              {`${data ? data.seuilSensibilite : seuilSensibilite} `} UI/L.
+            </strong>
           </p>
         </div>
 

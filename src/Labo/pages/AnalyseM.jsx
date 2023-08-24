@@ -3,14 +3,17 @@ import { ListeAnalyse } from "../../data/laboAM/Cards";
 import "../../style/laboAM/analyseM.css";
 import AnalyseCard from "../components/cards/AnalyseCard";
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import "../../style/loader/loader.css";
 const AnalyseM = () => {
   const { id } = useParams();
   const [isLoading, setLoading] = useState(false);
   const [patient, setPatient] = useState({});
   const [erreur, setErreur] = useState(false);
-
+  const navigate = useNavigate();
+  const navigation = () => {
+    navigate(-1);
+  };
   useEffect(() => {
     const fetchRdv = async () => {
       setLoading(true);
@@ -44,10 +47,24 @@ const AnalyseM = () => {
         <div className="spinner"></div>
       ) : (
         <>
-          <p>
-            <strong>Patient : </strong>{" "}
-            <span>{`${patient.nom} ${patient.prenom}`} </span>
-          </p>
+          <div className="infoPatient">
+            <div className="info_patient">
+              <p>
+                <span>Nom:</span> <span>{patient && patient.nom}</span>
+              </p>
+              <p>
+                <span>Prénom:</span> <span>{patient && patient.prenom}</span>
+              </p>
+              <p>
+                <span>Sexe:</span> <span>{patient && patient.sexe}</span>
+              </p>
+              <p>
+                <span>Age:</span> <span>{patient && patient.age}</span>
+              </p>
+            </div>
+            <button onClick={navigation}>Retour</button>
+          </div>
+
           <div className="analyse_items">
             {ListeAnalyse.map((card, index) => (
               <AnalyseCard

@@ -3,7 +3,7 @@ import "../../../../style/laboAM/documentAM/tp.css";
 import React, { useContext } from "react";
 import { BpoContext } from "../../../../util/context/Context";
 
-const Gs = ({ reference, nom, prenom, adresse }) => {
+const Gs = ({ reference, nom, prenom, adresse, data, dateService }) => {
   const { date, gs, rhesus } = useContext(BpoContext);
   return (
     <div className="tp" ref={reference}>
@@ -49,7 +49,12 @@ const Gs = ({ reference, nom, prenom, adresse }) => {
           </div>
           <p>
             <strong>DBK LE :</strong>{" "}
-            <span>{date && new Date(date).toLocaleDateString()}</span>
+            <span>
+              {" "}
+              {dateService
+                ? new Date(dateService.date).toLocaleDateString()
+                : date && new Date(date).toLocaleDateString()}
+            </span>
           </p>
         </div>
       </div>
@@ -60,7 +65,7 @@ const Gs = ({ reference, nom, prenom, adresse }) => {
               <strong>Groupe Sanguin:</strong>
             </p>
             <p>
-              <strong>{gs}</strong>
+              <strong>{data ? data.gs : gs}</strong>
             </p>
           </div>
           <div className="rs">
@@ -68,7 +73,7 @@ const Gs = ({ reference, nom, prenom, adresse }) => {
               <strong>Facteur Rhésus:</strong>
             </p>
             <p>
-              <strong>{rhesus}</strong>
+              <strong>{data ? data.rhesus : rhesus}</strong>
             </p>
           </div>
         </div>

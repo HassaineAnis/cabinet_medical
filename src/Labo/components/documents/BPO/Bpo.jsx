@@ -4,7 +4,7 @@ import logo from "../../../../assets/logo (1).png";
 import "../../../../style/laboAM/documentAM/tp.css";
 import { BpoContext } from "../../../../util/context/Context";
 
-const Bpo = ({ reference, nom, prenom, age, sexe }) => {
+const Bpo = ({ reference, nom, prenom, age, sexe, data, dateService }) => {
   const {
     date,
 
@@ -67,7 +67,7 @@ const Bpo = ({ reference, nom, prenom, age, sexe }) => {
               </span>{" "}
               <span>
                 <strong>: </strong>
-                {service}
+                {dateService ? dateService.service : service}
               </span>
             </p>
             <p>
@@ -92,7 +92,12 @@ const Bpo = ({ reference, nom, prenom, age, sexe }) => {
           </div>
           <p>
             <strong>DBK LE :</strong>{" "}
-            <span>{date && new Date(date).toLocaleDateString()}</span>
+            <span>
+              {" "}
+              {dateService
+                ? new Date(dateService.date).toLocaleDateString()
+                : date && new Date(date).toLocaleDateString()}
+            </span>
           </p>
         </div>
       </div>
@@ -111,21 +116,21 @@ const Bpo = ({ reference, nom, prenom, age, sexe }) => {
               <td>
                 <strong>Glucose</strong>{" "}
               </td>
-              <td>{glucose}</td>
+              <td>{data ? data.glucose : glucose}</td>
               <td>0.70 - 1.10g/l</td>
             </tr>
             <tr>
               <td>
                 <strong>Uree</strong>{" "}
               </td>
-              <td>{uree}</td>
+              <td>{data ? data.uree : uree}</td>
               <td>0.15 - 0.50g/l</td>
             </tr>
             <tr>
               <td>
                 <strong>Creatinemie</strong>{" "}
               </td>
-              <td>{creatinemie}</td>
+              <td>{data ? data.creatinemie : creatinemie}</td>
               <td>4.0 - 13.0mg/l</td>
             </tr>
           </tbody>
@@ -161,9 +166,9 @@ const Bpo = ({ reference, nom, prenom, age, sexe }) => {
                 {" "}
                 <strong>Patient</strong>
               </td>
-              <td>{tempProth}</td>
-              <td>{taux}</td>
-              <td>{inr}</td>
+              <td>{data ? data.tempProth : tempProth}</td>
+              <td>{data ? data.taux : taux}</td>
+              <td>{data ? data.inr : inr}</td>
             </tr>
           </tbody>
         </table>
@@ -186,7 +191,7 @@ const Bpo = ({ reference, nom, prenom, age, sexe }) => {
         </div>
         <div className="tck">
           <p>
-            <strong>TCK :</strong> <span>{tck}</span> s
+            <strong>TCK :</strong> <span>{data ? data.tck : tck}</span> s
           </p>
           <p>Valeurs usuelles : 22 - 38 s</p>
         </div>
@@ -195,20 +200,20 @@ const Bpo = ({ reference, nom, prenom, age, sexe }) => {
             <span style={{ width: "4rem", display: "inline-block" }}>
               <strong>HIV :</strong>
             </span>
-            <span>{hiv}.</span>
+            <span>{data ? data.hiv : hiv}.</span>
           </p>
           <p>
             <span style={{ width: "4em", display: "inline-block" }}>
               <strong>HBS :</strong>
             </span>{" "}
-            <span>{hbs}.</span>
+            <span>{data ? data.hbs : hbs}.</span>
           </p>
           <p>
             <span style={{ width: "4rem", display: "inline-block" }}>
               {" "}
               <strong>HCV :</strong>
             </span>
-            <span>{hcv}</span>
+            <span>{data ? data.hcv : hcv}</span>
           </p>
         </div>
 

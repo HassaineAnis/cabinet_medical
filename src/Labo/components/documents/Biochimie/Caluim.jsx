@@ -3,7 +3,7 @@ import logo from "../../../../assets/logo (1).png";
 import "../../../../style/laboAM/documentAM/tp.css";
 import { BpoContext } from "../../../../util/context/Context";
 
-const Caluim = ({ reference, nom, prenom, age, sexe }) => {
+const Caluim = ({ reference, nom, prenom, age, sexe, data, dateDoc }) => {
   const {
     date,
     calcuim,
@@ -75,7 +75,12 @@ const Caluim = ({ reference, nom, prenom, age, sexe }) => {
           </div>
           <p>
             <strong>DBK LE :</strong>{" "}
-            <span>{date && new Date(date).toLocaleDateString()}</span>
+            <span>
+              {" "}
+              {dateDoc
+                ? new Date(dateDoc).toLocaleDateString()
+                : date && new Date(date).toLocaleDateString()}
+            </span>
           </p>
         </div>
       </div>
@@ -93,7 +98,7 @@ const Caluim = ({ reference, nom, prenom, age, sexe }) => {
               <td>
                 <strong>Calcuim</strong>
               </td>
-              <td>{`${calcuim}`}</td>
+              <td>{`${data ? data.calcuim : calcuim}`}</td>
               <td>
                 <strong>{"< 85.0-105 mg/l"}</strong>
               </td>
@@ -104,7 +109,7 @@ const Caluim = ({ reference, nom, prenom, age, sexe }) => {
               </td>
               <td>
                 {" "}
-                <strong>{`${phosphore}`}</strong>
+                <strong>{`${data ? data.phosphore : phosphore}`}</strong>
               </td>
               <td>
                 <strong>{"< 2.5-4.5 mg/dl"}</strong>
@@ -116,7 +121,7 @@ const Caluim = ({ reference, nom, prenom, age, sexe }) => {
               </td>
               <td>
                 {" "}
-                <strong>{`${magnesium}`}</strong>
+                <strong>{`${data ? data.magnesium : magnesium}`}</strong>
               </td>
               <td>
                 <strong>{"< 1.7-2.4 mg/dl"}</strong>
@@ -146,7 +151,7 @@ const Caluim = ({ reference, nom, prenom, age, sexe }) => {
                 <strong>Fer Serrique</strong>
               </td>
               <td>
-                <strong>{`${ferSerrique}`}</strong>
+                <strong>{`${data ? data.ferSerrique : ferSerrique}`}</strong>
               </td>
               <td>
                 <div

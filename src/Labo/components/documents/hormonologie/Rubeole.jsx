@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import logo from "../../../../assets/logo (1).png";
 import "../../../../style/laboAM/documentAM/tp.css";
 import { BpoContext } from "../../../../util/context/Context";
-const Rubeole = ({ reference, nom, prenom, age, sexe }) => {
+const Rubeole = ({ reference, nom, prenom, age, sexe, data, dateService }) => {
   const {
     date,
     rubeole,
@@ -40,7 +40,8 @@ const Rubeole = ({ reference, nom, prenom, age, sexe }) => {
                 <strong>Nom </strong>
               </span>{" "}
               <span>
-                <strong>: </strong>hassaine
+                <strong>: </strong>
+                {nom}
               </span>
             </p>
             <p>
@@ -48,7 +49,8 @@ const Rubeole = ({ reference, nom, prenom, age, sexe }) => {
                 <strong>Prénom</strong>
               </span>{" "}
               <span>
-                <strong>: </strong>hassaine
+                <strong>: </strong>
+                {prenom}
               </span>
             </p>
             <p>
@@ -57,7 +59,7 @@ const Rubeole = ({ reference, nom, prenom, age, sexe }) => {
               </span>{" "}
               <span>
                 <strong>: </strong>
-                {service}
+                {dateService ? dateService.service : service}
               </span>
             </p>
             <p>
@@ -66,7 +68,7 @@ const Rubeole = ({ reference, nom, prenom, age, sexe }) => {
                 <strong>Age</strong>
               </span>{" "}
               <span>
-                <strong>: </strong>hassaine
+                <strong>: </strong> {age}
               </span>
             </p>{" "}
             <p>
@@ -74,13 +76,19 @@ const Rubeole = ({ reference, nom, prenom, age, sexe }) => {
                 <strong>Sexe</strong>
               </span>{" "}
               <span>
-                <strong>: </strong>hassaine
+                <strong>: </strong>
+                {sexe}
               </span>
             </p>
           </div>
           <p>
             <strong>DBK LE :</strong>{" "}
-            <span>{date && new Date(date).toLocaleDateString()}</span>
+            <span>
+              {" "}
+              {dateService
+                ? new Date(dateService.date).toLocaleDateString()
+                : date && new Date(date).toLocaleDateString()}
+            </span>
           </p>
         </div>
       </div>
@@ -95,13 +103,18 @@ const Rubeole = ({ reference, nom, prenom, age, sexe }) => {
           <ul>
             <li className="no_decor_list">
               Rubéole, sérologie <strong>lgG</strong>
-              <strong>..... {`${rubeole} `}</strong>
+              <strong>..... {`${data ? data.rubeole : rubeole} `}</strong>
               UI/ml.
             </li>
             <li className="no_decor_list">
               Rubéole, sérologie <strong> lgG</strong>
               <strong>.....</strong>
-              <strong>{verifieToxoplasmose(rubeole)}.</strong>
+              <strong>
+                {data
+                  ? verifieToxoplasmose(data.rubeole)
+                  : verifieToxoplasmose(rubeole)}
+                .
+              </strong>
             </li>
           </ul>
         </ul>

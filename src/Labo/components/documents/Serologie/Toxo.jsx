@@ -3,7 +3,7 @@ import logo from "../../../../assets/logo (1).png";
 import "../../../../style/laboAM/documentAM/tp.css";
 import { BpoContext } from "../../../../util/context/Context";
 
-const Toxo = ({ reference, nom, prenom, age, sexe }) => {
+const Toxo = ({ reference, nom, prenom, age, sexe, data, dateService }) => {
   const { date, toxoplasmose, service } = useContext(BpoContext);
   const verifieToxoplasmose = (valeur) => {
     const intvaleur = parseFloat(valeur);
@@ -54,7 +54,7 @@ const Toxo = ({ reference, nom, prenom, age, sexe }) => {
               </span>{" "}
               <span>
                 <strong>: </strong>
-                {service}
+                {dateService ? dateService.service : service}
               </span>
             </p>
             <p>
@@ -79,7 +79,12 @@ const Toxo = ({ reference, nom, prenom, age, sexe }) => {
           </div>
           <p>
             <strong>DBK LE :</strong>{" "}
-            <span>{date && new Date(date).toLocaleDateString()}</span>
+            <span>
+              {" "}
+              {dateService
+                ? new Date(dateService.date).toLocaleDateString()
+                : date && new Date(date).toLocaleDateString()}
+            </span>
           </p>
         </div>
       </div>
@@ -94,12 +99,19 @@ const Toxo = ({ reference, nom, prenom, age, sexe }) => {
           <ul>
             <li className="no_decor_list">
               Toxoplasmose, sérologie<strong> lgG</strong>{" "}
-              <strong>.....</strong> <strong>{`${toxoplasmose}`}</strong> UI/ml.
+              <strong>.....</strong>{" "}
+              <strong>{`${data ? data.toxoplasmose : toxoplasmose}`}</strong>{" "}
+              UI/ml.
             </li>
             <li className="no_decor_list">
               Toxoplasmose, sérologie <strong>lgG</strong>{" "}
               <strong>.....</strong>{" "}
-              <strong>{verifieToxoplasmose(toxoplasmose)}.</strong>
+              <strong>
+                {data
+                  ? verifieToxoplasmose(data.toxoplasmose)
+                  : verifieToxoplasmose(toxoplasmose)}
+                .
+              </strong>
             </li>
           </ul>
         </ul>

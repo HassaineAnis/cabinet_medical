@@ -5,174 +5,163 @@ import { useNavigate, useParams } from "react-router-dom";
 import Modal from "react-modal";
 import useModal from "../../../util/hooks/UseModal";
 import Notification from "../../../util/Notifiation";
+import { format } from "date-fns";
 
 import { ToastContainer } from "react-toastify";
 
-const ProfilEmploye = ({specialite}) => {
-    const { modalIsOpen, openModal, closeModal } = useModal();
-    const [isLoading, setLoading] = useState(false);
-    const [fetchData, setFetch] = useState({});
-    const [erreur, setErreur] = useState(false);
-    const { id } = useParams();
-  
-    useEffect(() => {
-      const fetchUsers = async () => {
-        setLoading(true);
-        try {
-          const response = await fetch(
-            `http://localhost:3000/api/personnel/${id}`
-          );
-  
-          const users = await response.json();
-  
-          setFetch(users);
-        } catch (e) {
-          console.log("erreur!!!", e);
-          setErreur(true);
-        } finally {
-          setLoading(false);
-        }
-      };
-  
-      fetchUsers();
-    }, [id]);
-  
-  
-    const navigate = useNavigate();
-    const nomRef = useRef(null);
-    const prenomRef = useRef(null);
-    const [dateNaissance,setDateNaissance] = useState(null)
-    const sexeRef = useRef(null);
-    const dateRef = useRef(null);
-    const numeroTelRef = useRef(null);
-    const numeroSecurite = useRef(null);
-    const passwordRef = useRef(null);
-    const adresseRef = useRef(null);
-    const confirmPasswordRef = useRef(null);
-    const photoRef = useRef("");
-    const specialiteRef = useRef(null);
-    const observationRef = useRef(null);
-    const formulaireRef = useRef(null);
-    const [imageUrl, setImageUrl] = useState(null);
-  
-    const ajouterPhoto = (e) => {
-      const file = e.target.files[0];
-  
-      const reader = new FileReader();
-      reader.onload = () => {
-        setImageUrl(reader.result);
-      };
-      reader.readAsDataURL(file);
-    };
-  
-    const resetPhoto = (e) => {
-      setImageUrl(null);
-      photoRef.current.value = null;
-      const tabInfo = {...fetchData}
-      tabInfo.photo = ""
-      setFetch(tabInfo)
-  
+const ProfilEmploye = ({ specialite }) => {
+  const { modalIsOpen, openModal, closeModal } = useModal();
+  const [isLoading, setLoading] = useState(false);
+  const [fetchData, setFetch] = useState({});
+  const [erreur, setErreur] = useState(false);
+  const { id } = useParams();
 
-    };
-  
-    const navigation = () => {
-      navigate(-1);
-    };
-  
-    const verifierData = (e) => {
-      e.preventDefault();
-      if (passwordRef.current.value !== fetchData.password) {
-        if (passwordRef.current.value !== confirmPasswordRef.current.value) {
-          return Notification.echec("Les mots de passe ne correspondent pas!");
-        }
-      } else {
-        openModal();
-      }
-    }; 
-  
-    const modifierProfile = async (e) => {
-      closeModal();
-      //formater les donnees avant envoie
-      const formaData = new FormData();
-  
-      if (photoRef.current.files[0]) {
-        formaData.append("photo", photoRef.current.files[0]);
-      } else {
-        formaData.append("photo", fetchData.photo);
-      }
-  
-      formaData.append("nom", nomRef.current.value.toUpperCase());
-      formaData.append("prenom", prenomRef.current.value.toUpperCase());
-      formaData.append("dateNaissance", dateRef.current.value);
-      formaData.append("adresse", adresseRef.current.value);
-      formaData.append("sexe", sexeRef.current.value);
-      formaData.append("numeroTel", numeroTelRef.current.value);
-      formaData.append(
-        "numeroSecurite",
-        parseInt(numeroSecurite.current.value, 10)
-      );
-      formaData.append('specialite',specialiteRef.current.value)
-      formaData.append("password", passwordRef.current.value);
-      if(observationRef.current.value){
-        formaData.append("observation", observationRef.current.value);
-      }
-       
- 
-   
-      
+  useEffect(() => {
+    const fetchUsers = async () => {
+      setLoading(true);
       try {
-        const response = await fetch(`http://localhost:3000/api/personnel/${id}`, {
-          method:"PUT",
+        const response = await fetch(
+          `http://localhost:3000/api/personnel/${id}`
+        );
+
+        const users = await response.json();
+
+        setFetch(users);
+      } catch (e) {
+        console.log("erreur!!!", e);
+        setErreur(true);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchUsers();
+  }, [id]);
+
+  const navigate = useNavigate();
+  const nomRef = useRef(null);
+  const prenomRef = useRef(null);
+
+  const sexeRef = useRef(null);
+  const dateRef = useRef(null);
+  const numeroTelRef = useRef(null);
+  const numeroSecurite = useRef(null);
+  const dateEntreRef = useRef(null);
+  const dateSortieRef = useRef(null);
+
+  const adresseRef = useRef(null);
+
+  const photoRef = useRef("");
+  const specialiteRef = useRef(null);
+  const observationRef = useRef(null);
+  const formulaireRef = useRef(null);
+  const [imageUrl, setImageUrl] = useState(null);
+
+  const ajouterPhoto = (e) => {
+    const file = e.target.files[0];
+
+    const reader = new FileReader();
+    reader.onload = () => {
+      setImageUrl(reader.result);
+    };
+    reader.readAsDataURL(file);
+  };
+
+  const resetPhoto = (e) => {
+    setImageUrl(null);
+    photoRef.current.value = null;
+    const tabInfo = { ...fetchData };
+    tabInfo.photo = "";
+    setFetch(tabInfo);
+  };
+
+  const navigation = () => {
+    navigate(-1);
+  };
+
+  const verifierData = (e) => {
+    e.preventDefault();
+
+    openModal();
+  };
+
+  const modifierProfile = async (e) => {
+    closeModal();
+    //formater les donnees avant envoie
+    const formaData = new FormData();
+
+    if (photoRef.current.files[0]) {
+      formaData.append("photo", photoRef.current.files[0]);
+    } else {
+      formaData.append("photo", fetchData.photo);
+    }
+
+    formaData.append("nom", nomRef.current.value.toUpperCase());
+    formaData.append("prenom", prenomRef.current.value.toUpperCase());
+    formaData.append("dateNaissance", dateRef.current.value);
+    formaData.append("dateEntre", dateEntreRef.current.value);
+    formaData.append("dateSortie", dateSortieRef.current.value);
+    formaData.append("adresse", adresseRef.current.value);
+    formaData.append("sexe", sexeRef.current.value);
+    formaData.append("numeroTel", numeroTelRef.current.value);
+    formaData.append(
+      "numeroSecurite",
+      parseInt(numeroSecurite.current.value, 10)
+    );
+    formaData.append("specialite", specialiteRef.current.value);
+
+    if (observationRef.current.value) {
+      formaData.append("observation", observationRef.current.value);
+    }
+
+    try {
+      const response = await fetch(
+        `http://localhost:3000/api/personnel/${id}`,
+        {
+          method: "PUT",
           body: formaData,
-        });
-      
-        if (response.ok) {
-          Notification.reussite("Profile modifier avec succès.");
-          formulaireRef.current.reset();
-        } else {
-          const erreurData = await response.json();
-          Notification.echec(erreurData.error);
-  
-          console.error(
-            "Une erreur s'est produite lors de la mise à jour du profil. Veuillez réessayer."
-          );
         }
-      } catch (error) {
-        Notification.echec(
-          "La requête a échoué. Veuillez vérifier votre connexion et réessayer."
+      );
+
+      if (response.ok) {
+        Notification.reussite("Profile modifier avec succès.");
+        // formulaireRef.current.reset();
+      } else {
+        const erreurData = await response.json();
+        Notification.echec(erreurData.error);
+
+        console.error(
+          "Une erreur s'est produite lors de la mise à jour du profil. Veuillez réessayer."
         );
       }
-    };
-      
-  
-    const afficherPhoto = ()=>{
-      if( fetchData.photo===""){
-           return adminPhoto
-      
-      }else{
-        return  fetchData.photo
-      }
+    } catch (error) {
+      Notification.echec(
+        "La requête a échoué. Veuillez vérifier votre connexion et réessayer."
+      );
+    }
+  };
 
-  
-      
+  const afficherPhoto = () => {
+    if (fetchData.photo === "") {
+      return adminPhoto;
+    } else {
+      return fetchData.photo;
     }
-  
-  
-  
-    if(erreur){
-      
-      return (
-        <div className="container_form">Erreur de chargement</div>
-      )
-    }
-  
-    return (
+  };
+
+  if (erreur) {
+    return <div className="container_form">Erreur de chargement</div>;
+  }
+
+  return (
+    <>
+      {" "}
+      <ToastContainer />
       <div className="container_form">
         {isLoading ? (
           <div> chargement</div>
         ) : (
           <>
-            <ToastContainer />
             <h2>Modifier les informations de l'utilisateur</h2>
             <hr />
             <form onSubmit={verifierData} ref={formulaireRef}>
@@ -180,10 +169,10 @@ const ProfilEmploye = ({specialite}) => {
                 <picture>
                   <img src={imageUrl ? imageUrl : afficherPhoto()} alt="user" />
                 </picture>
-  
+
                 <div className="btn_photo">
                   <label htmlFor="photo">Ajouter une nouvelle photo</label>
-  
+
                   <input
                     type="file"
                     name="photo"
@@ -203,7 +192,7 @@ const ProfilEmploye = ({specialite}) => {
                     type="text"
                     id="nom"
                     placeholder="Exemple : Dupont"
-                    defaultValue={ fetchData.nom}
+                    defaultValue={fetchData.nom}
                     ref={nomRef}
                     pattern="[A-Za-z,-_\s]{3,}"
                     title="Le nom doit contenir au moins 3 caractères alphabétiques."
@@ -215,7 +204,7 @@ const ProfilEmploye = ({specialite}) => {
                   <input
                     type="text"
                     placeholder="Exemple : Jean"
-                    defaultValue={ fetchData.prenom}
+                    defaultValue={fetchData.prenom}
                     id="prenom"
                     ref={prenomRef}
                     pattern="[A-Za-z,-_\s]{3,}"
@@ -224,23 +213,45 @@ const ProfilEmploye = ({specialite}) => {
                   />
                 </div>
                 <div className="input_conteneur">
-                  <label htmlFor="date">Date De Naissance</label>
-                  <div className="dates">
-                  <input type="date" id="date"   onChange={(e) => setDateNaissance(e.target.value)} />
-                  <input
-                    type="text"
-                    id="dateAffiche"
-                    readOnly={true}
-                    ref={dateRef}
-                     
-                    value={dateNaissance?  new Date(dateNaissance).toLocaleDateString() : fetchData.user && new Date(fetchData.user.dateNaissance).toLocaleDateString()}
-                   
-                  
-                  />
-                  </div>
+                  <label htmlFor="dateNaissance">Date De Naissance</label>
 
+                  <input
+                    type="date"
+                    id="dateNaissance"
+                    ref={dateRef}
+                    defaultValue={
+                      fetchData.dateNaissance &&
+                      format(new Date(fetchData.dateNaissance), "yyyy-MM-dd")
+                    }
+                  />
                 </div>
-  
+                <div className="input_conteneur">
+                  <label htmlFor="dateEntre">Date De Entree</label>
+
+                  <input
+                    type="date"
+                    id="dateEntre"
+                    ref={dateEntreRef}
+                    defaultValue={
+                      fetchData.dateEntre &&
+                      format(new Date(fetchData.dateEntre), "yyyy-MM-dd")
+                    }
+                  />
+                </div>
+                <div className="input_conteneur">
+                  <label htmlFor="dateSortie">Date De Sortie</label>
+
+                  <input
+                    type="date"
+                    id="dateSortie"
+                    ref={dateSortieRef}
+                    defaultValue={
+                      fetchData.dateSortie &&
+                      format(new Date(fetchData.dateSortie), "yyyy-MM-dd")
+                    }
+                  />
+                </div>
+
                 <div className="input_conteneur">
                   <label htmlFor="adresse">Adresse</label>
                   <input
@@ -254,7 +265,7 @@ const ProfilEmploye = ({specialite}) => {
                     required
                   />
                 </div>
-  
+
                 <div className="input_conteneur">
                   <label htmlFor="sexe">Sexe</label>
                   <select
@@ -268,7 +279,7 @@ const ProfilEmploye = ({specialite}) => {
                     <option value="FEMME">FEMME</option>
                   </select>
                 </div>
-  
+
                 <div className="input_conteneur">
                   <label htmlFor="numeroTel">N° Téléphone</label>
                   <input
@@ -282,72 +293,44 @@ const ProfilEmploye = ({specialite}) => {
                     placeholder="Ex: 05 XX XX XX XX"
                   />
                 </div>
-  
+
                 <div className="input_conteneur">
                   <label htmlFor="numeroSecurite">N° Sécurité Sociale</label>
                   <input
                     type="text"
                     id="numeroSecurite"
-                    defaultValue={ fetchData.numeroSecurite}
+                    defaultValue={fetchData.numeroSecurite}
                     ref={numeroSecurite}
                     placeholder="Numéro de sécurité sociale (ex : 12 3456 7890 12)"
                     required
                   />
                 </div>
                 <div className="input_conteneur">
-            <label htmlFor="specialite">Spécialité</label>
-            <select
-              name="specialite"
-              id="specialite"
-              ref={specialiteRef}
-              required
-              defaultValue={fetchData.specialite}
-               
-            >
-              
-              {specialite.map((element,index)=>
-              (  <option key={`${index}-${element}`} value={element}>{element}</option>)
-              )}
-            
-            </select>
-          </div>
-  
-                <div className="input_conteneur">
-                  <label htmlFor="password"> New Password</label>
-                  <input
-                    type="password"
-                    id="password"
-                    ref={passwordRef}
-                    defaultValue={fetchData.password}
-                    placeholder="Saisissez votre mot de passe"
-                    pattern="^(?=.*\d)(?=.*[a-z]).{5,}$"
-                    title="Le mot de passe doit contenir au moins 5 caractères, dont au moins une lettre minuscule et un chiffre."
+                  <label htmlFor="specialite">Spécialité</label>
+                  <select
+                    name="specialite"
+                    id="specialite"
+                    ref={specialiteRef}
                     required
-                  />
-                </div>
-                <div className="input_conteneur">
-                  <label htmlFor="confirmePassword">Comfirme Password</label>
-                  <input
-                    placeholder="Confirmez votre mot de passe"
-                    type="password"
-                    id="confirmePassword"
-                    ref={confirmPasswordRef}
-                    
-                  />
+                    defaultValue={fetchData.specialite}
+                  >
+                    {specialite.map((element, index) => (
+                      <option key={`${index}-${element}`} value={element}>
+                        {element}
+                      </option>
+                    ))}
+                  </select>
                 </div>
               </div>
               <div className="input_conteneur">
-                  <label htmlFor="confirmePassword">Observation</label>
-                  <textarea
+                <label htmlFor="confirmePassword">Observation</label>
+                <textarea
                   placeholder="Remarque sur l'employé...."
-                 style={{resize:"none"}}
-                 ref={observationRef}
-                 defaultValue={fetchData.observation}
-                  
-        
-       
-                  ></textarea>
-                </div>
+                  style={{ resize: "none" }}
+                  ref={observationRef}
+                  defaultValue={fetchData.observation}
+                ></textarea>
+              </div>
               <div className="btn">
                 <button type="submit">Enregitrer</button>
                 <Modal
@@ -373,7 +356,8 @@ const ProfilEmploye = ({specialite}) => {
           </>
         )}
       </div>
-    );
-}
+    </>
+  );
+};
 
 export default ProfilEmploye;

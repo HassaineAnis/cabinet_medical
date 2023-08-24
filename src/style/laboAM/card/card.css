@@ -7,7 +7,7 @@
   width: 300px;
   height: 400px;
   animation: table 300ms ease;
-  box-shadow: 0px 2px 10px 0px rgba(58, 53, 65, 0.1);
+  box-shadow: 0px 0px 19px 1px rgba(0, 0, 0, 0.3);
 }
 .card_analyse .section1 {
   width: 100%;

@@ -18,7 +18,7 @@ exports.afficherAnalysePatient = async (req, res, next) => {
   console.log("affichage les analyse d'un patient...");
   try {
     const analyses = await Analyse.find({ patient: req.params.id })
-      .populate("patient", "nom prenom age sexe")
+      .populate("patient", "nom prenom age sexe adresse")
       .exec();
 
     if (!analyses) {

@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import logo from "../../../../assets/logo (1).png";
 import "../../../../style/laboAM/documentAM/tp.css";
 import { BpoContext } from "../../../../util/context/Context";
-const Hgpo = ({ reference, nom, prenom, age, sexe }) => {
+const Hgpo = ({ reference, nom, prenom, age, sexe, data, dateDoc }) => {
   const {
     date,
     dosage1,
@@ -72,7 +72,12 @@ const Hgpo = ({ reference, nom, prenom, age, sexe }) => {
           </div>
           <p>
             <strong>DBK LE :</strong>{" "}
-            <span>{date && new Date(date).toLocaleDateString()}</span>
+            <span>
+              {" "}
+              {dateDoc
+                ? new Date(dateDoc).toLocaleDateString()
+                : date && new Date(date).toLocaleDateString()}
+            </span>
           </p>
         </div>
       </div>
@@ -101,7 +106,7 @@ const Hgpo = ({ reference, nom, prenom, age, sexe }) => {
                 <strong>Dosage 1 (à jeun)</strong>
               </td>
               <td>
-                <strong>{dosage1}</strong>
+                <strong>{data ? data.dosage1 : dosage1}</strong>
               </td>
               <td>
                 <strong>
@@ -114,7 +119,7 @@ const Hgpo = ({ reference, nom, prenom, age, sexe }) => {
                 <strong>Dosage 2 (à 1 h)</strong>
               </td>
               <td>
-                <strong>{dosage2}</strong>
+                <strong>{data ? data.dosage2 : dosage2}</strong>
               </td>
               <td>
                 <strong>{"<1.80 g/l"}</strong>
@@ -125,7 +130,7 @@ const Hgpo = ({ reference, nom, prenom, age, sexe }) => {
                 <strong>Dosage 3 (à 2 h)</strong>
               </td>
               <td>
-                <strong>{dosage3}</strong>
+                <strong>{data ? data.dosage3 : dosage3}</strong>
               </td>
               <td>
                 <strong>{"<1.53 g/l"}</strong>

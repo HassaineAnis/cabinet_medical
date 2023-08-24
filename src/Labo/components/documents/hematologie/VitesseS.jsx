@@ -3,7 +3,7 @@ import logo from "../../../../assets/logo (1).png";
 import "../../../../style/laboAM/documentAM/tp.css";
 import { BpoContext } from "../../../../util/context/Context";
 
-const VitesseS = ({ reference, nom, prenom, age, sexe }) => {
+const VitesseS = ({ reference, nom, prenom, age, sexe, data, dateService }) => {
   const {
     date,
 
@@ -51,7 +51,7 @@ const VitesseS = ({ reference, nom, prenom, age, sexe }) => {
               </span>{" "}
               <span>
                 <strong>: </strong>
-                {service}
+                {dateService ? dateService.service : service}
               </span>
             </p>
             <p>
@@ -76,7 +76,12 @@ const VitesseS = ({ reference, nom, prenom, age, sexe }) => {
           </div>
           <p>
             <strong>DBK LE :</strong>{" "}
-            <span>{date && new Date(date).toLocaleDateString()}</span>
+            <span>
+              {" "}
+              {dateService
+                ? new Date(dateService.date).toLocaleDateString()
+                : date && new Date(date).toLocaleDateString()}
+            </span>
           </p>
         </div>
       </div>
@@ -120,14 +125,14 @@ const VitesseS = ({ reference, nom, prenom, age, sexe }) => {
               <strong>CRP :</strong>
             </span>
             <strong>............</strong>
-            <span>{crp}.</span>
+            <span>{data ? data.crp : crp}.</span>
           </p>
           <p>
             <span>
               <strong>ASLO :</strong>
             </span>
             <strong>..........</strong>
-            <span>{aslo}.</span>
+            <span>{data ? data.aslo : aslo}.</span>
           </p>
           <p>
             <span>
@@ -135,7 +140,7 @@ const VitesseS = ({ reference, nom, prenom, age, sexe }) => {
               <strong>LATEX :</strong>
             </span>
             <strong>.........</strong>
-            <span>{latex}</span>
+            <span>{data ? data.latex : latex}</span>
           </p>
           <p>
             <span>
@@ -143,7 +148,7 @@ const VitesseS = ({ reference, nom, prenom, age, sexe }) => {
               <strong>W ROSE :</strong>
             </span>
             <strong>......</strong>
-            <span>{wrose}</span>
+            <span>{data ? data.wrose : wrose}</span>
           </p>
         </div>
         <div className="bas-page">

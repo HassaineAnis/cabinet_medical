@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import logo from "../../../../assets/logo (1).png";
 import "../../../../style/laboAM/documentAM/tp.css";
 import { BpoContext } from "../../../../util/context/Context";
-function Hiv({ reference, nom, prenom, sexe, age }) {
+function Hiv({ reference, nom, prenom, sexe, age, data, dateService }) {
   const {
     date,
 
@@ -50,7 +50,7 @@ function Hiv({ reference, nom, prenom, sexe, age }) {
 
               <span>
                 <strong>: </strong>
-                {service}
+                {dateService ? dateService.service : service}
               </span>
             </p>
             <p>
@@ -75,7 +75,11 @@ function Hiv({ reference, nom, prenom, sexe, age }) {
           </div>
           <p>
             <strong>DBK LE :</strong>{" "}
-            <span>{date && new Date(date).toLocaleDateString()}</span>
+            <span>
+              {dateService
+                ? new Date(dateService.date).toLocaleDateString()
+                : date && new Date(date).toLocaleDateString()}
+            </span>
           </p>
         </div>
       </div>
@@ -90,19 +94,19 @@ function Hiv({ reference, nom, prenom, sexe, age }) {
             </p>
             <p className="point">
               <strong>HIV :</strong>
-              {` ${hiv}`}
+              {` ${data ? data.hiv : hiv}`}
             </p>
             <p className="point">
               <strong>HBS :</strong>
-              {` ${hbs}`}
+              {` ${data ? data.hbs : hbs}`}
             </p>
             <p className="point">
               <strong>HCV :</strong>
-              {` ${hcv}`}
+              {` ${data ? data.hcv : hcv}`}
             </p>
             <p className="point">
               <strong>BW :</strong>
-              {` ${bw}`}
+              {` ${data ? data.bw : bw}`}
             </p>
           </dis>
         </div>

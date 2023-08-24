@@ -3,7 +3,7 @@ import logo from "../../../../assets/logo (1).png";
 import "../../../../style/laboAM/documentAM/tp.css";
 import { BpoContext } from "../../../../util/context/Context";
 
-const Proteinurie = ({ reference, nom, prenom, age, sexe }) => {
+const Proteinurie = ({ reference, nom, prenom, age, sexe, data, dateDoc }) => {
   const {
     date,
     proteinurie,
@@ -69,7 +69,12 @@ const Proteinurie = ({ reference, nom, prenom, age, sexe }) => {
           </div>
           <p>
             <strong>DBK LE :</strong>{" "}
-            <span>{date && new Date(date).toLocaleDateString()}</span>
+            <span>
+              {" "}
+              {dateDoc
+                ? new Date(dateDoc).toLocaleDateString()
+                : date && new Date(date).toLocaleDateString()}
+            </span>
           </p>
         </div>
       </div>
@@ -81,7 +86,7 @@ const Proteinurie = ({ reference, nom, prenom, age, sexe }) => {
             </p>
             <p>
               <strong>.......</strong>
-              {`${proteinurie} `}
+              {`${data ? data.proteinurie : proteinurie} `}
               <strong>mg/24h.</strong>
             </p>
           </div>
@@ -92,7 +97,7 @@ const Proteinurie = ({ reference, nom, prenom, age, sexe }) => {
             </p>
             <p>
               <strong>.......</strong>
-              {` ${diurese} `}
+              {`  ${data ? data.diurese : diurese} `}
               <strong>L.</strong>
             </p>
           </div>

@@ -299,7 +299,26 @@ const TableEmpolye = () => {
                         ).toLocaleDateString()}
                     </span>{" "}
                   </div>
-
+                  <div className="ligne">
+                    {" "}
+                    <p>Date D'entrée :</p>{" "}
+                    <span>
+                      {currentObjet &&
+                        new Date(currentObjet.dateEntre).toLocaleDateString()}
+                    </span>{" "}
+                  </div>{" "}
+                  {currentObjet.dateSortie && (
+                    <div className="ligne">
+                      {" "}
+                      <p>Date De Sortie :</p>{" "}
+                      <span>
+                        {currentObjet &&
+                          new Date(
+                            currentObjet.dateSortie
+                          ).toLocaleDateString()}
+                      </span>{" "}
+                    </div>
+                  )}
                   <div className="ligne">
                     {" "}
                     <p>Adresse : </p>{" "}

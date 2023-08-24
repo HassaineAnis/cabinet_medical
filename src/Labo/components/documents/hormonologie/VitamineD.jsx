@@ -4,7 +4,15 @@ import logo from "../../../../assets/logo (1).png";
 import "../../../../style/laboAM/documentAM/tp.css";
 import { BpoContext } from "../../../../util/context/Context";
 
-const VitamineD = ({ reference, nom, prenom, sexe, age }) => {
+const VitamineD = ({
+  reference,
+  nom,
+  prenom,
+  sexe,
+  age,
+  dateService,
+  data,
+}) => {
   const {
     date,
     calcuim,
@@ -48,7 +56,7 @@ const VitamineD = ({ reference, nom, prenom, sexe, age }) => {
               </span>{" "}
               <span>
                 <strong>: </strong>
-                {service}
+                {dateService ? dateService.service : service}
               </span>
             </p>
             <p>
@@ -72,7 +80,12 @@ const VitamineD = ({ reference, nom, prenom, sexe, age }) => {
           </div>
           <p>
             <strong>DBK LE :</strong>{" "}
-            <span>{date && new Date(date).toLocaleDateString()}</span>
+            <span>
+              {" "}
+              {dateService
+                ? new Date(dateService.date).toLocaleDateString()
+                : date && new Date(date).toLocaleDateString()}
+            </span>
           </p>
         </div>
       </div>
@@ -85,7 +98,7 @@ const VitamineD = ({ reference, nom, prenom, sexe, age }) => {
 
           <p>
             <strong>......</strong>
-            {`${vitamineD} `}
+            {`${data ? data.vitamineD : vitamineD} `}
             <strong>ng/l.</strong>
           </p>
         </div>
@@ -143,7 +156,7 @@ const VitamineD = ({ reference, nom, prenom, sexe, age }) => {
               <td>
                 <strong>Calcium</strong>{" "}
               </td>
-              <td>{calcuim}</td>
+              <td>{data ? data.calcuim : calcuim}</td>
               <td>85.0 - 105 mg/l</td>
             </tr>
           </tbody>

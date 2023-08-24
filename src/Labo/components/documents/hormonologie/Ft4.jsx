@@ -3,7 +3,7 @@ import logo from "../../../../assets/logo (1).png";
 import "../../../../style/laboAM/documentAM/tp.css";
 import { BpoContext } from "../../../../util/context/Context";
 
-const Ft4 = ({ reference, nom, prenom, age, sexe }) => {
+const Ft4 = ({ reference, nom, prenom, age, sexe, data, dateService }) => {
   const {
     date,
     ft4,
@@ -46,7 +46,7 @@ const Ft4 = ({ reference, nom, prenom, age, sexe }) => {
               </span>{" "}
               <span>
                 <strong>: </strong>
-                {service}
+                {dateService ? dateService.service : service}
               </span>
             </p>
             <p>
@@ -71,7 +71,12 @@ const Ft4 = ({ reference, nom, prenom, age, sexe }) => {
           </div>
           <p>
             <strong>DBK LE :</strong>{" "}
-            <span>{date && new Date(date).toLocaleDateString()}</span>
+            <span>
+              {" "}
+              {dateService
+                ? new Date(dateService.date).toLocaleDateString()
+                : date && new Date(date).toLocaleDateString()}
+            </span>
           </p>
         </div>
       </div>
@@ -90,7 +95,7 @@ const Ft4 = ({ reference, nom, prenom, age, sexe }) => {
             </p>
             <p style={{ margin: "0" }}>
               {"....."}
-              <strong>{`${ft4} `} pmol/l.</strong>
+              <strong>{`${data ? data.ft4 : ft4} `} pmol/l.</strong>
             </p>
           </div>
           <div style={{ display: "flex", height: "3rem" }}>

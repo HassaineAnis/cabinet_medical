@@ -3,7 +3,7 @@ import logo from "../../../../assets/logo (1).png";
 import "../../../../style/laboAM/documentAM/tp.css";
 import { BpoContext } from "../../../../util/context/Context";
 
-const ProlE2 = ({ reference, nom, prenom, age, sexe }) => {
+const ProlE2 = ({ reference, nom, prenom, age, sexe, data, dateService }) => {
   const { date, service, prolactine, oestradiol } = useContext(BpoContext);
 
   return (
@@ -43,7 +43,7 @@ const ProlE2 = ({ reference, nom, prenom, age, sexe }) => {
               </span>{" "}
               <span>
                 <strong>: </strong>
-                {service}
+                {dateService ? dateService.service : service}
               </span>
             </p>
             <p>
@@ -68,7 +68,12 @@ const ProlE2 = ({ reference, nom, prenom, age, sexe }) => {
           </div>
           <p>
             <strong>DBK LE :</strong>{" "}
-            <span>{date && new Date(date).toLocaleDateString()}</span>
+            <span>
+              {" "}
+              {dateService
+                ? new Date(dateService.date).toLocaleDateString()
+                : date && new Date(date).toLocaleDateString()}
+            </span>
           </p>
         </div>
       </div>
@@ -87,7 +92,9 @@ const ProlE2 = ({ reference, nom, prenom, age, sexe }) => {
             </p>
             <p style={{ margin: "0" }}>
               <strong>..........</strong>
-              <strong>{`${prolactine} `} ng/ml.</strong>
+              <strong>
+                {`${data ? data.prolactine : prolactine} `} ng/ml.
+              </strong>
             </p>
           </div>
           <p style={{ margin: "0", width: "fitContent", textAlign: "center" }}>
@@ -99,7 +106,9 @@ const ProlE2 = ({ reference, nom, prenom, age, sexe }) => {
             </p>
             <p style={{ margin: "0" }}>
               <strong>..........</strong>
-              <strong>{`${oestradiol} `} pg/ml.</strong>
+              <strong>
+                {`${data ? data.oestradiol : oestradiol} `} pg/ml.
+              </strong>
             </p>
           </div>
         </div>

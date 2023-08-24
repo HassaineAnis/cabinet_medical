@@ -3,7 +3,7 @@ import logo from "../../../../assets/logo (1).png";
 import "../../../../style/laboAM/documentAM/tp.css";
 import { BpoContext } from "../../../../util/context/Context";
 
-const Tp = ({ reference, nom, prenom, sexe, age }) => {
+const Tp = ({ reference, nom, prenom, sexe, age, data, dateService }) => {
   const {
     date,
 
@@ -54,7 +54,7 @@ const Tp = ({ reference, nom, prenom, sexe, age }) => {
               </span>{" "}
               <span>
                 <strong>: </strong>
-                {service}
+                {dateService ? dateService.service : service}
               </span>
             </p>
             <p>
@@ -79,7 +79,12 @@ const Tp = ({ reference, nom, prenom, sexe, age }) => {
           </div>
           <p>
             <strong>DBK LE :</strong>{" "}
-            <span>{date && new Date(date).toLocaleDateString()}</span>
+            <span>
+              {" "}
+              {dateService
+                ? new Date(dateService.date).toLocaleDateString()
+                : date && new Date(date).toLocaleDateString()}
+            </span>
           </p>
         </div>
       </div>
@@ -115,9 +120,9 @@ const Tp = ({ reference, nom, prenom, sexe, age }) => {
                 {" "}
                 <strong>Patient</strong>
               </td>
-              <td>{tempProth}</td>
-              <td>{taux}</td>
-              <td>{inr}</td>
+              <td>{data ? data.tempProth : tempProth}</td>
+              <td>{data ? data.taux : taux}</td>
+              <td>{data ? data.inr : inr}</td>
             </tr>
           </tbody>
         </table>
@@ -140,7 +145,7 @@ const Tp = ({ reference, nom, prenom, sexe, age }) => {
         </div>
         <div className="tck">
           <p>
-            <strong>TCK :</strong> <span> {tck}</span> s
+            <strong>TCK :</strong> <span> {data ? data.tck : tck}</span> s
           </p>
           <p>Valeurs usuelles : 22 - 38 s</p>
         </div>

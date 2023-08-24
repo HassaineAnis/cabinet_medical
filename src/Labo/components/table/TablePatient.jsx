@@ -36,11 +36,6 @@ function TablePatient(props) {
     }
   };
 
-  const filteredRdv = patient.filter((rdv) => {
-    const fullName = `${rdv.nom} ${rdv.prenom}`.toLowerCase();
-    return fullName.includes(searchTerm.toLowerCase());
-  });
-
   useEffect(() => {
     const fetchRdv = async () => {
       setLoading(true);
@@ -51,12 +46,19 @@ function TablePatient(props) {
 
         const patients = await response.json();
         //rendeVous.sort((a, b) => new Date(a.date) - new Date(b.date));
+        const resultRecherche = patients.filter((element) => {
+          const fullName = `${element.nom} ${element.prenom}`.toLowerCase();
+
+          const prefix = searchTerm.toLowerCase();
+
+          return fullName.startsWith(prefix);
+        });
         setTotalPages(
           !recherche
             ? Math.ceil(patients.length / nombreElementPage)
-            : Math.ceil(filteredRdv.length / nombreElementPage)
+            : Math.ceil(resultRecherche.length / nombreElementPage)
         );
-        setData(!recherche ? patients : filteredRdv);
+        setData(!recherche ? patients : resultRecherche);
 
         setPatient(patients);
       } catch (e) {
@@ -70,7 +72,7 @@ function TablePatient(props) {
     };
 
     fetchRdv();
-  }, [recherche]);
+  }, [recherche, searchTerm]);
 
   const indiceDepart = (currentPage - 1) * nombreElementPage;
   const currentData = data.slice(
@@ -157,9 +159,10 @@ function TablePatient(props) {
                             width={20}
                             height={20}
                             fill="#637381"
-                            viewBox="0 0 576 512"
+                            viewBox="0 0 384 512"
                           >
-                            <path d="M88.7 223.8L0 375.8V96C0 60.7 28.7 32 64 32H181.5c17 0 33.3 6.7 45.3 18.7l26.5 26.5c12 12 28.3 18.7 45.3 18.7H416c35.3 0 64 28.7 64 64v32H144c-22.8 0-43.8 12.1-55.3 31.8zm27.6 16.1C122.1 230 132.6 224 144 224H544c11.5 0 22 6.1 27.7 16.1s5.7 22.2-.1 32.1l-112 192C453.9 474 443.4 480 432 480H32c-11.5 0-22-6.1-27.7-16.1s-5.7-22.2 .1-32.1l112-192z" />
+                            {" "}
+                            <path d="M64 0C28.7 0 0 28.7 0 64V448c0 35.3 28.7 64 64 64H320c35.3 0 64-28.7 64-64V160H256c-17.7 0-32-14.3-32-32V0H64zM256 0V128H384L256 0zM80 64h64c8.8 0 16 7.2 16 16s-7.2 16-16 16H80c-8.8 0-16-7.2-16-16s7.2-16 16-16zm0 64h64c8.8 0 16 7.2 16 16s-7.2 16-16 16H80c-8.8 0-16-7.2-16-16s7.2-16 16-16zm54.2 253.8c-6.1 20.3-24.8 34.2-46 34.2H80c-8.8 0-16-7.2-16-16s7.2-16 16-16h8.2c7.1 0 13.3-4.6 15.3-11.4l14.9-49.5c3.4-11.3 13.8-19.1 25.6-19.1s22.2 7.7 25.6 19.1l11.6 38.6c7.4-6.2 16.8-9.7 26.8-9.7c15.9 0 30.4 9 37.5 23.2l4.4 8.8H304c8.8 0 16 7.2 16 16s-7.2 16-16 16H240c-6.1 0-11.6-3.4-14.3-8.8l-8.8-17.7c-1.7-3.4-5.1-5.5-8.8-5.5s-7.2 2.1-8.8 5.5l-8.8 17.7c-2.9 5.9-9.2 9.4-15.7 8.8s-12.1-5.1-13.9-11.3L144 349l-9.8 32.8z" />
                           </svg>
                         </Link>
 

@@ -50,7 +50,7 @@ const FormulaireTp = ({ id, imprimer }) => {
       document: {
         nom: "tp",
         data: {
-          temps: tempProth,
+          tempProth: tempProth,
           taux: taux,
           inr: inr,
           tck: tck,

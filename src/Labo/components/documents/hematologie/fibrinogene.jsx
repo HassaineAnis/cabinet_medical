@@ -3,7 +3,15 @@ import logo from "../../../../assets/logo (1).png";
 import "../../../../style/laboAM/documentAM/tp.css";
 import { BpoContext } from "../../../../util/context/Context";
 
-const Fibrinogene = ({ reference, nom, prenom, age, sexe }) => {
+const Fibrinogene = ({
+  reference,
+  nom,
+  prenom,
+  age,
+  sexe,
+  data,
+  dateService,
+}) => {
   const { date, service, fibrinogene } = useContext(BpoContext);
 
   return (
@@ -42,7 +50,7 @@ const Fibrinogene = ({ reference, nom, prenom, age, sexe }) => {
               </span>{" "}
               <span>
                 <strong>: </strong>
-                {service}
+                {dateService ? dateService.service : service}
               </span>
             </p>
             <p>
@@ -65,7 +73,12 @@ const Fibrinogene = ({ reference, nom, prenom, age, sexe }) => {
           </div>
           <p>
             <strong>DBK LE :</strong>{" "}
-            <span>{date && new Date(date).toLocaleDateString()}</span>
+            <span>
+              {" "}
+              {dateService
+                ? new Date(dateService.date).toLocaleDateString()
+                : date && new Date(date).toLocaleDateString()}
+            </span>
           </p>
         </div>
       </div>
@@ -76,7 +89,7 @@ const Fibrinogene = ({ reference, nom, prenom, age, sexe }) => {
           </p>
           <p>
             <strong>.....</strong>
-            {`${fibrinogene}`}
+            {`${data ? data.fibrinogene : fibrinogene}`}
             <strong>g/l Valeurs usuelles :2.5-4.0 g/l.</strong>
           </p>
         </div>

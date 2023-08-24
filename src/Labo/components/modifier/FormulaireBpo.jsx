@@ -76,7 +76,7 @@ const FormulaireBpo = ({ imprimer, type }) => {
         setHbs(analyse.document.data.hbs);
         setHcv(analyse.document.data.hcv);
         setGlucose(analyse.document.data.glucose);
-        setTemp(analyse.document.data.temps);
+        setTemp(analyse.document.data.tempProth);
         setUree(analyse.document.data.uree);
         setBw(analyse.document.data.bw);
         setGs(analyse.document.data.gs);
@@ -123,7 +123,7 @@ const FormulaireBpo = ({ imprimer, type }) => {
       document: {
         nom: type,
         data: {
-          ...(tempProth && { temps: tempProth }),
+          ...(tempProth && { tempProth: tempProth }),
           ...(taux && { taux: taux }),
           ...(inr && { inr: inr }),
           ...(tck && { tck: tck }),
