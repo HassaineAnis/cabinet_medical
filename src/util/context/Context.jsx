@@ -260,3 +260,51 @@ export const BpoProvider = ({ children }) => {
     </BpoContext.Provider>
   );
 };
+
+export const NavetteContext = createContext();
+export const NavetteProvider = ({ children }) => {
+  const [afficherFiche, setAfficherFiche] = useState(false);
+  const [designation, setDesignation] = useState([]);
+  const [nom, setNom] = useState("");
+  const [prenom, setPrenom] = useState("");
+  const [age, setAge] = useState("");
+  const [diagnostic, setDiagnostic] = useState("");
+  const [dateEntre, setdateEntre] = useState("");
+  const [dateSortie, setDateSortie] = useState("");
+  const [medicament, setMedicament] = useState("");
+  const [maternite, setMaternite] = useState(0);
+  const [bloc, setBloc] = useState(0);
+  const [hospital, setHospital] = useState(0);
+  return (
+    <NavetteContext.Provider
+      value={{
+        afficherFiche,
+        setAfficherFiche,
+        designation,
+        setDesignation,
+        nom,
+        setNom,
+        prenom,
+        setPrenom,
+        age,
+        setAge,
+        diagnostic,
+        setDiagnostic,
+        dateEntre,
+        setdateEntre,
+        dateSortie,
+        setDateSortie,
+        medicament,
+        setMedicament,
+        maternite,
+        setMaternite,
+        bloc,
+        setBloc,
+        hospital,
+        setHospital,
+      }}
+    >
+      {children}
+    </NavetteContext.Provider>
+  );
+};
