@@ -13,6 +13,9 @@ const congeRoutes = require("./routes/conge");
 const magasinRoutes = require("./routes/magasin");
 const interventionRoutes = require("./routes/intervention");
 const analyse = require("./routes/analyseM");
+const navetteRoutes = require("./routes/navette");
+const produitRoutes = require("./routes/produit");
+const qntProduitRoutes = require("./routes/qntProduit");
 
 const app = express();
 const server = http.createServer(app);
@@ -62,6 +65,9 @@ app.use("/api/conge", congeRoutes);
 app.use("/api/magasin", magasinRoutes);
 app.use("/api/intervention", interventionRoutes);
 app.use("/api/analyse", analyse);
+app.use("/api/navette", navetteRoutes);
+app.use("/api/produit", produitRoutes);
+app.use("/api/quantite", qntProduitRoutes);
 
 io.on("connection", (socket) => {
   console.log(socket.id);

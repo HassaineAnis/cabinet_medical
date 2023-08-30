@@ -82,6 +82,19 @@ const ModifierNavette = () => {
     };
 
     fetchRdv();
+    return () => {
+      setDesignation([]);
+      setHospital(0);
+      setBloc(0);
+      setMedicament("");
+      setMaternite(0);
+      setNom("");
+      setPrenom("");
+      setAge("");
+      setDateSortie("");
+      setdateEntre("");
+      setDiagnostic("");
+    };
   }, [id]);
   const verifieAvantAjout = () => {
     if (nom === "") {

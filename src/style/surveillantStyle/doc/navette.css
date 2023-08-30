@@ -1,0 +1,45 @@
+.navette {
+  display: flex;
+  flex-direction: column;
+}
+.navette h3 {
+  text-align: center;
+  text-decoration: underline;
+  text-transform: uppercase;
+}
+.navette .infoPatient {
+  display: flex;
+}
+.navette .infoPatient ul li {
+  gap: 0.3rem;
+  list-style: none;
+  display: flex;
+  align-items: center;
+}
+.navette .infoPatient ul li p strong {
+  text-decoration: underline;
+}
+.navette table {
+  border-collapse: collapse;
+}
+.navette table thead tr th {
+  border: 2px solid;
+  text-align: left;
+  text-transform: uppercase;
+}
+.navette table tbody tr td {
+  border: 2px solid;
+  text-align: left;
+  text-transform: uppercase;
+}
+
+@media print {
+  .navette {
+    padding: 0 1rem;
+  }
+  .navette .infoPatient {
+    width: 50%;
+    display: flex;
+    justify-content: space-between;
+  }
+}/*# sourceMappingURL=navette.css.map */

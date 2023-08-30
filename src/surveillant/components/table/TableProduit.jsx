@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import SearchBar from "../../../medecin/components/serchBar/SearchBar";
 import Pagination from "../../../admin/components/pagination/Pagination";
 import "../../../style/medecinStyle/consultation.css";
@@ -9,11 +9,7 @@ import Modal from "react-modal";
 import useModal from "../../../util/hooks/UseModal";
 
 const nombreElementPage = 6;
-
-function TablePatient(props) {
-  const jetonString = sessionStorage.getItem("user");
-  const jeton = JSON.parse(jetonString);
-
+const TableProduit = () => {
   const { modalIsOpen, openModal, closeModal } = useModal();
 
   const [data, setData] = useState([]);
@@ -21,7 +17,7 @@ function TablePatient(props) {
   const [totalPages, setTotalPages] = useState(1);
 
   const [isLoading, setLoading] = useState(false);
-  const [patient, setPatient] = useState([]);
+
   const [erreur, setErreur] = useState(false);
 
   const [searchTerm, setSearchTerm] = useState("");
@@ -40,32 +36,27 @@ function TablePatient(props) {
     const fetchRdv = async () => {
       setLoading(true);
       try {
-        const response = await fetch(
-          `http://localhost:3000/api/Patient/${jeton.id}`
-        );
+        const response = await fetch(`http://localhost:3000/api/produit`);
 
-        const patients = await response.json();
+        const navettes = await response.json();
         //rendeVous.sort((a, b) => new Date(a.date) - new Date(b.date));
-        const resultRecherche = patients.filter((element) => {
-          const fullName = `${element.nom} ${element.prenom}`.toLowerCase();
-          const name = `${element.nom}`.toLowerCase();
-          const prenom = `${element.prenom}`.toLowerCase();
+        const resultRecherche = navettes.filter((element) => {
+          const dci = `${element.dci}`.toLowerCase();
+          const denominationComerciale =
+            `${element.denominationComerciale}`.toLowerCase();
+
           const prefix = searchTerm.toLowerCase();
 
           return (
-            fullName.startsWith(prefix) ||
-            name.startsWith(prefix) ||
-            prenom.startsWith(prefix)
+            dci.startsWith(prefix) || denominationComerciale.startsWith(prefix)
           );
         });
         setTotalPages(
           !recherche
-            ? Math.ceil(patients.length / nombreElementPage)
+            ? Math.ceil(navettes.length / nombreElementPage)
             : Math.ceil(resultRecherche.length / nombreElementPage)
         );
-        setData(!recherche ? patients : resultRecherche);
-
-        setPatient(patients);
+        setData(!recherche ? navettes : resultRecherche);
       } catch (e) {
         console.log("erreur!!!", e);
         setErreur(true);
@@ -88,17 +79,18 @@ function TablePatient(props) {
   function pageSuivante(page) {
     setCurrentPage(page);
   }
+  console.log(data);
 
   if (erreur) {
     return <div>Erreur de chargement</div>;
   }
-
   return (
     <div className="consultation_table">
       <ToastContainer />
+
       <div className="consultation_table_btn">
         <Link
-          to="/laboAM/ajouter"
+          to="/surveillant/produit/ajouter"
           className="btn_ajout"
           style={{
             textDecoration: "none",
@@ -122,7 +114,7 @@ function TablePatient(props) {
             <path d="M12 5v14" />
             <path d="M5 12h14" />
           </svg>
-          Ajouter un patient
+          Ajouter un Produit
         </Link>
 
         <SearchBar onSearchChange={handleSearchChange} />
@@ -135,12 +127,9 @@ function TablePatient(props) {
             <table className="table">
               <thead>
                 <tr className="table_entete">
-                  <td>Nom</td>
-                  <td>Prénom</td>
-                  <td>Age</td>
-                  <td>Sexe</td>
-                  <td>N° Téléphone</td>
-                  <td>Adresse</td>
+                  <td>Dénomination Comerciale</td>
+                  <td>DCI</td>
+                  <td>Prix</td>
 
                   <td>Actions</td>
                 </tr>
@@ -148,30 +137,63 @@ function TablePatient(props) {
               <tbody>
                 {currentData.map((element) => (
                   <tr key={element._id}>
-                    <td>{element.nom}</td>
-                    <td>{element.prenom} </td>
-                    <td>{element.age}</td>
-                    <td>{element.sexe}</td>
-
-                    <td>{element.numeroTel}</td>
-                    <td>{element.adresse} </td>
+                    <td>{element.denominationComerciale}</td>
+                    <td>{element.dci} </td>
+                    <td>
+                      {element.prix.toLocaleString("fr-DZ", {
+                        style: "currency",
+                        currency: "DZD",
+                      })}
+                    </td>
 
                     <td>
                       <div className="action">
-                        <Link to={`/laboAM/analyse/${element._id}`}>
+                        <Link
+                          to={`/surveillant/produit/details/${element._id}`}
+                        >
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
                             width={20}
                             height={20}
                             fill="#637381"
-                            viewBox="0 0 384 512"
+                            viewBox="0 0 512 512"
                           >
                             {" "}
-                            <path d="M64 0C28.7 0 0 28.7 0 64V448c0 35.3 28.7 64 64 64H320c35.3 0 64-28.7 64-64V160H256c-17.7 0-32-14.3-32-32V0H64zM256 0V128H384L256 0zM80 64h64c8.8 0 16 7.2 16 16s-7.2 16-16 16H80c-8.8 0-16-7.2-16-16s7.2-16 16-16zm0 64h64c8.8 0 16 7.2 16 16s-7.2 16-16 16H80c-8.8 0-16-7.2-16-16s7.2-16 16-16zm54.2 253.8c-6.1 20.3-24.8 34.2-46 34.2H80c-8.8 0-16-7.2-16-16s7.2-16 16-16h8.2c7.1 0 13.3-4.6 15.3-11.4l14.9-49.5c3.4-11.3 13.8-19.1 25.6-19.1s22.2 7.7 25.6 19.1l11.6 38.6c7.4-6.2 16.8-9.7 26.8-9.7c15.9 0 30.4 9 37.5 23.2l4.4 8.8H304c8.8 0 16 7.2 16 16s-7.2 16-16 16H240c-6.1 0-11.6-3.4-14.3-8.8l-8.8-17.7c-1.7-3.4-5.1-5.5-8.8-5.5s-7.2 2.1-8.8 5.5l-8.8 17.7c-2.9 5.9-9.2 9.4-15.7 8.8s-12.1-5.1-13.9-11.3L144 349l-9.8 32.8z" />
+                            <path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM216 336h24V272H216c-13.3 0-24-10.7-24-24s10.7-24 24-24h48c13.3 0 24 10.7 24 24v88h8c13.3 0 24 10.7 24 24s-10.7 24-24 24H216c-13.3 0-24-10.7-24-24s10.7-24 24-24zm40-208a32 32 0 1 1 0 64 32 32 0 1 1 0-64z" />
+                          </svg>
+                        </Link>
+                        <Link
+                          to={`/surveillant/produit/quantite/ajouter/${element._id}`}
+                        >
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width={20}
+                            height={20}
+                            fill="#637381"
+                            viewBox="0 0 512 512"
+                          >
+                            {" "}
+                            <path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM232 344V280H168c-13.3 0-24-10.7-24-24s10.7-24 24-24h64V168c0-13.3 10.7-24 24-24s24 10.7 24 24v64h64c13.3 0 24 10.7 24 24s-10.7 24-24 24H280v64c0 13.3-10.7 24-24 24s-24-10.7-24-24z" />
+                          </svg>
+                        </Link>
+                        <Link
+                          to={`/surveillant/produit/quantite/retirer/${element._id}`}
+                        >
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width={20}
+                            height={20}
+                            fill="#637381"
+                            viewBox="0 0 512 512"
+                          >
+                            {" "}
+                            <path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM184 232H328c13.3 0 24 10.7 24 24s-10.7 24-24 24H184c-13.3 0-24-10.7-24-24s10.7-24 24-24z" />
                           </svg>
                         </Link>
 
-                        <Link to={`/laboAM/modifier/${element._id}`}>
+                        <Link
+                          to={`/surveillant/produit/modifier/${element._id}`}
+                        >
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
                             width={20}
@@ -215,6 +237,6 @@ function TablePatient(props) {
       )}
     </div>
   );
-}
+};
 
-export default TablePatient;
+export default TableProduit;

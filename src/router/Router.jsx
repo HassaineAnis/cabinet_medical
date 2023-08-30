@@ -16,6 +16,8 @@ import ArretTravaille from "../medecin/components/documentMedical/ArretTravaille
 import PrivateLaboAM from "./PrivateLaboAM";
 
 import LaboAmApp from "../Labo/App";
+import PrivateSurveillant from "./PrivateSurveillant";
+import SurveillantApp from "../surveillant/App";
 
 function Router() {
   return (
@@ -37,7 +39,10 @@ function Router() {
             <Route element={<PrivateLaboAM />}>
               <Route path="/laboAM/*" element={<LaboAmApp />} />
             </Route>
-
+            {/** Protection de l'espace Surveillant*/}
+            <Route element={<PrivateSurveillant />}>
+              <Route path="/surveillant/*" element={<SurveillantApp />} />
+            </Route>
             <Route path="/login" element={<Login />} />
             <Route path="*" element={<Login />} />
           </Routes>

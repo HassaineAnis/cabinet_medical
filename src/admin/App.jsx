@@ -82,7 +82,7 @@ function App() {
           path="/utilisateurs/pharmacien"
           element={
             <UsersRestant
-              role="Pharmacien"
+              role="Surveillant"
               route={"/admin/utilisateurs/pharmacien"}
               nomBtn="Ajouter Un Pharmacien"
               titre="Liste Des Pharmaciens"
@@ -94,7 +94,7 @@ function App() {
             element={
               <AjouterAutreUsers
                 titre="Informations Du Pharmacien"
-                role="Pharmacien"
+                role="Surveillant"
               />
             }
           />
