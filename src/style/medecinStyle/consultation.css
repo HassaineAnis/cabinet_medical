@@ -12,6 +12,7 @@
 .consultation .consultation__container {
   display: flex;
   flex-direction: column;
+  align-items: center;
   width: 95%;
 }
 .consultation .consultation__container h2 {

@@ -308,3 +308,106 @@ export const NavetteProvider = ({ children }) => {
     </NavetteContext.Provider>
   );
 };
+
+export const SurveillanceContext = createContext();
+
+export const SurveillanceProvider = ({ children }) => {
+  const [documentData, setDocumentData] = useState([]);
+  const [purfusions, setPurfusions] = useState({});
+  const [date, setDate] = useState("");
+  const [nom, setNom] = useState("");
+  const [prenom, setPrenom] = useState("");
+  const [age, setAge] = useState("");
+  const [diagnostic, setDiagnostic] = useState("");
+  const [chirurgien, setChirurgien] = useState("");
+  const [intervention, setIntervention] = useState("");
+  const [reanimateur, setReanimateur] = useState("");
+  const [heure, setHeure] = useState("");
+  const [groupage, setGroupage] = useState("");
+  const [afficherFiche, setAfficher] = useState(false);
+
+  return (
+    <SurveillanceContext.Provider
+      value={{
+        afficherFiche,
+        setAfficher,
+        groupage,
+        setGroupage,
+        documentData,
+        setDocumentData,
+        nom,
+        setNom,
+        prenom,
+        setPrenom,
+        age,
+        setAge,
+        diagnostic,
+        setDiagnostic,
+        chirurgien,
+        setChirurgien,
+        intervention,
+        setIntervention,
+        reanimateur,
+        setReanimateur,
+        heure,
+        setHeure,
+        date,
+        setDate,
+        purfusions,
+        setPurfusions,
+      }}
+    >
+      {children}
+    </SurveillanceContext.Provider>
+  );
+};
+
+export const SurveilleBabyContext = createContext();
+
+export const SurveilleBabyProvider = ({ children }) => {
+  const [nne, SetNne] = useState("");
+  const [date, setDate] = useState("");
+  const [heure, setHeure] = useState("");
+  const [sexe, setSexe] = useState("");
+  const [accouchement, setAccouchement] = useState("");
+  const [couveuse, setCouvveuse] = useState("");
+  const [nom, setNom] = useState("");
+  const [prenom, setPrenom] = useState("");
+  const [groupage, setGroupage] = useState("");
+  const [documentData, setDocumentData] = useState([]);
+  const [antiD, setAntiD] = useState("");
+  const [afficherFiche, setAfficher] = useState(false);
+
+  return (
+    <SurveilleBabyContext.Provider
+      value={{
+        nne,
+        SetNne,
+        date,
+        setDate,
+        heure,
+        setHeure,
+        sexe,
+        setSexe,
+        accouchement,
+        setAccouchement,
+        couveuse,
+        setCouvveuse,
+        nom,
+        setNom,
+        prenom,
+        setPrenom,
+        groupage,
+        setGroupage,
+        documentData,
+        setDocumentData,
+        antiD,
+        setAntiD,
+        afficherFiche,
+        setAfficher,
+      }}
+    >
+      {children}
+    </SurveilleBabyContext.Provider>
+  );
+};

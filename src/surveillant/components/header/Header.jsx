@@ -40,6 +40,16 @@ const Header = () => {
             </Link>
           </li>
           <li>
+            <Link to={`/surveillant/surveillance`} className="lien">
+              Surveillance
+            </Link>
+          </li>
+          <li>
+            <Link to={`/surveillant/baby`} className="lien">
+              Bébé
+            </Link>
+          </li>
+          <li>
             <Link to={`/surveillant/profil`} className="lien">
               Mon Profil
             </Link>

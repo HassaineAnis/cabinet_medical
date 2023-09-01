@@ -1,16 +1,25 @@
+@charset "UTF-8";
 .header_medecin {
   grid-column: 1/7;
   display: flex;
   justify-content: space-between;
   align-items: center;
   background-color: green;
-  color: #FFF;
+  color: #fff;
   padding: 0.5rem 1rem;
   border-bottom: 2px solid darkgreen;
 }
+@media screen and (max-width: 768px) {
+  .header_medecin {
+    /* Ajustements pour les écrans plus petits */
+    grid-column: 1/-1; /* Occupe toutes les colonnes disponibles */
+    flex-direction: column; /* Empiler les éléments verticalement */
+    /* Réduire les marges ou les espacements si nécessaire */
+  }
+}
 .header_medecin .lien {
   text-decoration: none;
-  color: #FFF;
+  color: #fff;
 }
 .header_medecin .header_medecin_logo img {
   width: 5rem;
@@ -18,10 +27,10 @@
 }
 .header_medecin .header_medecin_menu .header_medecin_menu_liste {
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   align-items: center;
   list-style: none;
-  gap: 2rem;
 }
 .header_medecin .header_medecin_menu .header_medecin_menu_liste li {
   height: 3rem;
