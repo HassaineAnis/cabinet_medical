@@ -13,7 +13,7 @@ const AjouterIntervention = () => {
   const jeton = JSON.parse(jetonString);
 
   const { modalIsOpen, openModal, closeModal } = useModal();
-  const [imprimable, setImprimable] = useState(false);
+  //const [imprimable, setImprimable] = useState(false);
   const componentRef = React.useRef();
   const [protocole, setProtocole] = useState("");
   const [pr, setPr] = useState("");
@@ -61,7 +61,7 @@ const AjouterIntervention = () => {
   });
   const verifierData = (e) => {
     e.preventDefault();
-    setImprimable(true);
+
     openModal();
   };
   const envoyerData = async () => {
@@ -310,7 +310,7 @@ const AjouterIntervention = () => {
               <button>Enregisté</button>
               <span onClick={navigation}>Annuler</span>
             </div>
-            {imprimable && <span onClick={handlePrint}>Imprimer</span>}
+            <span onClick={handlePrint}>Imprimer</span>
           </div>
         </form>
       </div>

@@ -18,6 +18,8 @@ import PrivateLaboAM from "./PrivateLaboAM";
 import LaboAmApp from "../Labo/App";
 import PrivateSurveillant from "./PrivateSurveillant";
 import SurveillantApp from "../surveillant/App";
+import PrivateReceptionniste from "./PrivateReceptionniste";
+import ReceptionnisteApp from "../receptionniste/App";
 
 function Router() {
   return (
@@ -42,6 +44,10 @@ function Router() {
             {/** Protection de l'espace Surveillant*/}
             <Route element={<PrivateSurveillant />}>
               <Route path="/surveillant/*" element={<SurveillantApp />} />
+            </Route>
+            {/** Protection de l'espace Réceptionniste*/}
+            <Route element={<PrivateReceptionniste />}>
+              <Route path="/receptionniste/*" element={<ReceptionnisteApp />} />
             </Route>
             <Route path="/login" element={<Login />} />
             <Route path="*" element={<Login />} />

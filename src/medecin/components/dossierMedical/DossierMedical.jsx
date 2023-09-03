@@ -86,7 +86,9 @@ function DossierMedical(props) {
               >
                 <option value="consultation">Consultation</option>
                 <option value="cherurgie">Chérurgie</option>
-                <option value="accouchement">Accouchement</option>
+                {patient.sexe === "FEMME" && (
+                  <option value="accouchement">Accouchement</option>
+                )}
               </select>
             </div>
           </div>
@@ -106,7 +108,7 @@ function DossierMedical(props) {
               <TableCherurgie id={patient._id} />
             </div>
           )}{" "}
-          {typeConsult === "accouchement" && (
+          {typeConsult === "accouchement" && patient.sexe === "FEMME" && (
             <div className="table_consult">
               <h3> Accouchement</h3>
 

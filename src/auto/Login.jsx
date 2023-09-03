@@ -29,6 +29,9 @@ const Login = () => {
     if (role === "Surveillant") {
       return "/surveillant";
     }
+    if (role === "Réceptionniste") {
+      return "/receptionniste";
+    }
   };
   useEffect(() => {
     const fetchUsers = async () => {

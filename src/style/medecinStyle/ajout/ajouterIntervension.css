@@ -356,6 +356,7 @@
   align-items: center;
   height: 100%;
   padding: 1rem;
+  width: 100%;
   gap: 1rem;
 }
 .intervention .section1 {
@@ -364,7 +365,7 @@
   width: 100%;
   height: 100%;
   padding: 1rem;
-  flex-grow: 1;
+  flex-grow: 2;
 }
 .intervention .section1 .section1_container {
   background-color: #fff;
