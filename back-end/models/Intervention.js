@@ -20,6 +20,7 @@ const interventionShema = mongoose.Schema({
   interventionPratique: { type: String, required: true },
   observation: { type: String, required: true },
   pr: { type: String, required: true },
+  montant: { type: Number, required: false, default: 0 },
   typeIntervention: { type: String, required: true },
 });
 

@@ -135,3 +135,21 @@ exports.modifierDateRdv = async (req, res, next) => {
       .json({ message: "Erreur lors de la modification de l'analyse." });
   }
 };
+
+//afficher RDV Archiver
+exports.afficherRendezVousArchiver = async (req, res, next) => {
+  console.log("Rdv archiver...");
+  try {
+    const rdvs = await RendezVous.find({ status: true })
+      .populate("medecin", "nom prenom ")
+      .exec();
+
+    if (!rdvs) {
+      return res.status(404).json({ message: "rdv introuvable." });
+    }
+
+    res.status(200).json(rdvs);
+  } catch (e) {
+    return res.status(400).json({ e });
+  }
+};

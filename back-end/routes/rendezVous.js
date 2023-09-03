@@ -4,6 +4,7 @@ const router = express.Router();
 const RdvControl = require("../controllers/rendezVous");
 
 router.post("/", RdvControl.ajouterRendezVous);
+router.get("/archive", RdvControl.afficherRendezVousArchiver);
 router.get("/", RdvControl.afficherRendezVous);
 router.get("/detail/:id", RdvControl.afficherUnRendezVous);
 router.get("/:id", RdvControl.afficherRendezVousMedecin);

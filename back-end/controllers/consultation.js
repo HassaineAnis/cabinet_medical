@@ -100,3 +100,26 @@ exports.afficherDetailConsultation = (req, res, next) => {
     })
     .catch((error) => res.status(400).json({ error }));
 };
+
+exports.modifierStatus = async (req, res, next) => {
+  console.log("payé consultation ...");
+  try {
+    const payer = await Consultation.updateOne(
+      { _id: req.params.id },
+      {
+        $set: {
+          status: true,
+        },
+      }
+    );
+    if (payer.nModified === 0) {
+      return res.status(404).json({ message: "consultation introuvable" });
+    }
+    res.status(200).json({ message: "Consultation payé avec succès." });
+  } catch (e) {
+    console.error("Erreur lors de la modification de la consultation:", e);
+    res
+      .status(500)
+      .json({ message: "Erreur lors de la modification de la consultation." });
+  }
+};

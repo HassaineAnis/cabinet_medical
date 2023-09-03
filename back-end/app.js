@@ -93,7 +93,14 @@ io.on("connection", (socket) => {
     console.log(data);
     io.emit("afterConfirmerdv", data);
   });
-
+  socket.on("payeConsult", (data) => {
+    console.log(data);
+    io.emit("afterPayeConsult", data);
+  });
+  socket.on("addConsult", (data) => {
+    console.log(data);
+    io.emit("afterAddConsult", data);
+  });
   socket.on("disconnect", () => {
     console.log("user disconnect");
   });

@@ -132,7 +132,7 @@ const TableRdv = () => {
           <option value="Accouchement">Accouchement</option>
         </select>
         <Link
-          to="/medecin/rendez-vous/archives"
+          to="/receptionniste/archives"
           style={{ textDecoration: "none" }}
           className="btn_archive"
         >

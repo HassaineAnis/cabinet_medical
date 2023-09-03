@@ -9,5 +9,6 @@ router.get("/", consultControl.afficherConsultation);
 router.delete("/:id", consultControl.supprimerConsultation);
 router.get("/patient/:id", consultControl.afficherConsultationPatient);
 router.get("/patient/detail/:id", consultControl.afficherDetailConsultation);
+router.put("/paye/:id", consultControl.modifierStatus);
 
 module.exports = router;
