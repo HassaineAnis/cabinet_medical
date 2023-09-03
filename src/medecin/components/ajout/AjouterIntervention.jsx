@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import * as XLSX from "xlsx";
 import { useReactToPrint } from "react-to-print";
@@ -15,6 +15,7 @@ const AjouterIntervention = () => {
   const { modalIsOpen, openModal, closeModal } = useModal();
   //const [imprimable, setImprimable] = useState(false);
   const componentRef = React.useRef();
+  const montantRef = useRef(null);
   const [protocole, setProtocole] = useState("");
   const [pr, setPr] = useState("");
   const [date, setDate] = useState("");
@@ -79,6 +80,7 @@ const AjouterIntervention = () => {
       interventionPratique: intervention,
       observation: observation,
       typeIntervention: "Chirurgie",
+      montant: montantRef.current.value,
     };
     try {
       const response = await fetch("http://localhost:3000/api/intervention", {
@@ -294,6 +296,10 @@ const AjouterIntervention = () => {
                 required
               />
             </div>
+            <div className="input_container">
+              <label htmlFor="montant">Montant</label>
+              <input type="number" id="montant" ref={montantRef} required />
+            </div>
           </div>
           <div className="input_container">
             <label htmlFor="observation">Observations</label>
@@ -305,6 +311,7 @@ const AjouterIntervention = () => {
               required
             ></textarea>
           </div>
+
           <div className="btn">
             <div className="btn_save">
               <button>Enregisté</button>
