@@ -13,6 +13,7 @@ import { useReactToPrint } from "react-to-print";
 const nombreElementPage = 6;
 const TableSurveillanceBebe = () => {
   const { modalIsOpen, openModal, closeModal } = useModal();
+  const [naissance, setNaissance] = useState("surveillance");
 
   const [data, setData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
@@ -132,6 +133,15 @@ const TableSurveillanceBebe = () => {
           </svg>
           Ajouter une Fiche
         </Link>
+        <select
+          name="filtre"
+          id="filtre"
+          onChange={(e) => setNaissance(e.target.value)}
+          value={naissance}
+        >
+          <option value="surveillance">Fiche De Surveillance</option>
+          <option value="naissance">Déclaration De Naissance</option>
+        </select>
 
         <SearchBar onSearchChange={handleSearchChange} />
       </div>

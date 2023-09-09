@@ -12,12 +12,18 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import profil from "../../../assets/avatarH.png";
 import socket from "../../../socket/Socket";
+import logo from "../../../assets/logo (1).png";
+import { useReactToPrint } from "react-to-print";
 
 Modal.setAppElement("#root");
 
 const nombreElementPage = 5;
 
 const TableEmpolye = () => {
+  const componentRef = React.useRef();
+  const handlePrint = useReactToPrint({
+    content: () => componentRef.current,
+  });
   const {
     modalIsOpen,
     openModal,
@@ -138,6 +144,43 @@ const TableEmpolye = () => {
   }
   return (
     <div className="user">
+      <div
+        className="carteImprimer"
+        style={{ position: "absolute", top: "-1000%", opacity: "0" }}
+      >
+        <div className="cartPro" ref={componentRef}>
+          <div className="entete">
+            {<img src={logo} alt="logo" height={80} width={80} />}
+            <h3>
+              Etablissement hospitalier Priveé <br />
+              la colombe
+            </h3>
+            {<img src={logo} alt="logo" height={80} width={80} />}
+          </div>
+          <div className="info">
+            <picture>
+              {currentObjet.photo && (
+                <img src={currentObjet.photo} alt="profil" />
+              )}
+            </picture>
+            <div className="info_employe">
+              <p>
+                <strong>Nom :</strong>
+                {`${currentObjet && currentObjet.nom}`}
+              </p>
+              <p>
+                <strong>Prénom :</strong>
+                {`${currentObjet && currentObjet.prenom}`}
+              </p>
+              <p>
+                <strong>Fonction :</strong>
+                {`${currentObjet && currentObjet.specialite}`}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <ToastContainer />
       <h2>Liste des Employés</h2>
       <div className="user_table">
@@ -266,7 +309,7 @@ const TableEmpolye = () => {
               }}
             >
               <div className="modal_profil">
-                <h2>Détails du Médecin</h2>
+                <h2 style={{ margin: "0" }}>Détails du Médecin</h2>
                 <hr />
                 <picture>
                   <img
@@ -342,8 +385,17 @@ const TableEmpolye = () => {
                 </div>
               </div>
 
-              <div className="modal_btn">
-                <button onClick={closeModal1}>Fermer</button>
+              <div
+                className="modal_btn"
+                style={{ display: "flex", justifyContent: "space-between" }}
+              >
+                <button
+                  onClick={closeModal1}
+                  style={{ backgroundColor: "darkred" }}
+                >
+                  Fermer
+                </button>
+                <button onClick={handlePrint}>Imprimer</button>
               </div>
             </Modal>
           </table>

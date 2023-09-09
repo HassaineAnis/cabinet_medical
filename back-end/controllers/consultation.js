@@ -84,7 +84,8 @@ exports.afficherConsultationPatient = (req, res, next) => {
 exports.afficherDetailConsultation = (req, res, next) => {
   console.log("details consultation");
   Consultation.findOne({ _id: req.params.id })
-    .populate("patient", "nom prenom age") // Populate the 'patient' field with the patient's details
+    .populate("patient", "nom prenom age")
+    .populate("medecin", "nom prenom ")
     .exec()
     .then((consult) => {
       if (!consult) {

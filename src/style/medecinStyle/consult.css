@@ -4,6 +4,7 @@
   flex-direction: column;
   gap: 1rem;
   position: relative;
+  width: 100%;
 }
 .details_container img {
   display: none;

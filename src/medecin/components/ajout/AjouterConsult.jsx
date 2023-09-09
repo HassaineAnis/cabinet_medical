@@ -373,6 +373,12 @@ const AjouterConsult = () => {
                   <option value={`/arret_travaille/${id}`}>
                     Arret de travail
                   </option>
+                  <option value={`/circoncision/${id}`}>
+                    Certificat de Circoncision
+                  </option>
+                  <option value={`/debutGrossesse/${id}`}>
+                    Debut Grossesse
+                  </option>
                 </select>
                 <div
                   className="btn_ajout"

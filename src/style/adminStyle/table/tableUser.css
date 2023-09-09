@@ -4,12 +4,40 @@
   gap: 1rem;
   width: 95%;
   font-family: Inter, sans-serif;
+  position: relative;
 }
 .user h2 {
   align-self: center;
   font-size: 2rem;
   font-weight: 500;
   letter-spacing: 0.0125em;
+}
+.user .carteImprimer .cartPro {
+  width: 140mm;
+  height: 90mm;
+  border: 2px solid black;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  background-color: red;
+}
+.user .carteImprimer .cartPro .entete {
+  display: flex;
+  justify-content: center;
+}
+.user .carteImprimer .cartPro .entete h3 {
+  text-align: center;
+}
+.user .carteImprimer .cartPro .info {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+}
+.user .carteImprimer .cartPro .info picture {
+  width: 35mm;
+  height: 40mm;
+  border: 2px dashed;
 }
 .user .user_table {
   width: 100%;
@@ -251,5 +279,42 @@
   100% {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+@media print {
+  .cartPro {
+    width: 140mm;
+    height: 90mm;
+    border: 1px dashed;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    background-color: #fff;
+  }
+  .cartPro .entete {
+    display: flex;
+    justify-content: center;
+  }
+  .cartPro .entete h3 {
+    text-align: center;
+  }
+  .cartPro .info {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+  }
+  .cartPro .info picture {
+    padding: 1px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 35mm;
+    height: 40mm;
+    border: 1px dashed;
+  }
+  .cartPro .info picture img {
+    width: 100%;
+    height: 100%;
   }
 }/*# sourceMappingURL=tableUser.css.map */

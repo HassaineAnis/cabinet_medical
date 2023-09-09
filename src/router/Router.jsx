@@ -20,6 +20,8 @@ import PrivateSurveillant from "./PrivateSurveillant";
 import SurveillantApp from "../surveillant/App";
 import PrivateReceptionniste from "./PrivateReceptionniste";
 import ReceptionnisteApp from "../receptionniste/App";
+import Circoncision from "../medecin/components/documentMedical/Circoncision";
+import DebutGross from "../medecin/components/documentMedical/DebutGross";
 
 function Router() {
   return (
@@ -29,6 +31,9 @@ function Router() {
           <Routes>
             <Route path="/ordonnance/:id" element={<Ordonnance />} />
             <Route path="/arret_travaille/:id" element={<ArretTravaille />} />
+            <Route path="/circoncision/:id" element={<Circoncision />} />
+            <Route path="/debutGrossesse/:id" element={<DebutGross />} />
+
             {/** Protection de l'ecpace Admin */}
             <Route element={<PrivateRoute />}>
               <Route path="/admin/*" element={<AdminApp />} />
