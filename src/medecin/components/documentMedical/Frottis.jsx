@@ -6,26 +6,26 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useReactToPrint } from "react-to-print";
 import { DocumentContext } from "../../../util/context/Context";
 import format from "date-fns/format";
-
-const Circoncision = () => {
+const Frottis = () => {
   const { documents, setDocuments } = useContext(DocumentContext);
   const { id } = useParams();
   const navigate = useNavigate();
   const navigation = () => {
     navigate(-1);
   };
-  const dataString = sessionStorage.getItem("user");
-  const data = dataString && JSON.parse(dataString);
+
   const componentRef = React.useRef();
   const handlePrint = useReactToPrint({
     content: () => componentRef.current,
   });
-  const [fils, setFils] = useState("");
+
   const [date, setDate] = useState(format(new Date(), "yyyy-MM-dd"));
+  const [Parite, setParite] = useState("");
+  const [Examen, setExamen] = useState("");
   const saveDocument = () => {
     const documentData = {
-      titre: "circoncision",
-      donnes: { date: date, parent: fils },
+      titre: "frottis cervico vaginal",
+      donnes: { date: date, Parite: Parite, Examen: Examen },
     };
     setDocuments([...documents, documentData]);
     navigate(-1);
@@ -86,38 +86,39 @@ const Circoncision = () => {
                 <strong
                   style={{ textDecoration: "underline", textAlign: "center" }}
                 >
-                  Certificat de circoncision
+                  Frottis Cervico Vaginal
                 </strong>
               </h2>
 
               <p>
-                <strong>
-                  Je soussigné(e), certifie avoir pratiqué ce jour
-                </strong>
+                <strong>Nom:</strong>
+                {` ${patient && patient.nom}`}
               </p>
               <p>
-                <strong>Une circoncision à l'enfant :</strong>
-                {`${patient && patient.nom} ${patient && patient.prenom}`}
+                <strong>Prénom:</strong>
+                {` ${patient && patient.prenom}`}
               </p>
               <p>
-                <strong>Agé de : </strong>
-                {`${patient && patient.age}`}
+                <strong>Age :</strong>
+                {` ${patient && patient.age} `}
                 <strong>ans</strong>
               </p>
               <p>
-                <strong>Fils de :{` ${fils}`}</strong>
+                <strong>Parité:</strong>
+                {` ${Parite}`}
               </p>
+              <p>
+                <strong>Examen du col:</strong>
+                {` ${Examen}`}
+              </p>
+
+              <br />
+              <br />
+              <br />
               <p style={{ textAlign: "center" }}>
-                Certificat établi pour servir et faire valoir ce qui est de
-                droit.
+                <strong>Prière faire lecture cytologique.</strong>
               </p>
-              <p style={{ textAlign: "right" }}>
-                <strong style={{ textDecoration: "underline" }}>
-                  Le chirurgien
-                </strong>
-                <br />
-                {`${data.nom} ${data.prenom}`}
-              </p>
+
               <div className="bas-page">
                 <hr className="no_print" />
                 <p>
@@ -147,14 +148,23 @@ const Circoncision = () => {
               />
             </div>
             <div className="input_container">
-              <label htmlFor="papa">Fils de</label>
+              <label htmlFor="parite">Parité</label>
               <input
                 type="text"
-                name="papa"
-                id="papa"
-                required
-                onChange={(e) => setFils(e.target.value)}
-                value={fils}
+                name="parite"
+                id="parite"
+                onChange={(e) => setParite(e.target.value)}
+                value={Parite}
+              />
+            </div>
+            <div className="input_container">
+              <label htmlFor="col">Examen du col</label>
+              <input
+                type="text"
+                name="col"
+                id="col"
+                onChange={(e) => setExamen(e.target.value)}
+                value={Examen}
               />
             </div>
           </div>
@@ -171,4 +181,4 @@ const Circoncision = () => {
   );
 };
 
-export default Circoncision;
+export default Frottis;

@@ -32,6 +32,38 @@
   align-items: center;
   list-style: none;
 }
+.header_medecin .header_medecin_menu .header_medecin_menu_liste .dropdown {
+  position: relative;
+}
+.header_medecin .header_medecin_menu .header_medecin_menu_liste .dropdown .dropdown-menu {
+  border-radius: 4px;
+  background-color: rgba(0, 128, 0, 0.849);
+  width: -moz-max-content;
+  width: max-content;
+  padding: 0.5rem;
+  list-style: none;
+  height: auto;
+  position: absolute;
+  top: 100%;
+  left: 100%;
+  transform-origin: center;
+  transform: scaleY(0);
+  transition: transform 200ms ease;
+}
+.header_medecin .header_medecin_menu .header_medecin_menu_liste .dropdown .dropdown-menu li {
+  width: 100%;
+}
+.header_medecin .header_medecin_menu .header_medecin_menu_liste .dropdown .dropdown-menu li .lien {
+  display: flex;
+  justify-content: flex-start;
+  text-decoration: underline;
+}
+.header_medecin .header_medecin_menu .header_medecin_menu_liste .dropdown .dropdown-menu li:hover {
+  background-color: darkgreen;
+}
+.header_medecin .header_medecin_menu .header_medecin_menu_liste .dropdown:hover .dropdown-menu {
+  transform: scaleY(1);
+}
 .header_medecin .header_medecin_menu .header_medecin_menu_liste li {
   height: 3rem;
   width: 10rem;
@@ -43,6 +75,14 @@
   display: flex;
   justify-content: center;
   align-items: center;
+}
+.header_medecin .header_medecin_menu .header_medecin_menu_liste li .lien .arrow-down {
+  border: solid #fff;
+  border-width: 0 2px 2px 0;
+  display: inline-block;
+  padding: 3px;
+  transform: rotate(45deg);
+  margin-left: 5px;
 }
 .header_medecin .header_medecin_menu .header_medecin_menu_liste li:hover {
   background-color: darkgreen;

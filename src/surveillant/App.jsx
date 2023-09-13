@@ -7,6 +7,7 @@ import Navette from "./page/Navette";
 import AjouterNavette from "./components/ajout/AjouterNavette";
 import ModifierNavette from "./components/modifer/ModifierNavette";
 import {
+  NaissanceProvider,
   NavetteProvider,
   SurveillanceProvider,
   SurveilleBabyProvider,
@@ -23,6 +24,9 @@ import ModifierSurveillance from "./components/modifer/ModifierSurveillance";
 import Baby from "./page/Baby";
 import AjouterBaby from "./components/ajout/AjouterBaby";
 import ModifierBaby from "./components/modifer/ModifierBaby";
+import AjouterNaissance from "./components/ajout/AjouterNaissance";
+import Naissance from "./page/Naissance";
+import ModifierNaissance from "./components/modifer/ModifierNaissance";
 const App = () => {
   return (
     <div className="medecinApp">
@@ -30,48 +34,60 @@ const App = () => {
       <NavetteProvider>
         <SurveillanceProvider>
           <SurveilleBabyProvider>
-            <Routes>
-              <Route path="/" element={<Stock />}>
-                <Route path="/produit/ajouter" element={<AjouterProduit />} />
-                <Route
-                  path="/produit/modifier/:id"
-                  element={<ModifierProduit />}
-                />
-                <Route path="/produit/details/:id" element={<TableQnt />} />
-                <Route
-                  path="/produit/quantite/ajouter/:id"
-                  element={<AjouterQntProduit />}
-                />{" "}
-                <Route
-                  path="/produit/quantite/retirer/:id"
-                  element={<RetrirerQntProduit />}
-                />
-              </Route>
+            <NaissanceProvider>
+              <Routes>
+                <Route path="/" element={<Stock />}>
+                  <Route path="/produit/ajouter" element={<AjouterProduit />} />
+                  <Route
+                    path="/produit/modifier/:id"
+                    element={<ModifierProduit />}
+                  />
+                  <Route path="/produit/details/:id" element={<TableQnt />} />
+                  <Route
+                    path="/produit/quantite/ajouter/:id"
+                    element={<AjouterQntProduit />}
+                  />{" "}
+                  <Route
+                    path="/produit/quantite/retirer/:id"
+                    element={<RetrirerQntProduit />}
+                  />
+                </Route>
 
-              <Route path="/navette" element={<Navette />}>
-                <Route path="/navette/ajouter" element={<AjouterNavette />} />
-                <Route
-                  path="/navette/modifier/:id"
-                  element={<ModifierNavette />}
-                />
-              </Route>
+                <Route path="/navette" element={<Navette />}>
+                  <Route path="/navette/ajouter" element={<AjouterNavette />} />
+                  <Route
+                    path="/navette/modifier/:id"
+                    element={<ModifierNavette />}
+                  />
+                </Route>
 
-              <Route path="/surveillance" element={<Surveillance />}>
-                <Route
-                  path="/surveillance/ajouter"
-                  element={<AjouterSurveillance />}
-                />
-                <Route
-                  path="/surveillance/modifier/:id"
-                  element={<ModifierSurveillance />}
-                />
-              </Route>
-              <Route path="/Baby" element={<Baby />}>
-                <Route path="/Baby/ajouter" element={<AjouterBaby />} />
-                <Route path="/Baby/modifier/:id" element={<ModifierBaby />} />
-              </Route>
-              <Route path="/profil" element={<Profil />} />
-            </Routes>
+                <Route path="/surveillance" element={<Surveillance />}>
+                  <Route
+                    path="/surveillance/ajouter"
+                    element={<AjouterSurveillance />}
+                  />
+                  <Route
+                    path="/surveillance/modifier/:id"
+                    element={<ModifierSurveillance />}
+                  />
+                </Route>
+                <Route path="/Baby" element={<Baby />}>
+                  <Route path="/Baby/ajouter" element={<AjouterBaby />} />
+                  <Route path="/Baby/modifier/:id" element={<ModifierBaby />} />
+                </Route>
+                <Route path="/naissance" element={<Naissance />}>
+                  <Route
+                    path="/naissance/ajouter"
+                    element={<AjouterNaissance />}
+                  />
+                  <Route
+                    path="/naissance/modifier/:id"
+                    element={<ModifierNaissance />}
+                  />
+                </Route>
+                <Route path="/profil" element={<Profil />} />
+              </Routes>
+            </NaissanceProvider>
           </SurveilleBabyProvider>
         </SurveillanceProvider>
       </NavetteProvider>

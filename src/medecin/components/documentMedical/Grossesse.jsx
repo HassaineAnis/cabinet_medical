@@ -7,25 +7,31 @@ import { useReactToPrint } from "react-to-print";
 import { DocumentContext } from "../../../util/context/Context";
 import format from "date-fns/format";
 
-const Circoncision = () => {
+const Grossesse = () => {
   const { documents, setDocuments } = useContext(DocumentContext);
   const { id } = useParams();
   const navigate = useNavigate();
   const navigation = () => {
     navigate(-1);
   };
-  const dataString = sessionStorage.getItem("user");
-  const data = dataString && JSON.parse(dataString);
+ 
   const componentRef = React.useRef();
   const handlePrint = useReactToPrint({
     content: () => componentRef.current,
   });
-  const [fils, setFils] = useState("");
+  const [epou, setEpou] = useState("");
+  const [datePrevu, setDatePrevu] = useState("");
+  const [nombreMois, setMois] = useState("");
   const [date, setDate] = useState(format(new Date(), "yyyy-MM-dd"));
   const saveDocument = () => {
     const documentData = {
-      titre: "circoncision",
-      donnes: { date: date, parent: fils },
+      titre: "certificat de grossesse",
+      donnes: {
+        date: date,
+        epou: epou,
+        nombreMois: nombreMois,
+        datePrevu: datePrevu,
+      },
     };
     setDocuments([...documents, documentData]);
     navigate(-1);
@@ -76,7 +82,17 @@ const Circoncision = () => {
               <img src={logo} alt="Logo Administration" />
             </div>
 
-            <div className="partie1" style={{ justifyContent: "flex-end" }}>
+            <div
+              className="partie1"
+              style={{ justifyContent: "space-between" }}
+            >
+              <p style={{ textAlign: "left", fontSize: ".9rem" }}>
+                <strong>Dr. CHALAH Md. Bellaïd</strong>
+                <br />
+                GYNECOLOGIE
+                <br />
+                10 1273 T.Z.O
+              </p>
               <p>
                 <strong>DBK LE :</strong> <span>{`${date}`}</span>
               </p>
@@ -86,38 +102,37 @@ const Circoncision = () => {
                 <strong
                   style={{ textDecoration: "underline", textAlign: "center" }}
                 >
-                  Certificat de circoncision
+                  CERTIFICAT DE GROSSESSE
                 </strong>
               </h2>
 
               <p>
                 <strong>
-                  Je soussigné(e), certifie avoir pratiqué ce jour
+                  Je soussigné(e), certifie avoir examiner ce jour
                 </strong>
               </p>
               <p>
-                <strong>Une circoncision à l'enfant :</strong>
-                {`${patient && patient.nom} ${patient && patient.prenom}`}
+                <strong>Madame :</strong>
+                {` ${patient && patient.nom} ${patient && patient.prenom}`}
               </p>
               <p>
-                <strong>Agé de : </strong>
-                {`${patient && patient.age}`}
+                <strong>Epouse de: </strong>
+                {` ${epou}`}
+              </p>
+              <p>
+                <strong>Agée de :</strong>
+                {` ${patient && patient.age} `}
                 <strong>ans</strong>
               </p>
               <p>
-                <strong>Fils de :{` ${fils}`}</strong>
+                <strong>Et déclare qu'elle présente une grossesse de :</strong>
+                {` ${nombreMois} mois`}
               </p>
-              <p style={{ textAlign: "center" }}>
-                Certificat établi pour servir et faire valoir ce qui est de
-                droit.
+              <p>
+                <strong>L'accouchement prévu le :</strong>
+                {` ${datePrevu && new Date(datePrevu).toLocaleDateString()}`}
               </p>
-              <p style={{ textAlign: "right" }}>
-                <strong style={{ textDecoration: "underline" }}>
-                  Le chirurgien
-                </strong>
-                <br />
-                {`${data.nom} ${data.prenom}`}
-              </p>
+
               <div className="bas-page">
                 <hr className="no_print" />
                 <p>
@@ -147,14 +162,34 @@ const Circoncision = () => {
               />
             </div>
             <div className="input_container">
-              <label htmlFor="papa">Fils de</label>
+              <label htmlFor="papa">Epouse De</label>
               <input
                 type="text"
-                name="papa"
                 id="papa"
                 required
-                onChange={(e) => setFils(e.target.value)}
-                value={fils}
+                onChange={(e) => setEpou(e.target.value)}
+                value={epou}
+              />
+            </div>
+            <div className="input_container">
+              <label htmlFor="mois">Mois</label>
+              <input
+                type="number"
+                id="papa"
+                required
+                onChange={(e) => setMois(e.target.value)}
+                value={nombreMois}
+              />
+            </div>
+
+            <div className="input_container">
+              <label htmlFor="dateAccouchement">Date</label>
+              <input
+                type="date"
+                id="dateAccouchement"
+                onChange={(e) => setDatePrevu(e.target.value)}
+                value={datePrevu}
+                required
               />
             </div>
           </div>
@@ -171,4 +206,4 @@ const Circoncision = () => {
   );
 };
 
-export default Circoncision;
+export default Grossesse;

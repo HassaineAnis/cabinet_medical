@@ -411,3 +411,88 @@ export const SurveilleBabyProvider = ({ children }) => {
     </SurveilleBabyContext.Provider>
   );
 };
+
+export const NaissanceContext = createContext();
+export const NaissanceProvider = ({ children }) => {
+  const [numero, setNumero] = useState("");
+  const [acteN, setActeN] = useState("");
+  const [grosseLettre, setGrosseLettre] = useState("");
+  const [lanDeuxMille, setLanDeuxMille] = useState("");
+  const [dateMariage, setDateMariage] = useState("");
+  const [lfNumero, setLfNumero] = useState("");
+  const [du, setDu] = useState("");
+  const [heure, setHeure] = useState("");
+  const [jour, setJour] = useState("");
+  const [mois, setMois] = useState("");
+  const [minute, setMinute] = useState("");
+  const [dame, setDame] = useState("");
+  const [ageDame, setAgeDame] = useState("");
+  const [lieuDame, setLieuDame] = useState("");
+  const [professionDame, setProfessionDame] = useState("");
+  const [epou, setEpou] = useState("");
+  const [ageEpou, setAgeEpou] = useState("");
+  const [lieuEpou, setLieuEpou] = useState("");
+  const [professionEpou, setProfessionEpou] = useState("");
+  const [domicile, setDomicile] = useState("");
+  const [sexeEnfant, setSexeEnfant] = useState("");
+  const [prenomEnfant, setPrenomEnfant] = useState("");
+  const [dateDame, setDateDame] = useState("");
+  const [dateEpou, setDateEpou] = useState("");
+
+  return (
+    <NaissanceContext.Provider
+      value={{
+        dateEpou,
+        setDateEpou,
+        dateDame,
+        setDateDame,
+        acteN,
+        setActeN,
+        lanDeuxMille,
+        setLanDeuxMille,
+        numero,
+        setNumero,
+        grosseLettre,
+        setGrosseLettre,
+        dateMariage,
+        setDateMariage,
+        lfNumero,
+        setLfNumero,
+        du,
+        setDu,
+        mois,
+        setMois,
+        jour,
+        setJour,
+        heure,
+        setHeure,
+        minute,
+        dame,
+        setDame,
+        setMinute,
+        ageDame,
+        setAgeDame,
+        lieuEpou,
+        setLieuEpou,
+        lieuDame,
+        setLieuDame,
+        professionDame,
+        setProfessionDame,
+        epou,
+        setEpou,
+        ageEpou,
+        setAgeEpou,
+        professionEpou,
+        setProfessionEpou,
+        domicile,
+        setDomicile,
+        sexeEnfant,
+        setSexeEnfant,
+        prenomEnfant,
+        setPrenomEnfant,
+      }}
+    >
+      {children}
+    </NaissanceContext.Provider>
+  );
+};

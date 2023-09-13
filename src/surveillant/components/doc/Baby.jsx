@@ -5,27 +5,26 @@ import { listeBaby } from "../../../data/surveillant/ListeBaby";
 const Baby = ({ reference, data }) => {
   const {
     nne,
-    SetNne,
+
     date,
-    setDate,
+
     heure,
-    setHeure,
+
     sexe,
-    setSexe,
+
     accouchement,
-    setAccouchement,
+
     couveuse,
-    setCouvveuse,
+
     nom,
-    setNom,
+
     prenom,
-    setPrenom,
+
     groupage,
-    setGroupage,
+
     documentData,
-    setDocumentData,
+
     antiD,
-    setAntiD,
   } = useContext(SurveilleBabyContext);
   const afficherData = (titre) => {
     return documentData.find((item) => item.titre === titre);

@@ -5,7 +5,45 @@ exports.afficherProduit = async (req, res, next) => {
   console.log("afficher produits...", req.body);
   try {
     const produits = await Produit.find();
-    res.status(200).json(produits);
+
+    const produitsAvecQuantite = [];
+
+    for (const produit of produits) {
+      // Récupérez les quantités ajoutées pour ce produit
+      const quantitesAjoutees = await QntProduit.find({
+        produit: produit._id,
+        typeOperation: "ajout",
+      });
+
+      // Récupérez les quantités retirées pour ce produit
+      const quantitesRetirees = await QntProduit.find({
+        produit: produit._id,
+        typeOperation: "retrait",
+      });
+
+      // Calculez la quantité totale ajoutée
+      const quantiteTotaleAjoutee = quantitesAjoutees.reduce(
+        (total, quantiteAjoutee) => total + quantiteAjoutee.quantite,
+        0
+      );
+
+      // Calculez la quantité totale retirée
+      const quantiteTotaleRetiree = quantitesRetirees.reduce(
+        (total, quantiteRetiree) => total + quantiteRetiree.quantite,
+        0
+      );
+
+      // Calculez la quantité totale pour ce produit
+      const quantiteTotale = quantiteTotaleAjoutee - quantiteTotaleRetiree;
+
+      // Ajoutez le produit avec sa quantité totale au tableau de résultats
+      produitsAvecQuantite.push({
+        ...produit.toObject(),
+        quantiteTotale,
+      });
+    }
+
+    res.status(200).json(produitsAvecQuantite);
   } catch (e) {
     return res.status(400).json({ e });
   }

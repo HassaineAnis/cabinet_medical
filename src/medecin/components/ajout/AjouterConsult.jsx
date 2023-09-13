@@ -377,8 +377,27 @@ const AjouterConsult = () => {
                     Certificat de Circoncision
                   </option>
                   <option value={`/debutGrossesse/${id}`}>
-                    Debut Grossesse
+                    Certificat De Debut Grossesse
                   </option>
+                  <option value={`/grossesse/${id}`}>
+                    Certificat De Grossesse
+                  </option>
+                  <option value={`/frottis/${id}`}>
+                    frottis Cervico Vaginal
+                  </option>
+                  <option value={`/pneumo/${id}`}>
+                    Certificat De Pneumo Phtisiologie
+                  </option>
+                  <option value={`/certificatMedical/${id}`}>
+                    Certificat médical général
+                  </option>
+                  <option value={`/obstétricale/${id}`}>
+                    COMPTE RENDU D'ECHOGRAPHIE OBSTETRICALE
+                  </option>
+                  <option value={`/pelvienne/${id}`}>
+                    COMPTE RENDU D'ECHOGRAPHIE PELVIENNE
+                  </option>
+                  <option value={`/bilan/${id}`}>Bilan</option>
                 </select>
                 <div
                   className="btn_ajout"

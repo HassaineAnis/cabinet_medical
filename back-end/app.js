@@ -18,6 +18,7 @@ const produitRoutes = require("./routes/produit");
 const qntProduitRoutes = require("./routes/qntProduit");
 const surveillanceRoutes = require("./routes/surveillance");
 const surveillanceBebeRoutes = require("./routes/surveillanceBebe");
+const naissanceRoutes = require("./routes/acteNaissance");
 
 const app = express();
 const server = http.createServer(app);
@@ -72,6 +73,7 @@ app.use("/api/produit", produitRoutes);
 app.use("/api/quantite", qntProduitRoutes);
 app.use("/api/surveillance", surveillanceRoutes);
 app.use("/api/bebe/surveillance", surveillanceBebeRoutes);
+app.use("/api/naissance", naissanceRoutes);
 
 io.on("connection", (socket) => {
   console.log(socket.id);

@@ -7,7 +7,7 @@ import { useReactToPrint } from "react-to-print";
 import { DocumentContext } from "../../../util/context/Context";
 import format from "date-fns/format";
 
-const DebutGross = () => {
+const Obstetricale = () => {
   const { documents, setDocuments } = useContext(DocumentContext);
   const navigate = useNavigate();
   const navigation = () => {
@@ -45,12 +45,11 @@ const DebutGross = () => {
     fetchPatient();
   }, []);
 
-  const [dateDebut, setDateDebut] = useState("");
   const [ddr, setDdr] = useState("");
   const [date, setDate] = useState(format(new Date(), "yyyy-MM-dd"));
-  const [gsEpou, setGsEpou] = useState("");
+  const [gsEpou, setGsEpou] = useState("A+");
   const [nomEpou, setNom] = useState("");
-  const [gs, setGs] = useState("");
+  const [gs, setGs] = useState("A+");
   const [g, setG] = useState("");
   const [p, setP] = useState("");
   const [a, setA] = useState("");
@@ -58,21 +57,35 @@ const DebutGross = () => {
   const [poid, setPoid] = useState("");
   const [tension, setTension] = useState("");
   const [tpa, setTpa] = useState("");
-  const [ddrc, setDdrc] = useState("");
   const [termeA, setTermeA] = useState("");
-  const [termeC, setTermeC] = useState("");
-  const [cardiaque, setCardiaque] = useState("");
+  const [presentation, setPresentation] = useState("");
+  const [vitalite, setVitalite] = useState("");
+  const [cn, setCn] = useState("");
+  const [lf, setLf] = useState("");
+  const [bip, setBip] = useState("");
+  const [ct, setCt] = useState("");
+  const [pa, setPa] = useState("");
+  const [coeur, setCoeur] = useState("");
   const [lcc, setLcc] = useState("");
-  const [volume, setVolume] = useState("");
-  const [aspect, setAspect] = useState("");
+  const [cavite, setCavite] = useState("");
+  const [vaisseau, setVaisseau] = useState("");
+  const [rachis, setRachis] = useState("");
+  const [vessie, setVessie] = useState("");
+  const [reins, setReins] = useState("");
+  const [estomac, setEstomac] = useState("");
+  const [membre, setMembre] = useState("");
+  const [placenta, setPlacenta] = useState("");
+  const [liquide, setLiquide] = useState("");
+  const [cardon, setCardon] = useState("");
+
   const [conclusion, setConclusion] = useState("");
   const [nombre, setNombre] = useState("");
   const saveDocument = () => {
     const documentData = {
-      titre: "debut grossesse",
+      titre: "echographie obstétricale",
       donnes: {
         date: date,
-        dateDebut: dateDebut,
+
         ddr: ddr,
         gs: gs,
         gsEpou: gsEpou,
@@ -84,13 +97,27 @@ const DebutGross = () => {
         poid: poid,
         tension: tension,
         tpa: tpa,
-        ddrc: ddrc,
+        coeur: coeur,
         termeA: termeA,
-        termeC: termeC,
-        cardiaque: cardiaque,
+        presentation: presentation,
+        vitalite: vitalite,
+        cn: cn,
+        lf: lf,
+        bip: bip,
+        ct: ct,
+        pa: pa,
         lcc: lcc,
-        volume: volume,
-        aspect: aspect,
+        cavite: cavite,
+        vaisseau: vaisseau,
+        rachis: rachis,
+        vessie: vessie,
+        reins: reins,
+        estomac: estomac,
+        membre: membre,
+        liquide: liquide,
+        placenta: placenta,
+        cardon: cardon,
+
         conclusion: conclusion,
         nombre: nombre,
       },
@@ -134,7 +161,7 @@ const DebutGross = () => {
                         textAlign: "center",
                       }}
                     >
-                      COMPTE RENDU D'ECHOGRAPHIE D'UNE GROSSESSE DEBUTANTE
+                      COMPTE RENDU D'ECHOGRAPHIE OBSTETRICALE
                     </strong>
                   </h2>
                 </div>
@@ -142,124 +169,219 @@ const DebutGross = () => {
                   <p style={{ textAlign: "right" }}>
                     <strong>DBK LE :</strong> <span>{`${date}`}</span>
                   </p>
-
                   <div style={{ display: "flex", gap: "1rem" }}>
-                    <p>
+                    <p style={{ margin: "0" }}>
                       <strong>Nom & Prénom:</strong>
                       {` ${patient && patient.nom} ${
                         patient && patient.prenom
                       }`}
                     </p>
-                    <p>
+                    <p style={{ margin: "0" }}>
+                      {" "}
                       <strong>Age:</strong>
                       {` ${patient && patient.age}`}
                     </p>
-                    <p>
+                    <p style={{ margin: "0" }}>
                       <strong>Gs:</strong>
                       {` ${gs}`}
                     </p>
                   </div>
                   <div style={{ display: "flex", gap: "1rem" }}>
-                    <p>
+                    <p style={{ margin: "0" }}>
                       <strong>Nom de l'époux:</strong>
                       {` ${nomEpou}`}
                     </p>
-                    <p>
+                    <p style={{ margin: "0" }}>
                       <strong>Gs</strong>
                       {` ${gsEpou}`}
                     </p>
                   </div>
                   <div style={{ display: "flex", gap: "1rem" }}>
-                    <p>
+                    <p style={{ margin: "0" }}>
                       <strong>G:</strong>
                       {` ${g}`}
                     </p>
-                    <p>
+                    <p style={{ margin: "0" }}>
                       <strong>P:</strong>
                       {` ${p}`}
                     </p>
-                    <p>
+                    <p style={{ margin: "0" }}>
                       <strong>A:</strong>
                       {` ${a}`}
                     </p>
-                    <p>
+                    <p style={{ margin: "0" }}>
                       <strong>C:</strong>
                       {` ${c}`}
                     </p>
                   </div>
                   <div style={{ display: "flex", gap: "1rem" }}>
-                    <p>
+                    <p style={{ margin: "0" }}>
                       <strong>Poid:</strong>
                       {` ${poid}`}
                     </p>
-                    <p>
+                    <p style={{ margin: "0" }}>
                       <strong>Tension Artériel:</strong>
                       {` ${tension}`}
                     </p>
                   </div>
                   <div style={{ display: "flex", gap: "1rem" }}>
-                    <p>
+                    <p style={{ margin: "0" }}>
                       <strong>DDR:</strong>
                       {` ${ddr && new Date(ddr).toLocaleDateString()}`}
                     </p>
-                    <p>
+                    <p style={{ margin: "0" }}>
                       <strong>Terme Actuel:</strong>
                       {` ${termeA}`}
                     </p>
-                    <p>
+                    <p style={{ margin: "0" }}>
                       <strong>TPA:</strong>
                       {` ${tpa}`}
                     </p>
                   </div>
                   <div style={{ display: "flex", gap: "1rem" }}>
-                    <p>
-                      <strong>DDRC:</strong>
-                      {` ${ddrc}`}
-                    </p>
-                    <p>
-                      <strong>Terme Corrigé:</strong>
-                      {` ${termeC}`}
-                    </p>
-                  </div>
-                  <div style={{ display: "flex", gap: "1rem" }}>
-                    <p>
-                      <strong>Date de début de grossesse:</strong>
-                      {` ${
-                        dateDebut && new Date(dateDebut).toLocaleDateString()
-                      }`}
-                    </p>
-                    <p>
-                      <strong>Nombre de fœtus:</strong>
+                    <p style={{ margin: "0" }}>
+                      <strong>Nombre de fœtus :</strong>
                       {` ${nombre}`}
                     </p>
+                    <p style={{ margin: "0" }}>
+                      <strong>Présentation:</strong>
+                      {` ${presentation}`}
+                    </p>
+                    <p style={{ margin: "0" }}>
+                      <strong>Vitalité:</strong>
+                      {` ${vitalite}`}
+                    </p>
                   </div>
+                  <p
+                    className="point"
+                    style={{
+                      position: "relative",
+                      left: "3rem",
+                      marginBottom: "0",
+                    }}
+                  >
+                    <span style={{ textDecoration: "underline" }}>
+                      BIOMETRIE
+                    </span>
+                  </p>
+                  <div style={{ display: "flex", gap: "3rem" }}>
+                    <div
+                      style={{
+                        display: "flex",
+                        flexDirection: "column",
+                        gap: "1rem",
+                      }}
+                    >
+                      <p style={{ margin: "0" }}>
+                        <strong>LCC:</strong>
+                        {` ${lcc} mm`}
+                      </p>
+                      <p style={{ margin: "0" }}>
+                        <strong>CN:</strong>
+                        {` ${cn} mm`}
+                      </p>
+                      <p style={{ margin: "0" }}>
+                        <strong>LF:</strong>
+                        {` ${lf} mm`}
+                      </p>
+                    </div>
+                    <div
+                      style={{
+                        display: "flex",
+                        flexDirection: "column",
+                        gap: "1rem",
+                      }}
+                    >
+                      <p style={{ margin: "0" }}>
+                        <strong>BIP:</strong>
+                        {` ${bip} mm`}
+                      </p>
+                      <p style={{ margin: "0" }}>
+                        <strong>CT:</strong>
+                        {` ${ct} mm`}
+                      </p>
+                      <p style={{ margin: "0" }}>
+                        <strong>PA:</strong>
+                        {` ${pa} mm`}
+                      </p>
+                    </div>
+                  </div>
+                  <p
+                    className="point"
+                    style={{
+                      position: "relative",
+                      left: "3rem",
+                      marginBottom: "0",
+                    }}
+                  >
+                    <span style={{ textDecoration: "underline" }}>
+                      MORPHOLOGIE
+                    </span>
+                  </p>
                   <div style={{ display: "flex", gap: "1rem" }}>
-                    <p>
-                      <strong>Activité cardiaque:</strong>
-                      {` ${cardiaque}`}
+                    <p style={{ margin: "0" }}>
+                      <strong>Position du coeur:</strong>
+                      {` ${coeur}`}
                     </p>
-                    <p>
-                      <strong>LCC:</strong>
-                      {` ${lcc}`}
+                    <p style={{ margin: "0" }}>
+                      <strong>Cavités :</strong>
+                      {` ${cavite}`}
+                    </p>
+                    <p style={{ margin: "0" }}>
+                      <strong>Vaisseaux :</strong>
+                      {` ${vaisseau}`}
                     </p>
                   </div>
+                  <p style={{ margin: "0" }}>
+                    <strong>Rachis :</strong>
+                    {` ${rachis}`}
+                  </p>
+                  <p style={{ margin: "0" }}>
+                    <strong>Reins :</strong>
+                    {` ${reins}`}
+                  </p>
                   <div style={{ display: "flex", gap: "1rem" }}>
-                    <p>
-                      <strong>Volume amniotique:</strong>
-                      {` ${volume}`}
+                    <p style={{ margin: "0" }}>
+                      <strong>Vessie:</strong>
+                      {` ${vessie}`}
                     </p>
-                    <p>
-                      <strong>Aspect du placenta:</strong>
-                      {` ${aspect}`}
+                    <p style={{ margin: "0" }}>
+                      <strong>Estomac :</strong>
+                      {` ${estomac}`}
+                    </p>
+                    <p style={{ margin: "0" }}>
+                      <strong>Membres :</strong>
+                      {` ${membre}`}
                     </p>
                   </div>
+                  <p
+                    className="point"
+                    style={{
+                      position: "relative",
+                      left: "3rem",
+                      marginBottom: "0",
+                    }}
+                  >
+                    <span style={{ textDecoration: "underline" }}>ANNEXES</span>
+                  </p>
+                  <p style={{ margin: "0" }}>
+                    <strong>Placenta :</strong>
+                    {` ${placenta}`}
+                  </p>{" "}
+                  <p style={{ margin: "0" }}>
+                    <strong>Liquide amniotique :</strong>
+                    {` ${liquide}`}
+                  </p>{" "}
+                  <p style={{ margin: "0" }}>
+                    <strong>Cardon :</strong>
+                    {` ${cardon}`}
+                  </p>
                   <div>
-                    <p>
+                    <p style={{ margin: "0" }}>
                       <strong>Conclusion:</strong>
                       {` ${conclusion}`}
                     </p>
                   </div>
-
                   <div className="bas-page">
                     <hr className="no_print" />
                     <p>
@@ -427,38 +549,6 @@ const DebutGross = () => {
                   />
                 </div>
                 <div className="input_container">
-                  <label htmlFor="ddrc">DDRC</label>
-                  <input
-                    type="text"
-                    id="ddrc"
-                    required
-                    onChange={(e) => setDdrc(e.target.value)}
-                    value={ddrc}
-                  />
-                </div>{" "}
-                <div className="input_container">
-                  <label htmlFor="terme">Terme Corrigé</label>
-                  <input
-                    type="text"
-                    id="terme"
-                    required
-                    onChange={(e) => setTermeC(e.target.value)}
-                    value={termeC}
-                  />
-                </div>
-                <div className="input_container">
-                  <label htmlFor="dateGrossesse">
-                    Date de début de grossesse
-                  </label>
-                  <input
-                    type="date"
-                    id="dateGrossesse"
-                    required
-                    onChange={(e) => setDateDebut(e.target.value)}
-                    value={dateDebut}
-                  />
-                </div>
-                <div className="input_container">
                   <label htmlFor="foetus">Nombre de foetus</label>
                   <input
                     type="number"
@@ -467,15 +557,25 @@ const DebutGross = () => {
                     onChange={(e) => setNombre(e.target.value)}
                     value={nombre}
                   />
-                </div>{" "}
+                </div>
                 <div className="input_container">
-                  <label htmlFor="cardiaque">Activité cardiaque</label>
+                  <label htmlFor="presentation">Présentation</label>
                   <input
                     type="text"
-                    id="cardiaque"
+                    id="presentation"
+                    onChange={(e) => setPresentation(e.target.value)}
+                    value={presentation}
                     required
-                    onChange={(e) => setCardiaque(e.target.value)}
-                    value={cardiaque}
+                  />
+                </div>
+                <div className="input_container">
+                  <label htmlFor="validite">Vitalité</label>
+                  <input
+                    type="text"
+                    id="validite"
+                    onChange={(e) => setVitalite(e.target.value)}
+                    value={vitalite}
+                    required
                   />
                 </div>
                 <div className="input_container">
@@ -487,25 +587,165 @@ const DebutGross = () => {
                     onChange={(e) => setLcc(e.target.value)}
                     value={lcc}
                   />
-                </div>{" "}
+                </div>
                 <div className="input_container">
-                  <label htmlFor="volume">Volume amniotique</label>
+                  <label htmlFor="cd">CN</label>
                   <input
                     type="text"
-                    id="volume"
+                    id="cd"
+                    onChange={(e) => setCn(e.target.value)}
+                    value={cn}
                     required
-                    onChange={(e) => setVolume(e.target.value)}
-                    value={volume}
                   />
-                </div>{" "}
+                </div>
                 <div className="input_container">
-                  <label htmlFor="aspect">Aspect du placenta</label>
+                  <label htmlFor="lf">LF</label>
                   <input
                     type="text"
-                    id="aspect"
+                    id="lf"
+                    onChange={(e) => setLf(e.target.value)}
+                    value={lf}
                     required
-                    onChange={(e) => setAspect(e.target.value)}
-                    value={aspect}
+                  />
+                </div>
+                <div className="input_container">
+                  <label htmlFor="bip">BIP</label>
+                  <input
+                    type="text"
+                    id="bip"
+                    onChange={(e) => setBip(e.target.value)}
+                    value={bip}
+                    required
+                  />
+                </div>
+                <div className="input_container">
+                  <label htmlFor="ct">CT</label>
+                  <input
+                    type="text"
+                    id="ct"
+                    onChange={(e) => setCt(e.target.value)}
+                    value={ct}
+                    required
+                  />
+                </div>
+                <div className="input_container">
+                  <label htmlFor="pa">PA</label>
+                  <input
+                    type="text"
+                    id="pa"
+                    required
+                    onChange={(e) => setPa(e.target.value)}
+                    value={pa}
+                  />
+                </div>
+                <div className="input_container">
+                  <label htmlFor="Position du cœur">Position du cœur</label>
+                  <input
+                    type="text"
+                    id="Position du cœur"
+                    required
+                    onChange={(e) => setCoeur(e.target.value)}
+                    value={coeur}
+                  />
+                </div>
+                <div className="input_container">
+                  <label htmlFor="cavite">Cavités</label>
+                  <input
+                    type="text"
+                    id="cavite"
+                    required
+                    onChange={(e) => setCavite(e.target.value)}
+                    value={cavite}
+                  />
+                </div>
+                <div className="input_container">
+                  <label htmlFor="vaisseaux">Vaisseaux</label>
+                  <input
+                    type="text"
+                    id="vaisseaux"
+                    onChange={(e) => setVaisseau(e.target.value)}
+                    value={vaisseau}
+                    required
+                  />
+                </div>
+                <div className="input_container">
+                  <label htmlFor="rachis">Rachis</label>
+                  <input
+                    type="text"
+                    id="rachis"
+                    required
+                    onChange={(e) => setRachis(e.target.value)}
+                    value={rachis}
+                  />
+                </div>
+                <div className="input_container">
+                  <label htmlFor="reins">Reins</label>
+                  <input
+                    type="text"
+                    id="reins"
+                    required
+                    onChange={(e) => setReins(e.target.value)}
+                    value={reins}
+                  />
+                </div>
+                <div className="input_container">
+                  <label htmlFor="vessie">Vessie</label>
+                  <input
+                    type="text"
+                    id="vessie"
+                    required
+                    onChange={(e) => setVessie(e.target.value)}
+                    value={vessie}
+                  />
+                </div>
+                <div className="input_container">
+                  <label htmlFor="estomac">Estomac</label>
+                  <input
+                    type="text"
+                    id="estomac"
+                    required
+                    onChange={(e) => setEstomac(e.target.value)}
+                    value={estomac}
+                  />
+                </div>
+                <div className="input_container">
+                  <label htmlFor="menbre">Membres</label>
+                  <input
+                    type="text"
+                    id="menbre"
+                    required
+                    onChange={(e) => setMembre(e.target.value)}
+                    value={membre}
+                  />
+                </div>
+                <div className="input_container">
+                  <label htmlFor="placenta">Placenta</label>
+                  <input
+                    type="text"
+                    id="placenta"
+                    required
+                    onChange={(e) => setPlacenta(e.target.value)}
+                    value={placenta}
+                  />
+                </div>
+                <div className="input_container">
+                  <label htmlFor="liquide">Liquide amniotique</label>
+                  <input
+                    type="text"
+                    id="liquide"
+                    required
+                    onChange={(e) => setLiquide(e.target.value)}
+                    value={liquide}
+                  />
+                </div>
+                <div className="input_container">
+                  <label htmlFor="cardon">Cardon</label>
+                  <input
+                    type="text"
+                    id="cardon"
+                    required
+                    onChange={(e) => setCardon(e.target.value)}
+                    value={cardon}
                   />
                 </div>
               </div>
@@ -535,5 +775,4 @@ const DebutGross = () => {
     </div>
   );
 };
-
-export default DebutGross;
+export default Obstetricale;

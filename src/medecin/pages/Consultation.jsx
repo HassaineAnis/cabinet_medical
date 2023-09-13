@@ -8,6 +8,12 @@ import Ordonnance from "../components/viewDoc/Ordonnance";
 import ArretTravail from "../components/viewDoc/ArretTravail";
 import Circoncision from "../components/viewDoc/Circoncision";
 import DebutGross from "../components/viewDoc/DebutGross";
+import Grossesse from "../components/viewDoc/Grossesse";
+import Frottis from "../components/viewDoc/Frottis";
+import Obstetricale from "../components/viewDoc/Obstetricale";
+import Pneumo from "../components/viewDoc/Pneumo";
+import Pelvienne from "../components/viewDoc/pelvienne";
+import Bilan from "../components/viewDoc/Bilan";
 
 const Consultation = () => {
   const { id } = useParams();
@@ -88,6 +94,66 @@ const Consultation = () => {
           />
         ) : (
           <DebutGross consultation={consultation} document={currentDoc} />
+        );
+      case "certificat de grossesse":
+        return reference ? (
+          <Grossesse
+            consultation={consultation}
+            document={currentDoc}
+            cible={componentRef}
+          />
+        ) : (
+          <Grossesse consultation={consultation} document={currentDoc} />
+        );
+      case "frottis cervico vaginal":
+        return reference ? (
+          <Frottis
+            consultation={consultation}
+            document={currentDoc}
+            cible={componentRef}
+          />
+        ) : (
+          <Frottis consultation={consultation} document={currentDoc} />
+        );
+      case "echographie obstétricale":
+        return reference ? (
+          <Obstetricale
+            consultation={consultation}
+            document={currentDoc}
+            cible={componentRef}
+          />
+        ) : (
+          <Obstetricale consultation={consultation} document={currentDoc} />
+        );
+      case "certificat de pneumo phtisiologie":
+        return reference ? (
+          <Pneumo
+            consultation={consultation}
+            document={currentDoc}
+            cible={componentRef}
+          />
+        ) : (
+          <Pneumo consultation={consultation} document={currentDoc} />
+        );
+      case "echographie pelvienne":
+        return reference ? (
+          <Pelvienne
+            consultation={consultation}
+            document={currentDoc}
+            cible={componentRef}
+          />
+        ) : (
+          <Pelvienne consultation={consultation} document={currentDoc} />
+        );
+      case "Bilans":
+        return reference ? (
+          <Bilan
+            consultation={consultation}
+            document={currentDoc}
+            cible={componentRef}
+          />
+        ) : (
+          <Bilan consultation={consultation} document={currentDoc} />
         );
       default:
         // Cas où le titre n'est pas reconnu, vous pouvez retourner un message d'erreur ou autre chose.

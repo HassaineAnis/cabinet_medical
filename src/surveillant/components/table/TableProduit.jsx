@@ -130,6 +130,7 @@ const TableProduit = () => {
                   <td>Dénomination Comerciale</td>
                   <td>DCI</td>
                   <td>Prix</td>
+                  <td>Etat des Stock</td>
 
                   <td>Actions</td>
                 </tr>
@@ -145,6 +146,11 @@ const TableProduit = () => {
                         currency: "DZD",
                       })}
                     </td>
+                    {element.quantiteTotale >= 50 ? (
+                      <td style={{ color: "green" }}>Normale</td>
+                    ) : (
+                      <td style={{ color: "red" }}>Rupture de stock</td>
+                    )}
 
                     <td>
                       <div className="action">

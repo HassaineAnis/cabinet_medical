@@ -7,7 +7,7 @@ import { useReactToPrint } from "react-to-print";
 import { DocumentContext } from "../../../util/context/Context";
 import format from "date-fns/format";
 
-const DebutGross = () => {
+const Pelvienne = () => {
   const { documents, setDocuments } = useContext(DocumentContext);
   const navigate = useNavigate();
   const navigation = () => {
@@ -45,54 +45,46 @@ const DebutGross = () => {
     fetchPatient();
   }, []);
 
-  const [dateDebut, setDateDebut] = useState("");
-  const [ddr, setDdr] = useState("");
   const [date, setDate] = useState(format(new Date(), "yyyy-MM-dd"));
-  const [gsEpou, setGsEpou] = useState("");
+  const [gsEpou, setGsEpou] = useState("A+");
   const [nomEpou, setNom] = useState("");
-  const [gs, setGs] = useState("");
-  const [g, setG] = useState("");
-  const [p, setP] = useState("");
-  const [a, setA] = useState("");
-  const [c, setC] = useState("");
-  const [poid, setPoid] = useState("");
-  const [tension, setTension] = useState("");
-  const [tpa, setTpa] = useState("");
-  const [ddrc, setDdrc] = useState("");
-  const [termeA, setTermeA] = useState("");
-  const [termeC, setTermeC] = useState("");
-  const [cardiaque, setCardiaque] = useState("");
-  const [lcc, setLcc] = useState("");
-  const [volume, setVolume] = useState("");
-  const [aspect, setAspect] = useState("");
+  const [gs, setGs] = useState("A+");
+  const [vessie, setVessie] = useState("");
+  const [Indication, setIndication] = useState("");
+  const [echographie, setEchographie] = useState("");
+  const [uterus, setUterus] = useState("");
+  const [position, setPosition] = useState("");
+  const [dimension, setDimension] = useState("");
+  const [endometre, setEmdometre] = useState("");
+  const [myometre, setMyometre] = useState("");
+  const [droit, setDroit] = useState("");
+  const [gauche, setgauche] = useState("");
+  const [sac, setSac] = useState("");
+
   const [conclusion, setConclusion] = useState("");
-  const [nombre, setNombre] = useState("");
+
   const saveDocument = () => {
     const documentData = {
-      titre: "debut grossesse",
+      titre: "echographie pelvienne",
       donnes: {
         date: date,
-        dateDebut: dateDebut,
-        ddr: ddr,
+
         gs: gs,
         gsEpou: gsEpou,
         nomEpou: nomEpou,
-        g: g,
-        p: p,
-        a: a,
-        c: c,
-        poid: poid,
-        tension: tension,
-        tpa: tpa,
-        ddrc: ddrc,
-        termeA: termeA,
-        termeC: termeC,
-        cardiaque: cardiaque,
-        lcc: lcc,
-        volume: volume,
-        aspect: aspect,
+        vessie: vessie,
+        Indication: Indication,
+        echographie: echographie,
+        uterus: uterus,
+        position: position,
+        dimension: dimension,
+        endometre: endometre,
+        myometre: myometre,
+        droit: droit,
+        gauche: gauche,
+        sac: sac,
+
         conclusion: conclusion,
-        nombre: nombre,
       },
     };
     setDocuments([...documents, documentData]);
@@ -134,7 +126,7 @@ const DebutGross = () => {
                         textAlign: "center",
                       }}
                     >
-                      COMPTE RENDU D'ECHOGRAPHIE D'UNE GROSSESSE DEBUTANTE
+                      COMPTE RENDU D'ECHOGRAPHIE OBSTETRICALE
                     </strong>
                   </h2>
                 </div>
@@ -142,124 +134,92 @@ const DebutGross = () => {
                   <p style={{ textAlign: "right" }}>
                     <strong>DBK LE :</strong> <span>{`${date}`}</span>
                   </p>
-
                   <div style={{ display: "flex", gap: "1rem" }}>
-                    <p>
+                    <p style={{ margin: "0" }}>
                       <strong>Nom & Prénom:</strong>
                       {` ${patient && patient.nom} ${
                         patient && patient.prenom
                       }`}
                     </p>
-                    <p>
+                    <p style={{ margin: "0" }}>
+                      {" "}
                       <strong>Age:</strong>
                       {` ${patient && patient.age}`}
                     </p>
-                    <p>
+                    <p style={{ margin: "0" }}>
                       <strong>Gs:</strong>
                       {` ${gs}`}
                     </p>
                   </div>
                   <div style={{ display: "flex", gap: "1rem" }}>
-                    <p>
+                    <p style={{ margin: "0" }}>
                       <strong>Nom de l'époux:</strong>
                       {` ${nomEpou}`}
                     </p>
-                    <p>
+                    <p style={{ margin: "0" }}>
                       <strong>Gs</strong>
                       {` ${gsEpou}`}
                     </p>
                   </div>
-                  <div style={{ display: "flex", gap: "1rem" }}>
-                    <p>
-                      <strong>G:</strong>
-                      {` ${g}`}
+                  <p style={{ margin: "0" }}>
+                    <strong>Indication :</strong>
+                    {` ${Indication}`}
+                  </p>
+                  <p style={{ margin: "0" }}>
+                    <strong>Echographie :</strong>
+                    {` ${echographie}`}
+                  </p>
+                  <p style={{ margin: "0" }}>
+                    <strong>Vessie :</strong>
+                    {` ${vessie}`}
+                  </p>
+                  <p style={{ margin: "0" }}>
+                    <strong>Utuérus :</strong>
+                    {` ${uterus}`}
+                  </p>
+                  <div style={{ position: "relative", left: "3rem" }}>
+                    <p style={{ margin: "0" }}>
+                      <strong>Position:</strong>
+                      {` ${position}`}
                     </p>
-                    <p>
-                      <strong>P:</strong>
-                      {` ${p}`}
+                    <p style={{ margin: "0" }}>
+                      <strong>Dimension:</strong>
+                      {` ${dimension}`}
                     </p>
-                    <p>
-                      <strong>A:</strong>
-                      {` ${a}`}
-                    </p>
-                    <p>
-                      <strong>C:</strong>
-                      {` ${c}`}
-                    </p>
-                  </div>
-                  <div style={{ display: "flex", gap: "1rem" }}>
-                    <p>
-                      <strong>Poid:</strong>
-                      {` ${poid}`}
-                    </p>
-                    <p>
-                      <strong>Tension Artériel:</strong>
-                      {` ${tension}`}
-                    </p>
-                  </div>
-                  <div style={{ display: "flex", gap: "1rem" }}>
-                    <p>
-                      <strong>DDR:</strong>
-                      {` ${ddr && new Date(ddr).toLocaleDateString()}`}
-                    </p>
-                    <p>
-                      <strong>Terme Actuel:</strong>
-                      {` ${termeA}`}
-                    </p>
-                    <p>
-                      <strong>TPA:</strong>
-                      {` ${tpa}`}
+                    <p style={{ margin: "0" }}>
+                      <strong>Endométre: </strong>
+                      {` ${endometre}`}
                     </p>
                   </div>
-                  <div style={{ display: "flex", gap: "1rem" }}>
-                    <p>
-                      <strong>DDRC:</strong>
-                      {` ${ddrc}`}
+
+                  <p style={{ margin: "0" }}>
+                    <strong>Myomètre: </strong>
+                    {` ${endometre}`}
+                  </p>
+                  <p style={{ margin: "0" }}>
+                    <strong>Ovaires: </strong>
+                  </p>
+                  <div style={{ position: "relative", left: "3rem" }}>
+                    <p style={{ margin: "0" }}>
+                      <strong>Gauche: </strong>
+                      {` ${gauche}`}
                     </p>
-                    <p>
-                      <strong>Terme Corrigé:</strong>
-                      {` ${termeC}`}
-                    </p>
-                  </div>
-                  <div style={{ display: "flex", gap: "1rem" }}>
-                    <p>
-                      <strong>Date de début de grossesse:</strong>
-                      {` ${
-                        dateDebut && new Date(dateDebut).toLocaleDateString()
-                      }`}
-                    </p>
-                    <p>
-                      <strong>Nombre de fœtus:</strong>
-                      {` ${nombre}`}
+                    <p style={{ margin: "0" }}>
+                      <strong>Droite: </strong>
+                      {` ${droit}`}
                     </p>
                   </div>
-                  <div style={{ display: "flex", gap: "1rem" }}>
-                    <p>
-                      <strong>Activité cardiaque:</strong>
-                      {` ${cardiaque}`}
-                    </p>
-                    <p>
-                      <strong>LCC:</strong>
-                      {` ${lcc}`}
-                    </p>
-                  </div>
-                  <div style={{ display: "flex", gap: "1rem" }}>
-                    <p>
-                      <strong>Volume amniotique:</strong>
-                      {` ${volume}`}
-                    </p>
-                    <p>
-                      <strong>Aspect du placenta:</strong>
-                      {` ${aspect}`}
-                    </p>
-                  </div>
+
+                  <p style={{ margin: "0" }}>
+                    <strong>Culs de sac :</strong>
+                    {`${sac}`}
+                  </p>
                   <div>
-                    <p>
+                    <p style={{ margin: "0" }}>
                       <strong>Conclusion:</strong>
                       {` ${conclusion}`}
                     </p>
                   </div>
-
                   <div className="bas-page">
                     <hr className="no_print" />
                     <p>
@@ -337,175 +297,116 @@ const DebutGross = () => {
                   </select>
                 </div>
                 <div className="input_container">
-                  <label htmlFor="g">G</label>
+                  <label htmlFor="Indication">Indication</label>
                   <input
                     type="text"
-                    id="g"
+                    id="Indication"
                     required
-                    onChange={(e) => setG(e.target.value)}
-                    value={g}
+                    onChange={(e) => setIndication(e.target.value)}
+                    value={Indication}
                   />
                 </div>
                 <div className="input_container">
-                  <label htmlFor="p">P</label>
+                  <label htmlFor="Echographie">Echographie</label>
+                  <select
+                    id="Echographie"
+                    required
+                    onChange={(e) => setEchographie(e.target.value)}
+                    value={echographie}
+                  >
+                    <option value="">---choisi---</option>
+                    <option value="Vaginale">Vaginale</option>
+                    <option value="Abdominale">Abdominale</option>
+                  </select>
+                </div>
+                <div className="input_container">
+                  <label htmlFor="vessie">Vessie</label>
                   <input
                     type="text"
-                    id="p"
+                    id="vessie"
                     required
-                    onChange={(e) => setP(e.target.value)}
-                    value={p}
+                    onChange={(e) => setVessie(e.target.value)}
+                    value={vessie}
                   />
                 </div>
                 <div className="input_container">
-                  <label htmlFor="a">A</label>
+                  <label htmlFor="Utuérus">Utuérus</label>
                   <input
                     type="text"
-                    id="a"
+                    id="Utuérus"
                     required
-                    onChange={(e) => setA(e.target.value)}
-                    value={a}
+                    onChange={(e) => setUterus(e.target.value)}
+                    value={uterus}
                   />
                 </div>
                 <div className="input_container">
-                  <label htmlFor="c">C</label>
+                  <label htmlFor="position">Position</label>
                   <input
                     type="text"
-                    id="c"
+                    id="position"
                     required
-                    onChange={(e) => setC(e.target.value)}
-                    value={c}
+                    onChange={(e) => setPosition(e.target.value)}
+                    value={position}
                   />
                 </div>
                 <div className="input_container">
-                  <label htmlFor="poid">Poid</label>
+                  <label htmlFor="Dimension">Dimension</label>
                   <input
                     type="text"
-                    id="poit"
+                    id="Dimension"
                     required
-                    onChange={(e) => setPoid(e.target.value)}
-                    value={poid}
+                    onChange={(e) => setDimension(e.target.value)}
+                    value={dimension}
                   />
                 </div>
                 <div className="input_container">
-                  <label htmlFor="tension">Tension Artérielle</label>
-                  <input
-                    type="text"
-                    id="epou"
-                    required
-                    onChange={(e) => setTension(e.target.value)}
-                    value={tension}
-                  />
-                </div>
-                <div className="input_container">
-                  <label htmlFor="ddr">DDR</label>
+                  <label htmlFor="Endomètre">Endomètre</label>
                   <input
                     type="date"
-                    id="ddr"
+                    id="Endomètre"
                     required
-                    onChange={(e) => setDdr(e.target.value)}
-                    value={ddr}
+                    onChange={(e) => setEmdometre(e.target.value)}
+                    value={endometre}
                   />
                 </div>
                 <div className="input_container">
-                  <label htmlFor="tpa">TPA</label>
+                  <label htmlFor="Myomètre">Myomètre</label>
                   <input
                     type="text"
-                    id="tpa"
+                    id="Myomètre"
                     required
-                    onChange={(e) => setTpa(e.target.value)}
-                    value={tpa}
+                    onChange={(e) => setMyometre(e.target.value)}
+                    value={myometre}
                   />
                 </div>
                 <div className="input_container">
-                  <label htmlFor="terme">Terme Actuel</label>
+                  <label htmlFor="Ovaires droit">Ovaires droit</label>
                   <input
                     type="text"
-                    id="terme"
+                    id="Ovaires droit"
                     required
-                    onChange={(e) => setTermeA(e.target.value)}
-                    value={termeA}
+                    onChange={(e) => setDroit(e.target.value)}
+                    value={droit}
                   />
                 </div>
                 <div className="input_container">
-                  <label htmlFor="ddrc">DDRC</label>
+                  <label htmlFor="Ovaires gauche">Ovaires gauche</label>
                   <input
                     type="text"
-                    id="ddrc"
+                    id="Ovaires gauche"
                     required
-                    onChange={(e) => setDdrc(e.target.value)}
-                    value={ddrc}
-                  />
-                </div>{" "}
-                <div className="input_container">
-                  <label htmlFor="terme">Terme Corrigé</label>
-                  <input
-                    type="text"
-                    id="terme"
-                    required
-                    onChange={(e) => setTermeC(e.target.value)}
-                    value={termeC}
+                    onChange={(e) => setgauche(e.target.value)}
+                    value={gauche}
                   />
                 </div>
                 <div className="input_container">
-                  <label htmlFor="dateGrossesse">
-                    Date de début de grossesse
-                  </label>
-                  <input
-                    type="date"
-                    id="dateGrossesse"
-                    required
-                    onChange={(e) => setDateDebut(e.target.value)}
-                    value={dateDebut}
-                  />
-                </div>
-                <div className="input_container">
-                  <label htmlFor="foetus">Nombre de foetus</label>
-                  <input
-                    type="number"
-                    id="foetus"
-                    required
-                    onChange={(e) => setNombre(e.target.value)}
-                    value={nombre}
-                  />
-                </div>{" "}
-                <div className="input_container">
-                  <label htmlFor="cardiaque">Activité cardiaque</label>
+                  <label htmlFor="Culs de sac">Culs de sac</label>
                   <input
                     type="text"
-                    id="cardiaque"
+                    id="Culs de sac"
+                    onChange={(e) => setSac(e.target.value)}
+                    value={sac}
                     required
-                    onChange={(e) => setCardiaque(e.target.value)}
-                    value={cardiaque}
-                  />
-                </div>
-                <div className="input_container">
-                  <label htmlFor="lcc">LCC</label>
-                  <input
-                    type="text"
-                    id="lcc"
-                    required
-                    onChange={(e) => setLcc(e.target.value)}
-                    value={lcc}
-                  />
-                </div>{" "}
-                <div className="input_container">
-                  <label htmlFor="volume">Volume amniotique</label>
-                  <input
-                    type="text"
-                    id="volume"
-                    required
-                    onChange={(e) => setVolume(e.target.value)}
-                    value={volume}
-                  />
-                </div>{" "}
-                <div className="input_container">
-                  <label htmlFor="aspect">Aspect du placenta</label>
-                  <input
-                    type="text"
-                    id="aspect"
-                    required
-                    onChange={(e) => setAspect(e.target.value)}
-                    value={aspect}
                   />
                 </div>
               </div>
@@ -536,4 +437,4 @@ const DebutGross = () => {
   );
 };
 
-export default DebutGross;
+export default Pelvienne;

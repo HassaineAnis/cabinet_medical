@@ -22,6 +22,13 @@ import PrivateReceptionniste from "./PrivateReceptionniste";
 import ReceptionnisteApp from "../receptionniste/App";
 import Circoncision from "../medecin/components/documentMedical/Circoncision";
 import DebutGross from "../medecin/components/documentMedical/DebutGross";
+import Grossesse from "../medecin/components/documentMedical/Grossesse";
+import Pneumo from "../medecin/components/documentMedical/Pneumo";
+import Frottis from "../medecin/components/documentMedical/Frottis";
+import CertificatMed from "../medecin/components/documentMedical/CertificatMed";
+import Obstetricale from "../medecin/components/documentMedical/Obstetricale";
+import Pelvienne from "../medecin/components/documentMedical/Pelvienne";
+import Bilan from "../medecin/components/documentMedical/Bilan";
 
 function Router() {
   return (
@@ -33,6 +40,15 @@ function Router() {
             <Route path="/arret_travaille/:id" element={<ArretTravaille />} />
             <Route path="/circoncision/:id" element={<Circoncision />} />
             <Route path="/debutGrossesse/:id" element={<DebutGross />} />
+            <Route path="/grossesse/:id" element={<Grossesse />} />
+            <Route path="/pneumo/:id" element={<Pneumo />} />
+            <Route path="/frottis/:id" element={<Frottis />} />
+
+            <Route path="/pelvienne/:id" element={<Pelvienne />} />
+
+            <Route path="/certificatMedical/:id" element={<CertificatMed />} />
+            <Route path="/obstétricale/:id" element={<Obstetricale />} />
+            <Route path="/bilan/:id" element={<Bilan />} />
 
             {/** Protection de l'ecpace Admin */}
             <Route element={<PrivateRoute />}>

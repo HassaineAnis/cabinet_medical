@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import logo from "../../../assets/colombe.png";
 import "../../../style/medecinStyle/header/header.css";
@@ -10,6 +10,7 @@ import useModal from "../../../util/hooks/UseModal";
 const Header = () => {
   const { openModal, closeModal, modalIsOpen } = useModal();
   const { logout } = useContext(AuthoContext);
+  const [ouvert, setOuvert] = useState(false);
   const dataString = sessionStorage.getItem("user");
   const data = dataString && JSON.parse(dataString);
   const navigate = useNavigate();
@@ -39,16 +40,29 @@ const Header = () => {
               Navette
             </Link>
           </li>
-          <li>
-            <Link to={`/surveillant/surveillance`} className="lien">
-              Surveillance
+          <li className="dropdown">
+            <Link className="lien">
+              Surveillance<span className="arrow-down"></span>
             </Link>
+            <ul className="dropdown-menu">
+              <li>
+                <Link to={`/surveillant/surveillance`} className="lien">
+                  Surveillance Malade
+                </Link>
+              </li>
+              <li>
+                <Link to={`/surveillant/baby`} className="lien">
+                  Surveillance Bébé
+                </Link>
+              </li>
+              <li>
+                <Link to={`/surveillant/naissance`} className="lien">
+                  Déclaration de Naissance
+                </Link>
+              </li>
+            </ul>
           </li>
-          <li>
-            <Link to={`/surveillant/baby`} className="lien">
-              Bébé
-            </Link>
-          </li>
+
           <li>
             <Link to={`/surveillant/profil`} className="lien">
               Mon Profil

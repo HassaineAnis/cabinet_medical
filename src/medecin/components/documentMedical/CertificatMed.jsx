@@ -7,25 +7,29 @@ import { useReactToPrint } from "react-to-print";
 import { DocumentContext } from "../../../util/context/Context";
 import format from "date-fns/format";
 
-const Circoncision = () => {
+const CertificatMed = () => {
   const { documents, setDocuments } = useContext(DocumentContext);
   const { id } = useParams();
   const navigate = useNavigate();
   const navigation = () => {
     navigate(-1);
   };
-  const dataString = sessionStorage.getItem("user");
-  const data = dataString && JSON.parse(dataString);
+
   const componentRef = React.useRef();
   const handlePrint = useReactToPrint({
     content: () => componentRef.current,
   });
-  const [fils, setFils] = useState("");
+  const [diagnostic, setDiagnostic] = useState("rien");
+  const [maladie, setMaladie] = useState("");
   const [date, setDate] = useState(format(new Date(), "yyyy-MM-dd"));
   const saveDocument = () => {
     const documentData = {
-      titre: "circoncision",
-      donnes: { date: date, parent: fils },
+      titre: "certificat de pneumo phtisiologie",
+      donnes: {
+        date: date,
+        diagnostic: diagnostic,
+        ...(diagnostic === "malade " && { maladie: maladie }),
+      },
     };
     setDocuments([...documents, documentData]);
     navigate(-1);
@@ -86,38 +90,43 @@ const Circoncision = () => {
                 <strong
                   style={{ textDecoration: "underline", textAlign: "center" }}
                 >
-                  Certificat de circoncision
+                  Certificat de pneumo phtisiologie
                 </strong>
               </h2>
+              <div style={{ display: "flex", gap: "2rem" }}>
+                <p>
+                  <strong>Nom:</strong>
+                  {` ${patient && patient.nom}`}
+                </p>
+                <p>
+                  <strong>Prénom</strong>
+                  {` ${patient && patient.prenom}`}
+                </p>
+                <p>
+                  <strong>Age :</strong>
+                  {` ${patient && patient.age} `}
+                  <strong>ans</strong>
+                </p>
+              </div>
+              <p>
+                <strong>Je soussigné,</strong>
+              </p>
 
-              <p>
-                <strong>
-                  Je soussigné(e), certifie avoir pratiqué ce jour
-                </strong>
+              <p style={{ textAlign: "center" }}>
+                Déclare que le susnommé{" "}
+                {diagnostic === "rien" &&
+                  " aucune maladie cliniquement décelable "}
+                {diagnostic === "malade" && `présente ${maladie} `}
+                ce jour.
               </p>
-              <p>
-                <strong>Une circoncision à l'enfant :</strong>
-                {`${patient && patient.nom} ${patient && patient.prenom}`}
-              </p>
-              <p>
-                <strong>Agé de : </strong>
-                {`${patient && patient.age}`}
-                <strong>ans</strong>
-              </p>
-              <p>
-                <strong>Fils de :{` ${fils}`}</strong>
-              </p>
+              <br />
+              <br />
+              <br />
               <p style={{ textAlign: "center" }}>
                 Certificat établi pour servir et faire valoir ce qui est de
                 droit.
               </p>
-              <p style={{ textAlign: "right" }}>
-                <strong style={{ textDecoration: "underline" }}>
-                  Le chirurgien
-                </strong>
-                <br />
-                {`${data.nom} ${data.prenom}`}
-              </p>
+
               <div className="bas-page">
                 <hr className="no_print" />
                 <p>
@@ -147,16 +156,32 @@ const Circoncision = () => {
               />
             </div>
             <div className="input_container">
-              <label htmlFor="papa">Fils de</label>
-              <input
-                type="text"
-                name="papa"
-                id="papa"
+              <label htmlFor="diagnostic">Diagnostic</label>
+              <select
+                name="diagnostic"
+                id="diagnostic"
                 required
-                onChange={(e) => setFils(e.target.value)}
-                value={fils}
-              />
+                onChange={(e) => setDiagnostic(e.target.value)}
+                value={diagnostic}
+              >
+                <option value="rien">Rien a signalé </option>
+                <option value="malade">Malade</option>
+              </select>
             </div>
+          </div>
+          <div className="partie1">
+            {diagnostic === "malade" && (
+              <div className="input_container">
+                <label htmlFor="maladie">Maladie</label>
+                <input
+                  type="text"
+                  id="maladie"
+                  required
+                  onChange={(e) => setMaladie(e.target.value)}
+                  value={maladie}
+                />
+              </div>
+            )}
           </div>
           <div className="btn">
             <div className="btn_save">
@@ -171,4 +196,4 @@ const Circoncision = () => {
   );
 };
 
-export default Circoncision;
+export default CertificatMed;
