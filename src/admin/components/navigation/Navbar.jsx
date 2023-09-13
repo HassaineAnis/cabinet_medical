@@ -1,4 +1,4 @@
-import React, {  useContext } from "react";
+import React, { useContext } from "react";
 import "../../../style/adminStyle/menu.css";
 
 import Modal from "react-modal";
@@ -19,13 +19,11 @@ function Navbar(props) {
     navigate("/");
   };
 
- 
-
   return (
     <div className="menu">
       <div className="menu_list_container">
         <ul className="menu_list">
-          <li>
+          {/* <li>
             <Link to="/admin" className="menu_list_lien">
               <span>Acceuil</span>
               <svg
@@ -39,10 +37,10 @@ function Navbar(props) {
                 <path d="M23.011 11.444 19.505 8.09V3a.75.75 0 0 0-.75-.75h-2.25a.75.75 0 0 0-.75.75v1.5L13.04 1.904c-.254-.257-.632-.404-1.04-.404-.407 0-.784.147-1.038.405l-9.97 9.539a.765.765 0 0 0-.063 1.048.749.749 0 0 0 1.087.05l9.726-9.294a.375.375 0 0 1 .519 0l9.727 9.294a.75.75 0 0 0 1.059-.02c.288-.299.264-.791-.036-1.078Z" />
               </svg>
             </Link>{" "}
-          </li>
+          </li>*/}
 
           <li>
-            <Link to="/admin/profile" className="menu_list_lien">
+            <Link to="/admin" className="menu_list_lien">
               {" "}
               <span>Mon Profile</span>
               <svg
@@ -88,8 +86,6 @@ function Navbar(props) {
               </svg>
             </Link>
           </li>
-
-         
 
           <li>
             <Link to="/admin/personnel" className="menu_list_lien">

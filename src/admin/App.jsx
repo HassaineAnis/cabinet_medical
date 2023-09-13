@@ -28,6 +28,9 @@ import ModifierConge from "./components/modifie/ModifierConge";
 import TableArchive from "./components/tables/TableArchive";
 import AjouterProduit from "./components/ajout/AjouterProduit";
 import ModifierProduit from "./components/modifie/ModifierProduit";
+import AjouterConvention from "./components/ajout/AjouterConvention";
+import AjouterPresta from "./components/ajout/AjouterPresta";
+import TablePresta from "./components/tables/TablePresta";
 
 function App() {
   return (
@@ -37,8 +40,7 @@ function App() {
       <Header />
 
       <Routes>
-        <Route path="/" element={<Acceuil />} />
-        <Route path="/profile" element={<Profile />} />
+        <Route path="/" element={<Profile />} />
 
         <Route path="/utilisateurs" element={<Utilisateur />}></Route>
         <Route path="/utilisateurs/medecin" element={<Medecins />}>
@@ -164,7 +166,23 @@ function App() {
           <Route path="/magasin/ajouter" element={<AjouterProduit />} />
           <Route path="/magasin/modifier/:id" element={<ModifierProduit />} />
         </Route>
-        <Route path="/convention" element={<Convention />} />
+        <Route path="/convention" element={<Convention />}>
+          <Route
+            exact
+            path="/convention/ajout"
+            element={<AjouterConvention />}
+          />
+          <Route
+            exact
+            path="/convention/prestation/ajouter/:id"
+            element={<AjouterPresta />}
+          />
+          <Route
+            exact
+            path="/convention/prestation/:id"
+            element={<TablePresta />}
+          />
+        </Route>
         <Route path="/*" element={<Erreur />} />
       </Routes>
     </div>
