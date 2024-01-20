@@ -128,7 +128,7 @@ function App() {
           path="/utilisateurs/laborantinACP"
           element={
             <UsersRestant
-              role="laborantinACP"
+              role="LaborantinACP"
               route={"/admin/utilisateurs/laborantinACP"}
               nomBtn="Ajouter Un LaborantinACP"
               titre="Liste Des LaborantinACP"

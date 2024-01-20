@@ -32,6 +32,9 @@ const Login = () => {
     if (role === "Réceptionniste") {
       return "/receptionniste";
     }
+    if (role === "LaborantinACP") {
+      return "/laboACP";
+    }
   };
   useEffect(() => {
     const fetchUsers = async () => {

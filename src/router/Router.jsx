@@ -29,7 +29,8 @@ import CertificatMed from "../medecin/components/documentMedical/CertificatMed";
 import Obstetricale from "../medecin/components/documentMedical/Obstetricale";
 import Pelvienne from "../medecin/components/documentMedical/Pelvienne";
 import Bilan from "../medecin/components/documentMedical/Bilan";
-
+import PrivateLaboPath from "./PrivateLaboPath";
+import LaboACPApp from "../LaboAnapate/App";
 function Router() {
   return (
     <AuthoProvider>
@@ -69,6 +70,10 @@ function Router() {
             {/** Protection de l'espace Réceptionniste*/}
             <Route element={<PrivateReceptionniste />}>
               <Route path="/receptionniste/*" element={<ReceptionnisteApp />} />
+            </Route>
+            {/** Protection de l'espace laboACP*/}
+            <Route element={<PrivateLaboPath />}>
+              <Route path="/laboACP/*" element={<LaboACPApp />} />
             </Route>
             <Route path="/login" element={<Login />} />
             <Route path="*" element={<Login />} />

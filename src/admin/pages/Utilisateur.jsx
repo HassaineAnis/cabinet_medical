@@ -82,7 +82,7 @@ const Utilisateur = () => {
                 <p>Espace de gestion des laborantins d'ACP</p>
               </div>
 
-              <Link to="/admin/utilisateurs/pharmacienACP" className="btn">
+              <Link to="/admin/utilisateurs/laborantinACP" className="btn">
                 Voir
               </Link>
             </div>
